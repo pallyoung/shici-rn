@@ -8,9 +8,6 @@ var routes = {};
 function isMap(o) {
     return typeof o === 'object' && o.constructor === Object;
 }
-function isComponent(o) {
-    return o instanceof (SceneComponent);
-}
 function flattenPages(pages) {
     var page;
     for (var o in pages) {
