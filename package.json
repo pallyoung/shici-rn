@@ -17,6 +17,7 @@
     "react-febrest": "0.0.1",
     "react-native": "^0.54.2",
     "react-native-alertui": "^1.0.0",
+    "react-native-awesome-viewpager": "^1.0.2",
     "react-native-improver": "^0.1.0",
     "react-native-modalui": "^1.0.2",
     "react-native-storage-tool": "0.0.1",

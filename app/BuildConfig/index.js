@@ -24,9 +24,9 @@ switch(ENV){
 
 }
 var BuildConfig = {
-    NANE:'',
+    NANE:'诗辞',
     ENV,
-    VERSION:'',
+    VERSION:'0.0.1',
     PLATFORM: Platform.OS.toUpperCase(),
     ...config,
 }

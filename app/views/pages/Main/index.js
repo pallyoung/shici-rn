@@ -6,12 +6,30 @@ import {
     SectionList,
     FlatList,
     TouchableOpacity,
-    Text
+    Text,
+    StyleSheet
 }from 'react-native';
 
 import ScreenComponent from './../../components/ScreenComponent';
+import {TabBar} from 'react-native-awesome-viewpager';
 import {Theme} from 'react-native-improver';
+
 var currentTheme = Theme.getTheme();
+
+const tabs = [
+    {
+        text:'推荐'
+    },
+    {
+        text:'诗文'
+    },
+    {
+        text:'名句'
+    },
+    {
+        text:'古籍'
+    }
+];
 class Main extends ScreenComponent{
     constructor(...props){
         super(...props);
@@ -20,11 +38,20 @@ class Main extends ScreenComponent{
         }
     }
     render(){
-       return  <View>
-                <Text>
-                    welcome use spencer kit start your project.
-                </Text>
+       return  <View
+                    style={{flex:1,backgroundColor:'#eeddff'}}>
+                <TabBar
+                    style={{flex:1}}
+                    tabs={tabs}>
+                    <View><Text>推荐</Text></View>
+                    <View><Text>诗文</Text></View>
+                    <View><Text>名句</Text></View>
+                    <View><Text>古籍</Text></View>
+                </TabBar>
            </View>
     }
 }
+const styles = StyleSheet.create({
+    
+})
 export default Main;
