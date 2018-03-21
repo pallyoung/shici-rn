@@ -11,7 +11,7 @@
     "spencer-kit-project-templates": "^0.1.0"
   },
   "dependencies": {
-    "febrest": "0.0.5",
+    "febrest": "0.0.6",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-febrest": "0.0.1",

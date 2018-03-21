@@ -1,21 +1,14 @@
 
-const host = 'http://m.gushiwen.org/';
+import fetchData from './fetchData';
+
 
 const TYPES = {
     INDEX:'index',
 }
-//获取数据基础方法
-function fetchData(url){
-    url = host+url;
-    return fetch(url).then(function(response){
-        return response.body().then(function(content){
-            return content;
-        });
-    });
-}
+
 
 //将原始html转成包含id的list
-function parseContentToList(content){
+function parseShiToList(content){
     if(!content){
         return null;
     }else {
@@ -30,10 +23,13 @@ function parseContentToList(content){
 
 
 
-
-function fetchListByType(){
-
+function fetchDefault(params){
+    var url = `default_${params.page}.aspx`;
+    return fetchData(url).then(function(content){
+        return parseShiToList(content);
+    })
 }
+
 
 //获取文章
 function fetchArticle(id){
@@ -56,6 +52,9 @@ function fetchContent(id){
     })
 }
 
+function fetchBySourceType(){
+
+}
 export default {
-    fetchContent
+    fetchBySourceType
 }
