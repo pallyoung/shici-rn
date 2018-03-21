@@ -1,5 +1,4 @@
 //获取数据基础方法
-const host = 'http://m.gushiwen.org/';
 import {Provider} from 'febrest';
 import gushiwen from './gushiwen';
 

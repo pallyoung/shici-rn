@@ -1,9 +1,11 @@
 
 
-function fetchDafult(){
-
+function fetchTuijie(tuijie){
+    return {
+        tuijie
+    }
 }
 
 export default {
-    fetchDafult
+    fetchTuijie
 }

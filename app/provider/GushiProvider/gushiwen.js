@@ -3,58 +3,70 @@ import fetchData from './fetchData';
 
 
 const TYPES = {
-    INDEX:'index',
+    INDEX: 'index',
 }
 
 
 //将原始html转成包含id的list
-function parseShiToList(content){
-    if(!content){
+function parseShiToList(content) {
+    if (!content) {
         return null;
-    }else {
-       var list = content.match(/OnYiwen\(([\d]+)\)/g) ;
-       if(list){
-           return list.map(function(item){
-               return item.match(/[\d]+/);
-           });
-       }
+    } else {
+        var list = content.match(/OnYiwen\(([\d]+)\)/g);
+        if (list) {
+            return list.map(function (item) {
+                return item.match(/[\d]+/);
+            });
+        }
     }
 }
 
 
 
-function fetchDefault(params){
+function fetchDefault(params) {
+
     var url = `default_${params.page}.aspx`;
-    return fetchData(url).then(function(content){
+    return fetchData(url).then(function (content) {
         return parseShiToList(content);
-    })
+    });
 }
 
 
 //获取文章
-function fetchArticle(id){
+function fetchArticle(id) {
     return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=cont`)
 }
 //获取注释
-function fetchZhushi(id){
+function fetchZhushi(id) {
     return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=zhu`)
 }
 //获取翻译
-function fetchYi(id){
+function fetchYi(id) {
     return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=yi`)
 }
 //获取诗文内容
-function fetchContent(id){
+function fetchContent(id) {
     //接口可能会变
     return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=yizhushang`).
-    then(function(content){
-        return parseContentToArticle(content);
-    })
+        then(function (content) {
+            return parseContentToArticle(content);
+        })
 }
 
-function fetchBySourceType(){
 
+function fetchBySourceType(sourceType, params) {
+    return methods[sourceType](params);
 }
+
+//
+const methods = {};
+
+function injectMethod(type, method) {
+    methods[type] = method;
+}
+const methodList = [
+    {type:'tuijie',method:fetchDefault}
+]
 export default {
     fetchBySourceType
 }
