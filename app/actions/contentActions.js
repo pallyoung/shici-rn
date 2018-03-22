@@ -3,6 +3,9 @@ import ACTIONS from './../constants/ACTIONS';
 export default [
     {
         key:ACTIONS.FETCH_DEFAULT,
-        controller:content.fetchTuijie
+        controller:content.fetchTuijie,
+        persist:{
+            params:'tuijie'
+        }
     }
 ]

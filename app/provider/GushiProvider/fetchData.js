@@ -1,11 +1,19 @@
 const host = 'http://m.gushiwen.org/';
 
-function fetchData(url){
-    return fetch(host+url).then(function(response){
-        return response.body().then(function(content){
-            return content;
+var headers = new Headers();
+function fetchData(url) {
+    url = host + url;
+    return fetch(
+        url,
+        {
+            method: 'get',
+        }).then(function (response) {
+            return response.text().then(function (content) {
+                return content;
+            });
+        }, function (err) {
+            console.log(err, '=====')
         });
-    });
 }
 
 export default fetchData;

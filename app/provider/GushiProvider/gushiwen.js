@@ -25,11 +25,18 @@ function parseShiToList(content) {
 
 
 function fetchDefault(params) {
-
-    var url = `default_${params.page}.aspx`;
+    params = params||{}
+    let page = params.page||1;
+    var url = `default_${page}.aspx`;
     return fetchData(url).then(function (content) {
         console.log(content)
-        return parseShiToList(content);
+        return content;
+    }).then(function(data){
+        params.page=page+1;
+        return {
+            params,
+            data
+        }
     });
 }
 
