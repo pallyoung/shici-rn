@@ -14,7 +14,7 @@
     "febrest": "0.0.6",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-febrest": "0.0.1",
+    "react-febrest": "0.0.2",
     "react-native": "^0.54.2",
     "react-native-alertui": "^1.0.0",
     "react-native-awesome-viewpager": "^1.0.2",

@@ -11,10 +11,25 @@ import {
 
 import ScreenComponent from './../../components/ScreenComponent';
 import ListView from './../../components/ListView';
-
+import ReactFebrest from 'react-febrest';
+import ACTIONS from './../../../constants/ACTIONS';
 class Tuijie extends ScreenComponent{
     constructor(...props){
         super(...props);
+        this.state = {
+
+        }
+    }
+    componentDidMount() {
+        this.dispatcher = ReactFebrest.createDispatcher(this,this._onDispatch);
+        this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT);
+    }
+    componentWillUnmount() {
+        this.dispatcher.release();
+    }
+    
+    _onDispatch=(data:{state:any})=>{
+
     }
     _renderItem(item){
         return (
