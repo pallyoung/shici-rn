@@ -8,14 +8,14 @@ class GushiProvider extends Provider{
     sourceType:string;
     constructor(config){
         super(config);
-        this.params = config.params;
+        this.state = config.state||{};
         this.sourceType = config.sourceType;
     }
-    set(params){
-        this.params=params;
+    set(state){
+        this.state=state;
     }
     get(){
-        return fetchBySourceType(this.sourceType,this.params);
+        return fetchBySourceType(this.sourceType,this.state);
     }
 }
 

@@ -5,7 +5,7 @@ export default [
         key:ACTIONS.FETCH_DEFAULT,
         controller:content.fetchTuijie,
         persist:{
-            params:'tuijie'
+            tuijie:'tuijie'
         }
     }
 ]

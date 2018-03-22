@@ -37,14 +37,17 @@ function parseShiToList(content) {
 
 
 
-function fetchDefault(params) {
-    params = params||{}
-    let page = params.page||1;
+function fetchDefault(state) {
+    state = state||{};
+    var params = state.params||{}
+    var page = params.page||1;
     var url = `default_${page}.aspx`;
+    var data = state.data||[];
     return fetchData(url).then(function (content) {
         return parseShiToList(content);
-    }).then(function(data){
+    }).then(function(newData){
         params.page=page+1;
+        data = data.concat(newData);
         return {
             params,
             data
@@ -75,8 +78,8 @@ function fetchContent(id) {
 }
 
 
-function fetchBySourceType(sourceType, params) {
-    return methods[sourceType](params);
+function fetchBySourceType(sourceType, state) {
+    return methods[sourceType](state);
 }
 
 //

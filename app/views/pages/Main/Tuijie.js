@@ -33,7 +33,6 @@ class Tuijie extends ScreenComponent{
     _onDispatch=(data:{state:any})=>{
     }
     _renderItem(item){
-        console.log(item)
         return (
             <Article  {...item.item}/>
         )
@@ -46,6 +45,7 @@ class Tuijie extends ScreenComponent{
         return (
             <ListView
                 data={data}
+                onEndReached={()=>this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT)}
                 renderItem={this._renderItem}
                 keyExtractor={this._listKeyExtractor}
                 style={styles.wrapper}/>
