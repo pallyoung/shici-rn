@@ -13,6 +13,7 @@ import {
 import ScreenComponent from './../../components/ScreenComponent';
 import {TabBar} from 'react-native-awesome-viewpager';
 import {Theme} from 'react-native-improver';
+import Tuijie from './Tuijie';
 
 var currentTheme = Theme.getTheme();
 
@@ -39,11 +40,13 @@ class Main extends ScreenComponent{
     }
     render(){
        return  <View
-                    style={{flex:1,backgroundColor:'#eeddff'}}>
+                    style={{flex:1}}>
                 <TabBar
                     style={{flex:1}}
                     tabs={tabs}>
-                    <View><Text>推荐</Text></View>
+                    <View>
+                        <Tuijie />
+                    </View>
                     <View><Text>诗文</Text></View>
                     <View><Text>名句</Text></View>
                     <View><Text>古籍</Text></View>

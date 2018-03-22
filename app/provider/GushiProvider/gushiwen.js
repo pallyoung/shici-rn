@@ -12,12 +12,13 @@ function parseShiToList(content) {
     if (!content) {
         return null;
     } else {
-        var list = content.match(/OnYiwen\(([\d]+)\)/g);
-        if (list) {
-            return list.map(function (item) {
-                return item.match(/[\d]+/);
-            });
-        }
+        return content;
+        // var list = content.match(/<div class="yizhu">(([\d]+)\)/g);
+        // if (list) {
+        //     return list.map(function (item) {
+        //         return item.match(/[\d]+/);
+        //     });
+        // }
     }
 }
 
@@ -27,6 +28,7 @@ function fetchDefault(params) {
 
     var url = `default_${params.page}.aspx`;
     return fetchData(url).then(function (content) {
+        console.log(content)
         return parseShiToList(content);
     });
 }
@@ -64,9 +66,12 @@ const methods = {};
 function injectMethod(type, method) {
     methods[type] = method;
 }
+
 const methodList = [
     {type:'tuijie',method:fetchDefault}
 ]
+
+methodList.forEach(item=>injectMethod(item.type,item.method));
 export default {
     fetchBySourceType
 }
