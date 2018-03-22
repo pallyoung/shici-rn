@@ -35,7 +35,7 @@ class Main extends ScreenComponent{
     constructor(...props){
         super(...props);
         this.navigationOptions = {
-            title:'首页'
+            title:'诗辞'
         }
     }
     render(){

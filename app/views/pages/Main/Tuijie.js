@@ -11,13 +11,15 @@ import {
 
 import ScreenComponent from './../../components/ScreenComponent';
 import ListView from './../../components/ListView';
+import Article from './../../components/Article';
 import ReactFebrest from 'react-febrest';
 import ACTIONS from './../../../constants/ACTIONS';
+
 class Tuijie extends ScreenComponent{
     constructor(...props){
         super(...props);
         this.state = {
-
+            tuijie:{}
         }
     }
     componentDidMount() {
@@ -29,24 +31,21 @@ class Tuijie extends ScreenComponent{
     }
     
     _onDispatch=(data:{state:any})=>{
-
     }
     _renderItem(item){
+        console.log(item)
         return (
-            <View>
-                <Text>
-                    {item.item}
-                </Text>
-            </View>
+            <Article  {...item.item}/>
         )
     }
     _listKeyExtractor(item,index){
-        return item+'';
+        return item.id+'';
     }
     render(){
+        var {data} = this.state.tuijie
         return (
             <ListView
-                data={[1,2,3]}
+                data={data}
                 renderItem={this._renderItem}
                 keyExtractor={this._listKeyExtractor}
                 style={styles.wrapper}/>
