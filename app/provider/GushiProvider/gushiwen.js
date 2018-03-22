@@ -12,13 +12,26 @@ function parseShiToList(content) {
     if (!content) {
         return null;
     } else {
-        return content;
-        // var list = content.match(/<div class="yizhu">(([\d]+)\)/g);
-        // if (list) {
-        //     return list.map(function (item) {
-        //         return item.match(/[\d]+/);
-        //     });
-        // }
+        var list = content.match(/<a style="font-size:20px;line-height:24px[\s\S]*?<div class="tool">/g);
+        if (list) {
+            return list.map(function (item) {
+                var id,author,age,article,title;
+                title = item.match(/<b>([^<]*?)</)[1];
+                let ageAuthorMatch = item.match(/">([^<]*?)<\/a/g);
+                age = ageAuthorMatch[0].match(/>(.*?)</)[1];
+                author = ageAuthorMatch[1].match(/>(.*?)</)[1];
+                let idAndArticleMatch = item.match(/<div class="contson"([\s\S]*?)<\/div>/)[1];
+                id = idAndArticleMatch.match(/contson([\d]+)/)[1];
+                article = idAndArticleMatch.match(/\n([\s\S]*?)\n/)[1].split(/<.+>/)
+                return {
+                    id,
+                    author,
+                    age,
+                    title,
+                    article
+                }
+            });
+        }
     }
 }
 
@@ -29,8 +42,7 @@ function fetchDefault(params) {
     let page = params.page||1;
     var url = `default_${page}.aspx`;
     return fetchData(url).then(function (content) {
-        console.log(content)
-        return content;
+        return parseShiToList(content);
     }).then(function(data){
         params.page=page+1;
         return {
