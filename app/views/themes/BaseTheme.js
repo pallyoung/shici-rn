@@ -9,6 +9,8 @@ var BaseTheme = {
     f5: autoSize(18),
     f6: autoSize(20),
     paddingHorizontal:autoSize(14),
+    mainColor:'#fff',
+    px:px2dp(1)
 }
 
 export default BaseTheme;

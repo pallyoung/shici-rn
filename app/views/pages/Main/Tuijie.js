@@ -56,7 +56,8 @@ class Tuijie extends ScreenComponent{
 
 const styles = StyleSheet.create({
     wrapper:{
-        flex:1
+        flex:1,
+        backgroundColor:'#fff'
     }
 });
 export default Tuijie;
