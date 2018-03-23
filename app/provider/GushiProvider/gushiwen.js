@@ -11,7 +11,7 @@ function innerText(string) {
     var textNodes = [];
     for (let i = 0, l = texts.length; i < l; i++) {
         let text = texts[i];
-        if (/^\s*$/.test(texts[i])) {
+        if (/^[\s▲]*$/.test(texts[i])) {
             continue;
         } else if(text.indexOf('展开阅读全文')>-1) {
             textNodes = [];
