@@ -12,26 +12,24 @@ class Button extends Component {
         var type = this.props.type;
         var styles = {
             left: {
-                left: 20,
+                // left: 20,
                 justifyContent: 'flex-start',
             },
             right: {
-                right: 20,
+                // right: 20,
                 justifyContent: 'flex-end',
             },
-            back:{
-                left: 0,
+            back: {
+                // left: 0,
                 justifyContent: 'flex-start',
-                width:120
             }
         }
         return <View
             style={{
-                width: 100,
                 flexDirection: 'row',
-                position: 'absolute',
-                top: IOS?20:0,
-                bottom: 0,
+                // position: 'absolute',
+                // top: IOS?20:0,
+                // bottom: 0,
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles[type]
@@ -47,15 +45,15 @@ class Title extends Component {
     render() {
         return <View
             style={{
-                position: 'absolute',
-                top: IOS?20:0,
-                bottom: 0,
-                left: 60,
-                right: 60,
+                // position: 'absolute',
+                // top: IOS?20:0,
+                // bottom: 0,
+                // left: 60,
+                // right: 60,
+                paddingLeft:12,
                 overflow: 'hidden',
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'center',
             }}>
             {this.props.children}
         </View>
@@ -73,17 +71,17 @@ export default class Header extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps.title!==this.props.title){
+        if (nextProps.title !== this.props.title) {
             this.state.title = nextProps.title;
         }
-        if(nextProps.leftButton!==this.props.leftButton){
+        if (nextProps.leftButton !== this.props.leftButton) {
             this.state.leftButton = nextProps.leftButton;
         }
-        if(nextProps.rightButton!==this.props.rightButton){
+        if (nextProps.rightButton !== this.props.rightButton) {
             this.state.rightButton = nextProps.rightButton;
         }
     }
-    
+
     updateInfo(info) {
         this.setState(info);
     }
@@ -103,13 +101,20 @@ export default class Header extends Component {
         return null;
     }
     _backButton(headerProps, navigation) {
-        return <TouchableOpacity
-            style={{ flex:1, justifyContent: 'center',paddingLeft:20, }}
-            onPress={headerProps.scene.index !== 0 ? () => navigation.goBack() : () => APPContext.hideLoginPopup()}
-            children={
-                <Image source={require('./Arrow.png')} />
-            }
-        />
+        return (
+            <TouchableOpacity
+                style={{ justifyContent: 'center',flexDirection:'row', paddingLeft:12 }}
+                onPress={headerProps.scene.index !== 0 ? () => navigation.goBack() : () => APPContext.hideLoginPopup()}>
+                <Text
+                    style={{
+                        color: '#fff',
+                        fontSize: 20,
+                        marginRight:12,
+                    }}>
+                    ←
+                </Text>
+            </TouchableOpacity >
+        );
     }
     _renderRightButton() {
         if (typeof this.state.rightButton === 'object') {
@@ -125,7 +130,7 @@ export default class Header extends Component {
         if (typeof this.state.title === 'function') {
             child = this.state.title;
         } else {
-            child = <Text style={[{ fontSize: 18 }, this.props.titleStyle]}>{this.state.title}</Text>
+            child = <Text style={[{ fontSize: 16, color: '#fff' }, this.props.titleStyle]}>{this.state.title}</Text>
         }
         return <Title>{child}</Title>
     }
@@ -135,7 +140,7 @@ export default class Header extends Component {
         }
         return <View
             style={[
-                {backgroundColor:'#fff'},
+                { backgroundColor: '#303952' },
                 this.props.style,
                 {
                     height: IOS ? 64 : 44,
@@ -143,9 +148,9 @@ export default class Header extends Component {
                     paddingTop: IOS ? 20 : 0,
                 }
             ]}>
+            {this._renderLeftButton()}
             {this._renderTitle()}
             {this._renderRightButton()}
-            {this._renderLeftButton()}
         </View>
     }
 }

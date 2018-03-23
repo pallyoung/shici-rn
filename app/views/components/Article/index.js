@@ -38,18 +38,13 @@ function Content(props) {
             style={styles.contentWrapper}>
             {props.article.map(
                 (item, i) => {
-                    if(!/^\s*$/.test(item)){
-                        return <Text style={styles.content} key={i}>{item}</Text>;
-                    }else{
-                        return null;
-                    }
+                    return <Text style={styles.content} key={i}>{item}</Text>;
                 })
             }
         </View>
     );
 }
 function Article(props) {
-    console.log(props)
     return (
         <View
             style={styles.wrapper}>
@@ -70,27 +65,27 @@ const styles = StyleSheet.create({
         paddingTop:10,
         paddingBottom:10,
         marginBottom:10,
-        borderBottomWidth:currentTheme.px
+        borderBottomWidth:currentTheme.px,
+        borderColor:'rgba(120,120,120,0.5)'
     },
     titleWrapper:{
         justifyContent:'center'
     },
     title:{
         fontSize:currentTheme.f5,
-        textAlign:'center'
     },
     infoWrapper:{
         paddingVertical:8
     },
     info:{
-        textAlign:'center'
+        textAlign:'left'
     },
     contentWrapper:{
 
     },
     content:{
-        textAlign:'center',
-        marginBottom:8
+        marginBottom:8,
+        lineHeight:2*currentTheme.f3
         
     }
 })
