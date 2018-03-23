@@ -36,9 +36,9 @@ function parseShiToList(content) {
                 let ageAuthorMatch = item.match(/">([^<]*?)<\/a/g);
                 age = ageAuthorMatch[0].match(/>(.*?)</)[1];
                 author = ageAuthorMatch[1].match(/>(.*?)</)[1];
-                let idAndArticleMatch = item.match(/<div class="contson"([\s\S]*?)<div class="tool">/)[0];
-                id = idAndArticleMatch.match(/contson([\d]+)/)[1];
-                article = innerText(idAndArticleMatch);
+                let articleMatch = item.match(/<div class="contson"([\s\S]*?)<div class="tool">/)[0];
+                id = item.match(/href="\/(.*?).aspx/)[1];
+                article = innerText(articleMatch);
                 return {
                     id,
                     author,
@@ -147,27 +147,6 @@ function fetchGuji(state={}){
     });
 }
 
-
-//获取文章
-function fetchArticle(id) {
-    return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=cont`)
-}
-//获取注释
-function fetchZhushi(id) {
-    return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=zhu`)
-}
-//获取翻译
-function fetchYi(id) {
-    return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=yi`)
-}
-//获取诗文内容
-function fetchContent(id) {
-    //接口可能会变
-    return fetchData(`shiwen2017/ajaxshiwencont.aspx?id=${id}&value=yizhushang`).
-        then(function (content) {
-            return parseContentToArticle(content);
-        })
-}
 
 
 function fetchBySourceType(sourceType, state) {
