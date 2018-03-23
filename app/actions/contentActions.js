@@ -7,5 +7,12 @@ export default [
         persist:{
             tuijie:'tuijie'
         }
+    },
+    {
+        key:ACTIONS.FETCH_MINGJU,
+        controller:content.fetchMingju,
+        persist:{
+            mingju:'mingju'
+        }
     }
 ]

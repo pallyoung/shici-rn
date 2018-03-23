@@ -51,8 +51,27 @@ function parseShiToList(content) {
     }
 }
 
+//解析名句
+function parseMingjuToList(content){
+    if (!content) {
+        return null;
+    } else {
+        var list = content.match(/<div class="cont" style=" margin-top:12px;border-bottom:1px dashed #DAD9D1; padding-bottom:7px;">[\s\S]*?<\/div>/g);
+        if (list) {
+            return list.map(function (item) {
+                var id, text;
+                id = item.match(/mingju\/(.*?)\.aspx/)[1];
+                text = item.match(/>(.*?)</)[1];
+                return {
+                    id,
+                    text
+                }
+            });
+        }
+    }
+}
 
-
+//首页推荐
 function fetchDefault(state) {
     state = state || {};
     var params = state.params || {}
@@ -61,6 +80,23 @@ function fetchDefault(state) {
     var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseShiToList(content);
+    }).then(function (newData) {
+        params.page = page + 1;
+        data = data.concat(newData);
+        return {
+            params,
+            data
+        }
+    });
+}
+//首页名句
+function fetchMingju(state={}){
+    var params = state.params || {}
+    var page = params.page || 1;
+    var url = `mingju/Default.aspx?p=${page}`;
+    var data = state.data || [];
+    return fetchData(url).then(function (content) {
+        return parseMingjuToList(content);
     }).then(function (newData) {
         params.page = page + 1;
         data = data.concat(newData);
@@ -106,10 +142,12 @@ function injectMethod(type, method) {
 }
 
 const methodList = [
-    { type: 'tuijie', method: fetchDefault }
+    { type: 'tuijie', method: fetchDefault },
+    { type: 'mingju', method: fetchMingju}
 ]
 
 methodList.forEach(item => injectMethod(item.type, item.method));
+
 export default {
     fetchBySourceType
 }

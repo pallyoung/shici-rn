@@ -6,6 +6,13 @@ function fetchTuijie(tuijie){
     }
 }
 
+function fetchMingju(mingju){
+    return {
+        mingju
+    }
+}
+
 export default {
-    fetchTuijie
+    fetchTuijie,
+    fetchMingju
 }

@@ -14,15 +14,13 @@ import ScreenComponent from './../../components/ScreenComponent';
 import {TabBar} from 'react-native-awesome-viewpager';
 import {Theme} from 'react-native-improver';
 import Tuijie from './Tuijie';
+import Mingju from './Mingju';
 
 var currentTheme = Theme.getTheme();
 
 const tabs = [
     {
         text:'推荐'
-    },
-    {
-        text:'诗文'
     },
     {
         text:'名句'
@@ -47,8 +45,9 @@ class Main extends ScreenComponent{
                     <View>
                         <Tuijie />
                     </View>
-                    <View><Text>诗文</Text></View>
-                    <View><Text>名句</Text></View>
+                    <View>
+                        <Mingju />
+                    </View>
                     <View><Text>古籍</Text></View>
                 </TabBar>
            </View>
