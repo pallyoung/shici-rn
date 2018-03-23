@@ -14,5 +14,12 @@ export default [
         persist:{
             mingju:'mingju'
         }
+    },
+    {
+        key:ACTIONS.FETCH_GUJI,
+        controller:content.fetchGuji,
+        persist:{
+            guji:'guji'
+        }
     }
 ]

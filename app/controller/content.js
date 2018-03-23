@@ -11,8 +11,14 @@ function fetchMingju(mingju){
         mingju
     }
 }
+function fetchGuji(guji){
+    return {
+        guji
+    }
+}
 
 export default {
     fetchTuijie,
-    fetchMingju
+    fetchMingju,
+    fetchGuji
 }
