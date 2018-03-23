@@ -6,6 +6,22 @@ const TYPES = {
     INDEX: 'index',
 }
 
+function innerText(string) {
+    var texts = string.replace(/<[^>]*>/g,'\n').split('\n');
+    var textNodes = [];
+    for (let i = 0, l = texts.length; i < l; i++) {
+        let text = texts[i];
+        if (/^\s*$/.test(texts[i])) {
+            continue;
+        } else if(text.indexOf('展开阅读全文')>-1) {
+            textNodes = [];
+            continue;
+        }else{
+            textNodes.push(texts[i]);
+        }
+    }
+    return textNodes;
+}
 
 //将原始html转成包含id的list
 function parseShiToList(content) {
@@ -15,14 +31,14 @@ function parseShiToList(content) {
         var list = content.match(/<a style="font-size:20px;line-height:24px[\s\S]*?<div class="tool">/g);
         if (list) {
             return list.map(function (item) {
-                var id,author,age,article,title;
+                var id, author, age, article, title;
                 title = item.match(/<b>([^<]*?)</)[1];
                 let ageAuthorMatch = item.match(/">([^<]*?)<\/a/g);
                 age = ageAuthorMatch[0].match(/>(.*?)</)[1];
                 author = ageAuthorMatch[1].match(/>(.*?)</)[1];
-                let idAndArticleMatch = item.match(/<div class="contson"([\s\S]*?)<\/div>/)[1];
+                let idAndArticleMatch = item.match(/<div class="contson"([\s\S]*?)<div class="tool">/)[0];
                 id = idAndArticleMatch.match(/contson([\d]+)/)[1];
-                article = idAndArticleMatch.match(/\n([\s\S]*?)\n/)[1].split(/<.+>/)
+                article = innerText(idAndArticleMatch);
                 return {
                     id,
                     author,
@@ -38,15 +54,15 @@ function parseShiToList(content) {
 
 
 function fetchDefault(state) {
-    state = state||{};
-    var params = state.params||{}
-    var page = params.page||1;
+    state = state || {};
+    var params = state.params || {}
+    var page = params.page || 1;
     var url = `default_${page}.aspx`;
-    var data = state.data||[];
+    var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseShiToList(content);
-    }).then(function(newData){
-        params.page=page+1;
+    }).then(function (newData) {
+        params.page = page + 1;
         data = data.concat(newData);
         return {
             params,
@@ -90,10 +106,10 @@ function injectMethod(type, method) {
 }
 
 const methodList = [
-    {type:'tuijie',method:fetchDefault}
+    { type: 'tuijie', method: fetchDefault }
 ]
 
-methodList.forEach(item=>injectMethod(item.type,item.method));
+methodList.forEach(item => injectMethod(item.type, item.method));
 export default {
     fetchBySourceType
 }
