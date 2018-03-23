@@ -9,4 +9,9 @@ export default [
         type:'content',
         sourceType:'mingju'
     },
+    {
+        name:'guji',
+        type:'content',
+        sourceType:'guji'
+    },
 ]

@@ -33,14 +33,13 @@ class Mingju extends ScreenComponent{
     _onDispatch=(data:{state:any})=>{
     }
     _renderItem(item){
-        console.log(item)
         return (
             <Paragrah  
                 text = {item.item.text}/>
         )
     }
     _listKeyExtractor(item,index){
-        return index+'';
+        return item.id+'';
     }
     render(){
         var {data} = this.state.mingju

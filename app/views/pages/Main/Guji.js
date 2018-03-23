@@ -11,7 +11,7 @@ import {
 
 import ScreenComponent from './../../components/ScreenComponent';
 import ListView from './../../components/ListView';
-import Paragrah from './../../components/Paragrah';
+import Brief from './../../components/Brief';
 import ReactFebrest from 'react-febrest';
 import ACTIONS from './../../../constants/ACTIONS';
 
@@ -19,7 +19,7 @@ class Guji extends ScreenComponent{
     constructor(...props){
         super(...props);
         this.state = {
-            mingju:{}
+            guji:{}
         }
     }
     componentDidMount() {
@@ -33,17 +33,19 @@ class Guji extends ScreenComponent{
     _onDispatch=(data:{state:any})=>{
     }
     _renderItem(item){
-        console.log(item)
         return (
-            <Paragrah  
-                text = {item.item.text}/>
+            <Brief  
+                brief = {item.item.brief}
+                title = {item.item.title}
+                />
         )
     }
     _listKeyExtractor(item,index){
-        return index+'';
+        return item.id+'';
     }
     render(){
-        var {data} = this.state.mingju
+        var {data} = this.state.guji;
+
         return (
             <ListView
                 data={data}

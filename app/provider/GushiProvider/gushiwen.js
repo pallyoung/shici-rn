@@ -71,6 +71,28 @@ function parseMingjuToList(content){
     }
 }
 
+//解析古籍
+function parseGujiToList(content){
+    if (!content) {
+        return null;
+    } else {
+        var list = content.match(/<div class="cont">[\s\S]*?<div class="tool">/g);
+        if (list) {
+            return list.map(function (item) {
+                var id, brief,title;
+                id = item.match(/guwen\/(.*?)\.aspx/)[1];
+                title =item.match(/<b>(.*?)<\/b>/)[1]
+                brief = item.match(/<p style=" margin:0px;">(.*?)</)[1];
+                return {
+                    id,
+                    title,
+                    brief
+                }
+            });
+        }
+    }
+}
+
 //首页推荐
 function fetchDefault(state) {
     state = state || {};
@@ -97,6 +119,24 @@ function fetchMingju(state={}){
     var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseMingjuToList(content);
+    }).then(function (newData) {
+        params.page = page + 1;
+        data = data.concat(newData);
+        return {
+            params,
+            data
+        }
+    });
+}
+
+//首页获取古籍
+function fetchGuji(state={}){
+    var params = state.params || {}
+    var page = params.page || 1;
+    var url = `guwen/Default.aspx?p=${page}`;
+    var data = state.data || [];
+    return fetchData(url).then(function (content) {
+        return parseGujiToList(content);
     }).then(function (newData) {
         params.page = page + 1;
         data = data.concat(newData);
@@ -143,7 +183,8 @@ function injectMethod(type, method) {
 
 const methodList = [
     { type: 'tuijie', method: fetchDefault },
-    { type: 'mingju', method: fetchMingju}
+    { type: 'mingju', method: fetchMingju},
+    { type: 'guji', method: fetchGuji}
 ]
 
 methodList.forEach(item => injectMethod(item.type, item.method));

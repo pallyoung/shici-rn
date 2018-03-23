@@ -15,6 +15,7 @@ import {TabBar} from 'react-native-awesome-viewpager';
 import {Theme} from 'react-native-improver';
 import Tuijie from './Tuijie';
 import Mingju from './Mingju';
+import Guji from './Guji';
 
 var currentTheme = Theme.getTheme();
 
@@ -48,7 +49,9 @@ class Main extends ScreenComponent{
                     <View>
                         <Mingju />
                     </View>
-                    <View><Text>古籍</Text></View>
+                    <View>
+                        <Guji />
+                    </View>
                 </TabBar>
            </View>
     }
