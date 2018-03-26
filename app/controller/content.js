@@ -17,8 +17,15 @@ function fetchGuji(guji){
     }
 }
 
+function fetchArticle(article){
+    return {
+        article 
+    }
+}
+
 export default {
     fetchTuijie,
     fetchMingju,
-    fetchGuji
+    fetchGuji,
+    fetchArticle
 }

@@ -14,4 +14,9 @@ export default [
         type:'content',
         sourceType:'guji'
     },
+    {
+        name:'article',
+        type:'content',
+        sourceType:'article'
+    },
 ]

@@ -149,10 +149,16 @@ function fetchGuji(state={}){
 
 
 
-function fetchBySourceType(sourceType, state) {
-    return methods[sourceType](state);
+function fetchBySourceType(sourceType, state,payload) {
+    return methods[sourceType](state,payload);
 }
-
+function fetchArticle(state,payload){
+    var url = `${payload.id}.aspx`;
+    return fetchData(url).then(function (content) {
+        return content;
+        //return parseGujiToList(content);
+    });
+}
 //
 const methods = {};
 
@@ -163,7 +169,7 @@ function injectMethod(type, method) {
 const methodList = [
     { type: 'tuijie', method: fetchDefault },
     { type: 'mingju', method: fetchMingju},
-    { type: 'guji', method: fetchGuji}
+    { type: 'guji', method: fetchGuji},
 ]
 
 methodList.forEach(item => injectMethod(item.type, item.method));

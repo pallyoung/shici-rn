@@ -14,8 +14,8 @@ class GushiProvider extends Provider{
     set(state){
         this.state=state;
     }
-    get(){
-        return fetchBySourceType(this.sourceType,this.state);
+    get(payload){
+        return fetchBySourceType(this.sourceType,this.state,payload);
     }
 }
 

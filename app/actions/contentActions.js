@@ -21,5 +21,9 @@ export default [
         persist:{
             guji:'guji'
         }
+    },
+    {
+        key:ACTIONS.FETCH_ARICLE,
+        controller:content.fetchGuji,
     }
 ]
