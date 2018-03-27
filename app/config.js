@@ -6,17 +6,46 @@ import BuildConfig from './BuildConfig';
 import {
         useProvider,
         injectProvider,
-        createActions
+        createActions,
+        StorageProvider,
     } from 'febrest';
 import GushiProvider from './provider/GushiProvider';
+import {
+    AsyncStorage
+} from 'react-native';
 
 import contentProviderConfigs from './provider/contentProviderConfigs';
+import userProviderConfigs from './provider/userProviderConfigs';
 import contentActions from './actions/contentActions';
 
 useProvider('content',GushiProvider);
 injectProvider(contentProviderConfigs);
-createActions(contentActions)
+injectProvider(userProviderConfigs);
+createActions(contentActions);
 
+const SHICI_STROAGE_PRE = 'SHICI_STROAGE_PRE_';
+StorageProvider.setStorageTool({
+    setter:function(key,value){
+        key = SHICI_STROAGE_PRE+key;
+        try{
+            value = JSON.stringify(value);
+        }catch(e){
+
+        }
+        return AsyncStorage.setItem(key,);
+    },
+    getter:function(key){
+        key = SHICI_STROAGE_PRE+key;
+        return AsyncStorage.getItem(key).then(function(value){
+            try{
+                value = JSON.parse(value);
+            }catch(e){
+                
+            }
+            return value;
+        });
+    }
+})
 
 //设置主题
 Theme.setTheme(BaseTheme);
