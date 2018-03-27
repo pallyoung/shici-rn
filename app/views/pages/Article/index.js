@@ -17,6 +17,13 @@ import {Theme} from 'react-native-improver';
 import ReactFebrest from 'react-febrest';
 import ACTIONS from './../../../constants/ACTIONS';
 
+import Title from './Title';
+
+import Content from './Content';
+import Author from './Author';
+
+var currentTheme = Theme.getTheme();
+
 class Article extends ScreenComponent{
     constructor(...props){
         super(...props);
@@ -35,7 +42,11 @@ class Article extends ScreenComponent{
     _onDispatch(data,isThis){
         if(data.key===ACTIONS.FETCH_ARTICLE&&isThis){
             let article = data.state.article;
-            this.getScreen().updateHeader({title:article.title});
+            let title = article.title;
+            if(title.length>12){
+                title = title.slice(0,11)+'...';
+            }
+            this.getScreen().updateHeader({title});
             this.setState({article});
             return true;
         }
@@ -45,57 +56,30 @@ class Article extends ScreenComponent{
         if(!article){
             return null;
         }
-        console.log(article)
         return (
-            <ScrollView>
-                <View>
-                    <Text>
-                        {article.title}
-                    </Text>
-                </View>
-                <View>
-                    <Text>
-                        {article.age}:{article.author}
-                    </Text>
-                </View>
-                <View>
-                    {article.article.map((item)=>{
-                        return (
-                            <Text
-                                key={item}>
-                                {item}
-                            </Text>
-                        );
-                    })}
-                </View>
-                <View>
-                    <Text>
-                        注释
-                    </Text>
-                    {
-                        article.zhushi.map((item)=>{
-                            return (
-                                <Text
-                                    key={item}>
-                                    {item}
-                                </Text>
-                            ); 
-                        })
-                    }
-                </View>
-                <View>
-                    <Text>
-                        解析
-                    </Text>
-                </View>
-                <View>
-                    <Text>
-                        作者
-                    </Text>
-                </View>
+            <ScrollView
+                bounces={false}
+                style={styles.wrapper}
+                showsVerticalScrollIndicator={false} >
+                <Title 
+                    text={article.title}/>
+                <Author
+                    age={article.age}
+                    author={article.author}
+                     />
+                <Content 
+                    article={article.article}/>
             </ScrollView>
         )
     }
 }
 
-export default Article;
+const styles = StyleSheet.create({
+    wrapper:{
+       backgroundColor:'#fff',
+       flex:1,
+       paddingHorizontal:currentTheme.paddingHorizontal,
+    },
+});
+
+export default Article
