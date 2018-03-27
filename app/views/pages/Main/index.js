@@ -16,6 +16,7 @@ import {Theme} from 'react-native-improver';
 import Tuijie from './Tuijie';
 import Mingju from './Mingju';
 import Guji from './Guji';
+import My from './My';
 
 var currentTheme = Theme.getTheme();
 
@@ -28,6 +29,9 @@ const tabs = [
     },
     {
         text:'古籍'
+    },
+    {
+        text:'我的'
     }
 ];
 class Main extends ScreenComponent{
@@ -51,6 +55,9 @@ class Main extends ScreenComponent{
                     </View>
                     <View>
                         <Guji />
+                    </View>
+                    <View>
+                        <My />
                     </View>
                 </TabBar>
            </View>
