@@ -93,6 +93,32 @@ function parseGujiToList(content){
     }
 }
 
+//解析诗文内容
+
+function parseArticle(content){
+    if (!content) {
+        return null;
+    } else {
+        var main = content.match(/<div class="main3"[\s\S]*?<\/div>(?=\n<script)/)[0];
+        var title = main.match(/<h1 style="font-size:22px; line-height:30px; margin-bottom:10px;">(.*?)<\/h1>/)[1];
+        var age = main.match(/<a href="\/shiwen[^>]*?>(.*?)<\/a>/)[1];
+        var author = main.match(/<a href="\/authorv[^>]*?>(.*?)<\/a>/)[1];
+        var article =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
+        var zhushiJianxiMatch = main.match(/<div class="contyishang"[\s\S]*?div class="dingpai"/g);
+        var zhushi =  []//innerText(zhushiJianxiMatch[0].match(/(?=<p>)[\s\S]*?(?=<\/p>)/));
+        // var jianxi =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
+        // var authorInfo =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
+        return {
+                title,
+                article,
+                author,
+                age,
+                // jianxi,
+                zhushi,
+                // authorInfo
+            }
+    }
+}
 //首页推荐
 function fetchDefault(state) {
     state = state || {};
@@ -155,8 +181,7 @@ function fetchBySourceType(sourceType, state,payload) {
 function fetchArticle(state,payload){
     var url = `${payload.id}.aspx`;
     return fetchData(url).then(function (content) {
-        return content;
-        //return parseGujiToList(content);
+        return parseArticle(content);
     });
 }
 //
@@ -170,6 +195,7 @@ const methodList = [
     { type: 'tuijie', method: fetchDefault },
     { type: 'mingju', method: fetchMingju},
     { type: 'guji', method: fetchGuji},
+    { type: 'article', method: fetchArticle},
 ]
 
 methodList.forEach(item => injectMethod(item.type, item.method));

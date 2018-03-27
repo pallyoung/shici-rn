@@ -82,7 +82,7 @@ export default class Header extends Component {
         }
     }
 
-    updateInfo(info) {
+    update(info) {
         this.setState(info);
     }
     _renderLeftButton() {

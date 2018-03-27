@@ -3,7 +3,8 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 
 import {Theme} from 'react-native-improver';
@@ -46,7 +47,9 @@ function Content(props) {
 }
 function Article(props) {
     return (
-        <View
+        <TouchableOpacity
+            onPress={props.onPress}
+            activeOpacity={1}
             style={styles.wrapper}>
             <Title title={props.title} />
             <Info
@@ -54,7 +57,7 @@ function Article(props) {
                 author={props.author} />
             <Content 
                 article={props.article}/>
-        </View>
+        </TouchableOpacity>
     );
 }
 

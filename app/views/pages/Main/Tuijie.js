@@ -30,16 +30,22 @@ class Tuijie extends ScreenComponent{
         this.dispatcher.release();
     }
     
+    _navigateToArticle(id){
+        this.getScreen().getNavigation().navigate('Article',{id});
+    }
     _onDispatch=(data:{state:any})=>{
     }
-    _renderItem(item){
+    _renderItem=(item)=>{
         return (
-            <Article  {...item.item}/>
+            <Article
+                onPress={()=>this._navigateToArticle(item.item.id)} 
+                {...item.item}/>
         )
     }
     _listKeyExtractor(item,index){
         return item.id+'';
     }
+   
     render(){
         var {data} = this.state.tuijie
         return (

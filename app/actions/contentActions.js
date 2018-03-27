@@ -23,7 +23,7 @@ export default [
         }
     },
     {
-        key:ACTIONS.FETCH_ARICLE,
-        controller:content.fetchGuji,
+        key:ACTIONS.FETCH_ARTICLE,
+        controller:content.fetchArticle,
     }
 ]

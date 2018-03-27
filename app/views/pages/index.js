@@ -1,5 +1,6 @@
 
 module.exports = {
     PageList:require('./PageList').default,
-    Main:require('./Main').default
+    Main:require('./Main').default,
+    Article:require('./Article').default
 }
