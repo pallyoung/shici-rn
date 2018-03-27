@@ -94,7 +94,6 @@ function parseGujiToList(content){
 }
 
 //解析诗文内容
-
 function parseArticle(content){
     if (!content) {
         return null;
@@ -104,18 +103,11 @@ function parseArticle(content){
         var age = main.match(/<a href="\/shiwen[^>]*?>(.*?)<\/a>/)[1];
         var author = main.match(/<a href="\/authorv[^>]*?>(.*?)<\/a>/)[1];
         var article =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
-        var zhushiJianxiMatch = main.match(/<div class="contyishang"[\s\S]*?div class="dingpai"/g);
-        var zhushi =  []//innerText(zhushiJianxiMatch[0].match(/(?=<p>)[\s\S]*?(?=<\/p>)/));
-        // var jianxi =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
-        // var authorInfo =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
         return {
                 title,
                 article,
                 author,
-                age,
-                // jianxi,
-                zhushi,
-                // authorInfo
+                age
             }
     }
 }
