@@ -11,5 +11,12 @@ export default [
         persist:{
             fav:'fav'
         }
+    },
+    {
+        key:ACTIONS.REMOVE_FAV,
+        controller:user.removeFav,
+        persist:{
+            fav:'fav'
+        }
     }
 ]

@@ -1,7 +1,6 @@
 
 
 function fetchTuijie(tuijie,fav){
-    console.log(fav)
     tuijie.data = tuijie.data.map(function(article){
         article.isFav = !!fav[article.id];
         return article;

@@ -33,11 +33,15 @@ class Tuijie extends ScreenComponent{
     _navigateToArticle(id){
         this.getScreen().getNavigation().navigate('Article',{id});
     }
-    _fav(id){
-        this.dispatcher.dispatch(ACTIONS.ADD_FAV,{id});
+    _fav(id,isFav){
+        if(!isFav){
+            this.dispatcher.dispatch(ACTIONS.ADD_FAV,{id});
+        }else{
+            this.dispatcher.dispatch(ACTIONS.REMOVE_FAV,{id});
+        }
     }
     _onDispatch=(data:{state:any},isThis)=>{
-        if(isThis&&data.key===ACTIONS.ADD_FAV){
+        if(isThis&&(data.key===ACTIONS.ADD_FAV||data.key===ACTIONS.REMOVE_FAV)){
             this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT);
             return true;
         }
@@ -45,7 +49,7 @@ class Tuijie extends ScreenComponent{
     _renderItem=(item)=>{
         return (
             <Article
-                onFav={()=>this._fav(item.item.id)}
+                onFav={()=>this._fav(item.item.id,item.item.isFav)}
                 onPress={()=>this._navigateToArticle(item.item.id)} 
                 {...item.item}/>
         )
