@@ -1,11 +1,17 @@
 export default [
     {
         name:'userList',
-        type:'storage'
+        type:'storage',
+        defaultState:[
+            {name:'default'}
+        ]
     },
     {
         name:'currentUser',
-        type:'storage'
+        type:'storage',
+        defaultState:{
+            name:'default'
+        }
     },
     {
         name:'fav',

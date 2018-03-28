@@ -13,10 +13,24 @@ function unlogin(currentUser,payload){
 function register(userList,payload){
 
 }
-
+function isLogin(currentUser){
+    if(currentUser&&currentUser.name){
+        return {
+            loginState:{
+                isLogined:true
+            }
+        }
+    }
+    return {
+        loginState:{
+            isLogined:false
+        }
+    }
+}
 
 export default {
     login,
     unlogin,
-    register
+    register,
+    isLogin
 }
