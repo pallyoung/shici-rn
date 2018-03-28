@@ -115,19 +115,17 @@ function parseArticle(content){
 function fetchDefault(state,payload) {
     state = state || {};
     var params = state.params || {}
-    var page = params.page || 1;
-    if(payload.loadMore){
-        params.page = page + 1;
+    params.page = params.page || 0;
+    if(payload.loadMore||params.page==0){
+        params.page++;;
+    }else{
+        return state;
     }
-    if(page==0){
-        page = 1;
-    }
-    var url = `default_${page}.aspx`;
+    var url = `default_${params.page}.aspx`;
     var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseShiToList(content);
     }).then(function (newData) {
-        params.page = page + 1;
         data = data.concat(newData);
         return {
             params,
@@ -138,19 +136,17 @@ function fetchDefault(state,payload) {
 //首页名句
 function fetchMingju(state={},payload){
     var params = state.params || {}
-    var page = params.page || 0;
-    if(payload.loadMore){
-        params.page = page + 1;
+    params.page = params.page || 0;
+    if(payload.loadMore||params.page==0){
+        params.page++;;
+    }else{
+        return state;
     }
-    if(page==0){
-        page = 1;
-    }
-    var url = `mingju/Default.aspx?p=${page}`;
+    var url = `mingju/Default.aspx?p=${params.page}`;
     var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseMingjuToList(content);
     }).then(function (newData) {
-        params.page = page + 1;
         data = data.concat(newData);
         return {
             params,
@@ -163,13 +159,12 @@ function fetchMingju(state={},payload){
 function fetchGuji(state={},payload){
     var params = state.params || {}
     var page = params.page || 0;
-    if(payload.loadMore){
-        params.page = page + 1;
+    if(payload.loadMore||params.page==0){
+        params.page++;;
+    }else{
+        return state;
     }
-    if(page==0){
-        page = 1;
-    }
-    var url = `guwen/Default.aspx?p=${page}`;
+    var url = `guwen/Default.aspx?p=${params.page}`;
     var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseGujiToList(content);

@@ -34,7 +34,7 @@ StorageProvider.setStorageTool({
         }catch(e){
 
         }
-        return AsyncStorage.setItem(key,);
+        return AsyncStorage.setItem(key,value);
     },
     getter:function(key){
         key = SHICI_STROAGE_PRE+key;

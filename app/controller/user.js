@@ -27,13 +27,14 @@ function isLogin(currentUser){
         }
     }
 }
-function addFav(fav={},payload){
+function addFav(fav,payload){
+    fav=fav||{};
     fav[payload.id] = true;
     return {
         fav
     }
 }
-function removeFav(fav={},payload){
+function removeFav(fav,payload){
     delete fav[payload.id];
     return {
         fav

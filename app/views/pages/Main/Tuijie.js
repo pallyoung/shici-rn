@@ -34,9 +34,13 @@ class Tuijie extends ScreenComponent{
         this.getScreen().getNavigation().navigate('Article',{id});
     }
     _fav(id){
-        this.dispatcher.dispatch(ACTIONS.ADD_FAV);
+        this.dispatcher.dispatch(ACTIONS.ADD_FAV,{id});
     }
-    _onDispatch=(data:{state:any})=>{
+    _onDispatch=(data:{state:any},isThis)=>{
+        if(isThis&&data.key===ACTIONS.ADD_FAV){
+            this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT);
+            return true;
+        }
     }
     _renderItem=(item)=>{
         return (
