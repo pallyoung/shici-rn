@@ -57,6 +57,15 @@ function Article(props) {
                 author={props.author} />
             <Content 
                 article={props.article}/>
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={props.onFav}
+                style={styles.favWrapper}>
+                <Text
+                    style={styles.fav}>
+                    {props.isFav?'取消收藏':'点我收藏'}
+                </Text>
+            </TouchableOpacity>
         </TouchableOpacity>
     );
 }
@@ -90,6 +99,14 @@ const styles = StyleSheet.create({
         marginBottom:8,
         lineHeight:2*currentTheme.f3
         
+    },
+    favWrapper:{
+        marginBottom:8,
+        alignItems:'flex-end'
+    },
+    fav:{
+        fontSize:currentTheme.f2,
+        color:'#795548'
     }
 })
 export default Article;

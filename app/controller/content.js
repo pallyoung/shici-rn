@@ -1,6 +1,10 @@
 
 
-function fetchTuijie(tuijie){
+function fetchTuijie(tuijie,fav={}){
+    tuijie.data = tuijie.data.map(function(article){
+        article.isFav = !!fav[article.id];
+        return article;
+    })
     return {
         tuijie
     }

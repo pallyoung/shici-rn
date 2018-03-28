@@ -112,10 +112,16 @@ function parseArticle(content){
     }
 }
 //首页推荐
-function fetchDefault(state) {
+function fetchDefault(state,payload) {
     state = state || {};
     var params = state.params || {}
     var page = params.page || 1;
+    if(payload.loadMore){
+        params.page = page + 1;
+    }
+    if(page==0){
+        page = 1;
+    }
     var url = `default_${page}.aspx`;
     var data = state.data || [];
     return fetchData(url).then(function (content) {
@@ -130,9 +136,15 @@ function fetchDefault(state) {
     });
 }
 //首页名句
-function fetchMingju(state={}){
+function fetchMingju(state={},payload){
     var params = state.params || {}
-    var page = params.page || 1;
+    var page = params.page || 0;
+    if(payload.loadMore){
+        params.page = page + 1;
+    }
+    if(page==0){
+        page = 1;
+    }
     var url = `mingju/Default.aspx?p=${page}`;
     var data = state.data || [];
     return fetchData(url).then(function (content) {
@@ -148,15 +160,20 @@ function fetchMingju(state={}){
 }
 
 //首页获取古籍
-function fetchGuji(state={}){
+function fetchGuji(state={},payload){
     var params = state.params || {}
-    var page = params.page || 1;
+    var page = params.page || 0;
+    if(payload.loadMore){
+        params.page = page + 1;
+    }
+    if(page==0){
+        page = 1;
+    }
     var url = `guwen/Default.aspx?p=${page}`;
     var data = state.data || [];
     return fetchData(url).then(function (content) {
         return parseGujiToList(content);
     }).then(function (newData) {
-        params.page = page + 1;
         data = data.concat(newData);
         return {
             params,

@@ -24,7 +24,7 @@ class Tuijie extends ScreenComponent{
     }
     componentDidMount() {
         this.dispatcher = ReactFebrest.createDispatcher(this,this._onDispatch);
-        this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT);
+        this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT,{loadMore:true});
     }
     componentWillUnmount() {
         this.dispatcher.release();
@@ -33,11 +33,15 @@ class Tuijie extends ScreenComponent{
     _navigateToArticle(id){
         this.getScreen().getNavigation().navigate('Article',{id});
     }
+    _fav(id){
+        this.dispatcher.dispatch(ACTIONS.ADD_FAV);
+    }
     _onDispatch=(data:{state:any})=>{
     }
     _renderItem=(item)=>{
         return (
             <Article
+                onFav={()=>this._fav(item.item.id)}
                 onPress={()=>this._navigateToArticle(item.item.id)} 
                 {...item.item}/>
         )
@@ -51,7 +55,7 @@ class Tuijie extends ScreenComponent{
         return (
             <ListView
                 data={data}
-                onEndReached={()=>this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT)}
+                onEndReached={()=>this.dispatcher.dispatch(ACTIONS.FETCH_DEFAULT,{loadMore:true})}
                 renderItem={this._renderItem}
                 keyExtractor={this._listKeyExtractor}
                 style={styles.wrapper}/>

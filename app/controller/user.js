@@ -27,10 +27,23 @@ function isLogin(currentUser){
         }
     }
 }
-
+function addFav(fav={},payload){
+    fav[payload.id] = true;
+    return {
+        fav
+    }
+}
+function removeFav(fav={},payload){
+    delete fav[payload.id];
+    return {
+        fav
+    }
+}
 export default {
     login,
     unlogin,
     register,
-    isLogin
+    isLogin,
+    addFav,
+    removeFav
 }
