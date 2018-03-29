@@ -29,7 +29,9 @@ function isLogin(currentUser){
 }
 function addFav(fav,payload){
     fav=fav||{};
-    fav[payload.id] = true;
+    fav[payload.id] = {
+        timestamp:Date.now()
+    };
     return {
         fav
     }
