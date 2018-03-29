@@ -4,7 +4,8 @@ var fs = require('fs');
 
 const assetPath = path.relative('./','asset');
 
-const file = assetPath+'/tuijie.json';
+// const file = assetPath+'/tuijie.json';
+const file = assetPath+'/shiwen.json';
 
 function innerText(string) {
     var texts = string.replace(/<[^>]*>/g,'\n').split('\n');
@@ -34,7 +35,7 @@ fs.appendFile(file,'[',function(){});
 var page = 0;
 
 function next(){
-    return fetch(`https://m.gushiwen.org/default_${++page}.aspx`);
+    return fetch(`https://m.gushiwen.org/shiwen/default_0A0A${++page}.aspx`);
 }
 
 function getShi(content){
@@ -48,8 +49,8 @@ function getShi(content){
                 title = item.match(/<b>([^<]*?)</)[1];
                 id = item.match(/id="contson([\d]*?)"/)[1]
                 let ageAuthorMatch = item.match(/">([^<]*?)<\/a/g);
-                age = ageAuthorMatch[0].match(/>(.*?)</)[1];
-                author = ageAuthorMatch[1].match(/>(.*?)</)[1];
+                age = ageAuthorMatch[0].match(/>(.*?)[\n<]/)[1];
+                author = ageAuthorMatch[1].match(/>(.*?)[\n<]/)[1];
                 let articleMatch = item.match(/<div class="contson"([\s\S]*?)<div class="tool">/)[0];
                 pageid = item.match(/href="\/(.*?).aspx/)[1];
                 article = innerText(articleMatch);
