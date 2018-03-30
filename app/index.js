@@ -14,11 +14,9 @@ import { Theme } from 'react-native-improver';
 var currentTheme = Theme.getTheme();
 import { StackNavigator } from 'react-navigation';
 import Routes from './views/routes/Routes';
-import { NativeManager } from './native';
+import {NativeManager} from './native'
 import BuildConfig from './BuildConfig';
-import Loading from './views/components/Loading';
 import Screen from './views/components/Screen';
-import contentPrepare from './provider/contentPrepare';
 
 function createNavigation(initialRouteName, initialRouteParams) {
     return StackNavigator(Routes, {
@@ -48,7 +46,7 @@ class Entry extends Component {
 
         InteractionManager.runAfterInteractions(() => {
 
-            let initialRouteName = NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
+            let initialRouteName = BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';
             this.state.navigation = createNavigation(initialRouteName);
             this.setState({ inited: true });
             InteractionManager.runAfterInteractions(() => NativeManager.hideLoadingView())
@@ -56,7 +54,7 @@ class Entry extends Component {
 
     }
     resetNavigator(initialRouteName, initialRouteParams) {
-        initialRouteName = initialRouteName || NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
+        initialRouteName = initialRouteName || BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';
         this.setState({
             inited: true,
             navigationKey: this.state.navigationKey + 1,

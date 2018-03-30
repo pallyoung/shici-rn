@@ -26,6 +26,7 @@ createActions(contentActions);
 createActions(userActions);
 
 const SHICI_STROAGE_PRE = 'SHICI_STROAGE_PRE_';
+
 StorageProvider.setStorageTool({
     setter:function(key,value){
         key = SHICI_STROAGE_PRE+key;
