@@ -8,25 +8,33 @@ var assetPath = path.relative('./','app/asset');
 var authorFile = path.join(assetPath,'author.js');
 var ageFile = path.join(assetPath,'age.js');
 var shiFile = path.join(assetPath,'shi.js');
+var versionFile = path.join(assetPath,'assetversion.js');
 
-fs.unlinkSync(authorFile);
-fs.unlinkSync(ageFile);
-fs.unlinkSync(shiFile);
+try{
+    fs.unlinkSync(authorFile);
+    fs.unlinkSync(ageFile);
+    fs.unlinkSync(shiFile);
+    fs.unlinkSync(versionFile);
+} catch(e){
+
+}
+
 
 var id = 0;
 
 var authors = new Map();
 var ages = new Map();
 
-var shis = new Map();
+var shis = [];
 
 
 shi.forEach(function (item) {
     var author = item.author;
     var age = item.age;
     var innerid = 'shi_' + id++;
+    item.innerid = innerid;
 
-    shis.set(innerid, item);
+    shis.push(item);
 
     var authorS,ageS;
     if (!authors.has(author)) {
@@ -55,8 +63,9 @@ ages.forEach(function(v,k){
 });
 fs.appendFileSync(ageFile,'}');
 
-fs.appendFileSync(shiFile,'export default {')
-shis.forEach(function(v,k){
-    fs.appendFileSync(shiFile,'"'+k+'"'+':'+JSON.stringify(v)+',');
-});
-fs.appendFileSync(shiFile,'}');
+fs.appendFileSync(shiFile,'var list = ');
+
+fs.appendFileSync(shiFile,JSON.stringify(shis,null,'\t'));
+
+fs.appendFileSync(shiFile,'; \r\nfunction release(){list = null} \r\n function get(){return list}\r\n export default {release,get}');
+fs.writeFileSync(versionFile,'export default version = '+Date.now());

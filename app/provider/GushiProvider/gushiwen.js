@@ -1,7 +1,6 @@
 
 import fetchData from './fetchData';
 
-
 const TYPES = {
     INDEX: 'index',
 }

@@ -17,7 +17,8 @@ import Routes from './views/routes/Routes';
 import { NativeManager } from './native';
 import BuildConfig from './BuildConfig';
 import Loading from './views/components/Loading';
-import Screen from './views/components/Screen'
+import Screen from './views/components/Screen';
+import contentPrepare from './provider/contentPrepare';
 
 function createNavigation(initialRouteName, initialRouteParams) {
     return StackNavigator(Routes, {
