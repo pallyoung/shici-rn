@@ -1,4 +1,4 @@
-export default [
+var list = [
 	{
 		"pageid": "juv_2d8bb03f1e19",
 		"text": "山有木兮木有枝，心悦君兮君不知。"
@@ -39398,4 +39398,17 @@ export default [
 		"pageid": "juv_a63453489457",
 		"text": "百沸缲汤雪涌波，缲车嘈囋雨鸣蓑。"
 	}
-]
+];
+
+function get(){
+    return list;
+}
+
+function release(){
+    list = null;
+}
+
+export default {
+    get,
+    release
+}

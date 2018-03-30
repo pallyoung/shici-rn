@@ -17,6 +17,7 @@ import Routes from './views/routes/Routes';
 import {NativeManager} from './native'
 import BuildConfig from './BuildConfig';
 import Screen from './views/components/Screen';
+import ReactFebrest from 'react-febrest';
 
 function createNavigation(initialRouteName, initialRouteParams) {
     return StackNavigator(Routes, {
@@ -33,6 +34,7 @@ class Entry extends Component {
             navigation: null,
             navigationKey: 0
         }
+        this.dispatcher = ReactFebrest.createDispatcher(this,this._onDispatch)
 
     }
     componentWillMount() {
@@ -42,13 +44,16 @@ class Entry extends Component {
         APPContext.Routes = Routes;
 
         InteractionManager.runAfterInteractions(() => {
-
+            
             let initialRouteName = BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';
             this.state.navigation = createNavigation(initialRouteName);
             this.setState({ inited: true });
             InteractionManager.runAfterInteractions(() => NativeManager.hideLoadingView())
         });
 
+    }
+    _onDispatch(){
+        
     }
     resetNavigator(initialRouteName, initialRouteParams) {
         initialRouteName = initialRouteName || BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';
