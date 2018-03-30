@@ -28,9 +28,6 @@ class Entry extends Component {
     constructor(...props) {
         super(...props);
         global.APPContext = this;
-        this._isLoginPopupShow = false;
-        this._loginPopupId;
-        this._isLoadinViewShow = false;
         this.state = {
             inited: false,
             navigation: null,
