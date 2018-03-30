@@ -55,7 +55,7 @@ class Tuijie extends ScreenComponent{
         )
     }
     _listKeyExtractor(item,index){
-        return item.id+'';
+        return item.innerid;
     }
    
     render(){

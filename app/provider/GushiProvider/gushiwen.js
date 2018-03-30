@@ -1,74 +1,17 @@
 
 import fetchData from './fetchData';
+import shiGetter from './../../asset/shi';
+import author from './../../asset/author';
+import age from './../../asset/age';
+import version from './../../asset/assetversion';
+import mingju from './../../asset/mingju';
 
+
+var shi = shiGetter.get();
 const TYPES = {
     INDEX: 'index',
 }
 
-function innerText(string) {
-    var texts = string.replace(/<[^>]*>/g,'\n').split('\n');
-    var textNodes = [];
-    for (let i = 0, l = texts.length; i < l; i++) {
-        let text = texts[i];
-        if (/^[\s▲]*$/.test(texts[i])) {
-            continue;
-        } else if(text.indexOf('展开阅读全文')>-1) {
-            textNodes = [];
-            continue;
-        }else{
-            textNodes.push(texts[i]);
-        }
-    }
-    return textNodes;
-}
-
-//将原始html转成包含id的list
-function parseShiToList(content) {
-    if (!content) {
-        return null;
-    } else {
-        var list = content.match(/<a style="font-size:20px;line-height:24px[\s\S]*?<div class="tool">/g);
-        if (list) {
-            return list.map(function (item) {
-                var id, author, age, article, title;
-                title = item.match(/<b>([^<]*?)</)[1];
-                let ageAuthorMatch = item.match(/">([^<]*?)<\/a/g);
-                age = ageAuthorMatch[0].match(/>(.*?)</)[1];
-                author = ageAuthorMatch[1].match(/>(.*?)</)[1];
-                let articleMatch = item.match(/<div class="contson"([\s\S]*?)<div class="tool">/)[0];
-                id = item.match(/href="\/(.*?).aspx/)[1];
-                article = innerText(articleMatch);
-                return {
-                    id,
-                    author,
-                    age,
-                    title,
-                    article
-                }
-            });
-        }
-    }
-}
-
-//解析名句
-function parseMingjuToList(content){
-    if (!content) {
-        return null;
-    } else {
-        var list = content.match(/<div class="cont" style=" margin-top:12px;border-bottom:1px dashed #DAD9D1; padding-bottom:7px;">[\s\S]*?<\/div>/g);
-        if (list) {
-            return list.map(function (item) {
-                var id, text;
-                id = item.match(/mingju\/(.*?)\.aspx/)[1];
-                text = item.match(/>(.*?)</)[1];
-                return {
-                    id,
-                    text
-                }
-            });
-        }
-    }
-}
 
 //解析古籍
 function parseGujiToList(content){
@@ -92,66 +35,29 @@ function parseGujiToList(content){
     }
 }
 
-//解析诗文内容
-function parseArticle(content){
-    if (!content) {
-        return null;
-    } else {
-        var main = content.match(/<div class="main3"[\s\S]*?<\/div>(?=\n<script)/)[0];
-        var title = main.match(/<h1 style="font-size:22px; line-height:30px; margin-bottom:10px;">(.*?)<\/h1>/)[1];
-        var age = main.match(/<a href="\/shiwen[^>]*?>(.*?)<\/a>/)[1];
-        var author = main.match(/<a href="\/authorv[^>]*?>(.*?)<\/a>/)[1];
-        var article =  innerText(main.match(/<div class="contson"[^>]*?>([\s\S]*?)<\/div>/)[1]);
-        return {
-                title,
-                article,
-                author,
-                age
-            }
-    }
-}
 //首页推荐
 function fetchDefault(state,payload) {
     state = state || {};
     var params = state.params || {}
     params.page = params.page || 0;
     if(payload.loadMore||params.page==0){
-        params.page++;;
-    }else{
-        return state;
+        params.page++;
+        state.params = params;
+        state.data = shi.slice(0,params.page*10);
     }
-    var url = `default_${params.page}.aspx`;
-    var data = state.data || [];
-    return fetchData(url).then(function (content) {
-        return parseShiToList(content);
-    }).then(function (newData) {
-        data = data.concat(newData);
-        return {
-            params,
-            data
-        }
-    });
+    return state;
+    
 }
 //首页名句
 function fetchMingju(state={},payload){
     var params = state.params || {}
     params.page = params.page || 0;
+    console.log(params,'====')
     if(payload.loadMore||params.page==0){
         params.page++;;
-    }else{
-        return state;
+        state.data = mingju.slice(0,params.page*20)
     }
-    var url = `mingju/Default.aspx?p=${params.page}`;
-    var data = state.data || [];
-    return fetchData(url).then(function (content) {
-        return parseMingjuToList(content);
-    }).then(function (newData) {
-        data = data.concat(newData);
-        return {
-            params,
-            data
-        }
-    });
+    return state;
 }
 
 //首页获取古籍
@@ -182,10 +88,6 @@ function fetchBySourceType(sourceType, state,payload) {
     return methods[sourceType](state,payload);
 }
 function fetchArticle(state,payload){
-    var url = `${payload.id}.aspx`;
-    return fetchData(url).then(function (content) {
-        return parseArticle(content);
-    });
 }
 //
 const methods = {};

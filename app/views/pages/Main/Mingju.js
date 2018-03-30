@@ -39,7 +39,7 @@ class Mingju extends ScreenComponent{
         )
     }
     _listKeyExtractor(item,index){
-        return item.id+'';
+        return item.pageid+'';
     }
     render(){
         var {data} = this.state.mingju
