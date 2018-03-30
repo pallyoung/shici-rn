@@ -18,6 +18,7 @@ import {NativeManager} from './native'
 import BuildConfig from './BuildConfig';
 import Screen from './views/components/Screen';
 import ReactFebrest from 'react-febrest';
+import DataLoading from './views/components/DataLoading';
 
 function createNavigation(initialRouteName, initialRouteParams) {
     return StackNavigator(Routes, {
@@ -47,7 +48,7 @@ class Entry extends Component {
             
             let initialRouteName = BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';
             this.state.navigation = createNavigation(initialRouteName);
-            this.setState({ inited: true });
+            // this.setState({ inited: true });
             InteractionManager.runAfterInteractions(() => NativeManager.hideLoadingView())
         });
 
@@ -66,7 +67,9 @@ class Entry extends Component {
     render() {
         var Navigation = this.state.navigation;
         if (!this.state.inited) {
-            return null;
+            return (
+                <DataLoading />
+            );
         }
         return <Navigation />
     }
