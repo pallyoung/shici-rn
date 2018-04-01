@@ -19,6 +19,7 @@ import BuildConfig from './BuildConfig';
 import Screen from './views/components/Screen';
 import ReactFebrest from 'react-febrest';
 import DataLoading from './views/components/DataLoading';
+import Actions from './constants/ACTIONS';
 
 function createNavigation(initialRouteName, initialRouteParams) {
     return StackNavigator(Routes, {
@@ -45,7 +46,7 @@ class Entry extends Component {
         APPContext.Routes = Routes;
 
         InteractionManager.runAfterInteractions(() => {
-            
+            this.dispatcher.dispatch(Actions.INIT)
             let initialRouteName = BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';
             this.state.navigation = createNavigation(initialRouteName);
             // this.setState({ inited: true });
@@ -53,7 +54,7 @@ class Entry extends Component {
         });
 
     }
-    _onDispatch(){
+    _onDispatch(data){
         
     }
     resetNavigator(initialRouteName, initialRouteParams) {

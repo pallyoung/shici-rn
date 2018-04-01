@@ -7,8 +7,10 @@
     "babel-jest": "^23.0.0-alpha.0",
     "babel-preset-react-native": "^4.0.0",
     "jest": "^23.0.0-alpha.0",
+    "prettier": "^1.11.1",
     "react-test-renderer": "^16.2.0",
-    "spencer-kit-project-templates": "^0.1.0"
+    "spencer-kit-project-templates": "^0.1.0",
+    "sqlite3": "^4.0.0"
   },
   "dependencies": {
     "febrest": "^0.2.1",

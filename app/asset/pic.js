@@ -90,8 +90,6 @@ var list =  [
     
     "http://img0.imgtn.bdimg.com/it/u=1233955830,4099467307&fm=214&gp=0.jpg",
     
-    "http://img1.imgtn.bdimg.com/it/u=127325316,317259536&fm=214&gp=0.jpg",
-    
     "http://img2.imgtn.bdimg.com/it/u=2851929082,2128843100&fm=214&gp=0.jpg",
     
     "http://img1.imgtn.bdimg.com/it/u=1480698046,2376088760&fm=214&gp=0.jpg",
@@ -121,8 +119,6 @@ var list =  [
     "http://img2.imgtn.bdimg.com/it/u=1274742217,3830832298&fm=214&gp=0.jpg",
     
     "http://img1.imgtn.bdimg.com/it/u=765834386,130923893&fm=214&gp=0.jpg",
-    
-    "http://img4.imgtn.bdimg.com/it/u=727742669,1950331009&fm=214&gp=0.jpg",
     
     "http://img3.imgtn.bdimg.com/it/u=951106438,93687534&fm=214&gp=0.jpg",
     
@@ -300,8 +296,6 @@ var list =  [
     
     "http://img2.imgtn.bdimg.com/it/u=3289743167,4070276992&fm=214&gp=0.jpg",
     
-    "http://img1.imgtn.bdimg.com/it/u=4194962566,3212854008&fm=214&gp=0.jpg",
-    
     "http://img0.imgtn.bdimg.com/it/u=427522190,2648694957&fm=214&gp=0.jpg",
     
     "http://img1.imgtn.bdimg.com/it/u=2343947231,1583023862&fm=214&gp=0.jpg",
@@ -327,8 +321,6 @@ var list =  [
     "http://img0.imgtn.bdimg.com/it/u=2662797770,3959592044&fm=214&gp=0.jpg",
     
     "http://img0.imgtn.bdimg.com/it/u=3888739210,2984547134&fm=214&gp=0.jpg",
-    
-    "http://img2.imgtn.bdimg.com/it/u=482968652,3417299632&fm=214&gp=0.jpg",
     
     "http://img4.imgtn.bdimg.com/it/u=1290390349,3077812832&fm=214&gp=0.jpg",
     
@@ -626,8 +618,6 @@ var list =  [
     
     "http://img0.imgtn.bdimg.com/it/u=269543580,4182470602&fm=214&gp=0.jpg",
     
-    "http://img2.imgtn.bdimg.com/it/u=687132937,3051337626&fm=214&gp=0.jpg",
-    
     "http://img2.imgtn.bdimg.com/it/u=4130868812,2364598872&fm=214&gp=0.jpg",
     
     "http://img0.imgtn.bdimg.com/it/u=2885090530,2042832650&fm=214&gp=0.jpg",
@@ -639,8 +629,6 @@ var list =  [
     "http://img2.imgtn.bdimg.com/it/u=4177163467,2278984107&fm=214&gp=0.jpg",
     
     "http://img4.imgtn.bdimg.com/it/u=2215594924,3659214566&fm=214&gp=0.jpg",
-    
-    "http://img2.imgtn.bdimg.com/it/u=208114987,273566405&fm=214&gp=0.jpg",
     
     "http://img0.imgtn.bdimg.com/it/u=2910649730,2877319191&fm=214&gp=0.jpg",
     
@@ -836,8 +824,6 @@ var list =  [
     
     "http://img1.imgtn.bdimg.com/it/u=2810908351,427333992&fm=214&gp=0.jpg",
     
-    "http://img4.imgtn.bdimg.com/it/u=2540195934,1539557108&fm=214&gp=0.jpg",
-    
     "http://img0.imgtn.bdimg.com/it/u=1525628130,1018892334&fm=214&gp=0.jpg",
     
     "http://img0.imgtn.bdimg.com/it/u=1462787745,1913311667&fm=214&gp=0.jpg",
@@ -907,8 +893,6 @@ var list =  [
     "http://img4.imgtn.bdimg.com/it/u=2630088294,2053583258&fm=214&gp=0.jpg",
     
     "http://img0.imgtn.bdimg.com/it/u=246554000,99558110&fm=214&gp=0.jpg",
-    
-    "http://img3.imgtn.bdimg.com/it/u=1165849328,3832998676&fm=214&gp=0.jpg",
     
     "http://img0.imgtn.bdimg.com/it/u=203838260,838511672&fm=214&gp=0.jpg",
     
@@ -1005,8 +989,6 @@ var list =  [
     "http://img1.imgtn.bdimg.com/it/u=2646725511,2307979&fm=214&gp=0.jpg",
     
     "http://img4.imgtn.bdimg.com/it/u=2375050174,3985717978&fm=214&gp=0.jpg",
-    
-    "http://img3.imgtn.bdimg.com/it/u=4010180153,3852451414&fm=214&gp=0.jpg",
     
     "http://img3.imgtn.bdimg.com/it/u=3269218723,1083813861&fm=214&gp=0.jpg",
     
@@ -1198,8 +1180,6 @@ var list =  [
     
     "http://img1.imgtn.bdimg.com/it/u=689366316,2136959908&fm=214&gp=0.jpg",
     
-    "http://img3.imgtn.bdimg.com/it/u=233723308,1736837521&fm=214&gp=0.jpg",
-    
     "http://img4.imgtn.bdimg.com/it/u=2766561439,577311466&fm=214&gp=0.jpg",
     
     "http://img3.imgtn.bdimg.com/it/u=2713755383,591021469&fm=214&gp=0.jpg",
@@ -1223,7 +1203,7 @@ var list =  [
     "http://img0.imgtn.bdimg.com/it/u=2220363575,1202762327&fm=214&gp=0.jpg",
     
     "http://img4.imgtn.bdimg.com/it/u=356898724,1729438751&fm=214&gp=0.jpg"
-];
+    ];
 
 function get(){
     return list;
