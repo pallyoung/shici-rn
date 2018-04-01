@@ -1,6 +1,8 @@
 'use strict'
 function appInit(){
-
+    return {
+        inited:true
+    }
 }
 
 

@@ -13,27 +13,9 @@ import {
 import ScreenComponent from './../../components/ScreenComponent';
 import {TabBar} from 'react-native-awesome-viewpager';
 import {Theme} from 'react-native-improver';
-import Tuijie from './Tuijie';
-import Mingju from './Mingju';
-import Guji from './Guji';
-import My from './My';
 
 var currentTheme = Theme.getTheme();
 
-const tabs = [
-    {
-        text:'推荐'
-    },
-    {
-        text:'名句'
-    },
-    {
-        text:'古籍'
-    },
-    {
-        text:'我的'
-    }
-];
 class Main extends ScreenComponent{
     constructor(...props){
         super(...props);
@@ -44,22 +26,7 @@ class Main extends ScreenComponent{
     render(){
        return  <View
                     style={{flex:1}}>
-                <TabBar
-                    style={{flex:1}}
-                    tabs={tabs}>
-                    <View>
-                        <Tuijie />
-                    </View>
-                    <View>
-                        <Mingju />
-                    </View>
-                    <View>
-                        <Guji />
-                    </View>
-                    <View>
-                        <My />
-                    </View>
-                </TabBar>
+                
            </View>
     }
 }

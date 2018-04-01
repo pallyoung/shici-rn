@@ -28,7 +28,7 @@ class DataLoading extends Component{
         this._changeImage();
     }
     componentWillUnmount() {
-        this_stopChangeImage();
+        this._stopChangeImage();
     }
     
     _changeImage(){
@@ -45,7 +45,7 @@ class DataLoading extends Component{
                 this._changeImage();
         }, 2000);
     }
-    this_stopChangeImage(){
+    _stopChangeImage(){
         clearTimeout(this._imageChangeHandle);
     }
     render(){
