@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { autoSize } from 'react-native-improver';
+import { autoSize,Theme } from 'react-native-improver';
+
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 const IOS = Platform.OS === 'ios';
+const currentTheme = Theme.getTheme();
+
 class Button extends Component {
     constructor(...props) {
         super(...props);
@@ -130,7 +133,7 @@ export default class Header extends Component {
         if (typeof this.state.title === 'function') {
             child = this.state.title;
         } else {
-            child = <Text style={[{ fontSize: 16, color: '#fff' }, this.props.titleStyle]}>{this.state.title}</Text>
+            child = <Text style={[{ fontSize: 16, color: '#222',fontWeight:'200' }, this.props.titleStyle]}>{this.state.title}</Text>
         }
         return <Title>{child}</Title>
     }
@@ -140,7 +143,7 @@ export default class Header extends Component {
         }
         return <View
             style={[
-                { backgroundColor: '#303952' },
+                currentTheme.header,
                 this.props.style,
                 {
                     height: IOS ? 64 : 44,

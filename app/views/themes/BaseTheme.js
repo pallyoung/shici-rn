@@ -1,6 +1,6 @@
 
 import { autoSize, px2dp } from 'react-native-improver';
-import { Dimensions } from 'react-native';
+import { Dimensions,Platform } from 'react-native';
 var BaseTheme = {
     f1: autoSize(10),
     f2: autoSize(12),
@@ -10,7 +10,16 @@ var BaseTheme = {
     f6: autoSize(20),
     paddingHorizontal:autoSize(14),
     mainColor:'#fff',
-    px:px2dp(1)
+    px:px2dp(1),
+    
+    header:{
+        height:64,
+        paddingTop:20,
+        backgroundColor:'#fff',
+        borderBottomWidth:px2dp(1),
+        borderColor:'rgba(120,120,120,0.5)',
+        flexDirection:'row'
+    }
 }
 
 export default BaseTheme;

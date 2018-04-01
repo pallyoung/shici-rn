@@ -8,33 +8,38 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet
-}from 'react-native';
+} from 'react-native';
 
 import ScreenComponent from './../../components/ScreenComponent';
-import {TabBar} from 'react-native-awesome-viewpager';
-import {Theme} from 'react-native-improver';
-
-import Header from './Header';
-
+import { TabBar } from 'react-native-awesome-viewpager';
+import { Theme } from 'react-native-improver';
+import LeftIcon from './LeftIcon';
 
 var currentTheme = Theme.getTheme();
 
-class Main extends ScreenComponent{
-    constructor(...props){
+class Main extends ScreenComponent {
+    constructor(...props) {
         super(...props);
         this.navigationOptions = {
-            title:'诗辞',
-            header:null
+            title: '01 Feb,2018',
+            titleStyle:styles.titleStyle,
+            leftButton:<LeftIcon />
         }
     }
-    render(){
-       return  <View
-                    style={{flex:1}}>
-                <Header />
-           </View>
+    render() {
+        return <View
+            style={{ flex: 1 }}>
+        </View>
     }
 }
 const styles = StyleSheet.create({
-    
+    titleStyle:{
+        fontSize:12,
+    },
+    leftIcon:{
+        marginLeft:20,
+        flexDirection:'row',
+        alignItems:'center'
+    },
 })
 export default Main;
