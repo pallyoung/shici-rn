@@ -53,6 +53,7 @@ class Title extends Component {
                 // bottom: 0,
                 // left: 60,
                 // right: 60,
+                flex:1,
                 paddingLeft:12,
                 overflow: 'hidden',
                 flexDirection: 'row',

@@ -12,6 +12,8 @@ var BaseTheme = {
     mainColor:'#fff',
     px:px2dp(1),
     
+    color:'#333',
+    
     header:{
         height:64,
         paddingTop:20,

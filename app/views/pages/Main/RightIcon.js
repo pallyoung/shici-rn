@@ -26,21 +26,28 @@ class RightIcon extends ScreenComponent {
             <TouchableOpacity
                 activeOpacity={1}
                 onPress={this.props.onMenuPress}
-                style={styles.leftIcon}>
-                <Icon
-                    name="ios-menu-outline"
-                    color='#333'
-                    size={28} />
+                style={styles.wrapper}>
+                <Text
+                    style={styles.text}>
+                    今天
+                </Text>
             </TouchableOpacity>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    rightIcon: {
-        marginRight: 20,
-        flexDirection: 'row',
-        alignItems: 'center'
+    wrapper:{
+        borderRadius:4,
+        borderWidth:currentTheme.px,
+        borderColor:currentTheme.color,
+        paddingVertical:4,
+        paddingHorizontal:5,
+        marginRight:20
+    },
+    text:{
+        color:currentTheme.color,
+        fontSize:14
     }
 });
 export default RightIcon;

@@ -14,6 +14,7 @@ import ScreenComponent from './../../components/ScreenComponent';
 import { TabBar } from 'react-native-awesome-viewpager';
 import { Theme } from 'react-native-improver';
 import LeftIcon from './LeftIcon';
+import RightIcon from './RightIcon';
 
 var currentTheme = Theme.getTheme();
 
@@ -23,7 +24,8 @@ class Main extends ScreenComponent {
         this.navigationOptions = {
             title: '01 Feb,2018',
             titleStyle:styles.titleStyle,
-            leftButton:<LeftIcon />
+            leftButton:<LeftIcon />,
+            rightButton:<RightIcon />
         }
     }
     render() {
