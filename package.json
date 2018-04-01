@@ -22,6 +22,7 @@
     "react-native-awesome-viewpager": "^1.0.2",
     "react-native-improver": "^0.1.0",
     "react-native-modalui": "^1.0.2",
+    "react-native-sqlite-storage": "^3.3.4",
     "react-native-storage-tool": "0.0.1",
     "react-navigation": "^1.5.7"
   }
