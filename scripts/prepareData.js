@@ -200,3 +200,5 @@ db.serialize(function () {
 function randomInt(upper) {
     return Math.floor(Math.random(Date.now()) * upper);
 }
+
+db.close();
