@@ -1,13 +1,7 @@
 
 import fetchData from './fetchData';
-import shiGetter from './../../asset/shi';
-import author from './../../asset/author';
-import age from './../../asset/age';
-import version from './../../asset/assetversion';
-import mingju from './../../asset/mingju';
+import SQLite  from 'react-native-sqlite-storage';
 
-
-var shi = shiGetter.get();
 const TYPES = {
     INDEX: 'index',
 }
