@@ -1,22 +1,7 @@
 export default [
     {
-        name:'tuijie',
+        name:'every_day_list',
         type:'content',
-        sourceType:'tuijie'
-    },
-    {
-        name:'mingju',
-        type:'content',
-        sourceType:'mingju'
-    },
-    {
-        name:'guji',
-        type:'content',
-        sourceType:'guji'
-    },
-    {
-        name:'article',
-        type:'content',
-        sourceType:'article'
+        sourceType:'every_day'
     },
 ]

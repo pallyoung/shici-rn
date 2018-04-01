@@ -34,6 +34,11 @@ class Page extends ScreenComponent{
             height,
             width
         } = this.state;
+        const {
+            text,
+            image
+        } = this.props;
+        
         return (
             <ScrollView
                 onLayout={this._onLayout}
@@ -43,7 +48,8 @@ class Page extends ScreenComponent{
                 <Top 
                     height={height}
                     width={width}
-                    text={2222}
+                    image={image}
+                    text={text}
                     />
             </ScrollView>
         )

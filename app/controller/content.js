@@ -1,35 +1,12 @@
 
 
-function fetchTuijie(tuijie,fav){
-    tuijie.data = tuijie.data.map(function(article){
-        article.isFav = !!fav[article.id];
-        return article;
-    })
+function getEvery(every_day_list) {
     return {
-        tuijie
+        every_day_list
     }
 }
 
-function fetchMingju(mingju){
-    return {
-        mingju
-    }
-}
-function fetchGuji(guji){
-    return {
-        guji
-    }
-}
-
-function fetchArticle(article){
-    return {
-        article 
-    }
-}
 
 export default {
-    fetchTuijie,
-    fetchMingju,
-    fetchGuji,
-    fetchArticle
+    getEvery
 }

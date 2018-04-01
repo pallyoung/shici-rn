@@ -1,9 +1,8 @@
 export default{
     'INIT':'INIT',
-    'FETCH_DEFAULT':'FETCH_DEFAULT',
-    'FETCH_MINGJU':'FETCH_MINGJU',
-    'FETCH_GUJI':'FETCH_GUJI',
-    'FETCH_ARTICLE':'FETCH_ARTICLE',
+    
+    //首页数据
+    'MAIN_PAGE':'MAIN_PAGE',
     'CHECK_LOGIN':'CHECK_LOGIN',
     'ADD_FAV':'ADD_FAV',
     'REMOVE_FAV':'REMOVE_FAV'

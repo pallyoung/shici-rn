@@ -36,7 +36,12 @@ class Top extends Component {
                     width
                 }}>
                 <Image
-                    source={image}
+                    source={{
+                         uri:image,
+                         headers:{
+                            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Mobile Safari/537.36'
+                         }
+                    }}
                     resizeMode='stretch'
                     style={{
                         height,

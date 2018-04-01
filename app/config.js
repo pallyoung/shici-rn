@@ -16,16 +16,14 @@ import {
 
 import contentProviderConfigs from './provider/contentProviderConfigs';
 import userProviderConfigs from './provider/userProviderConfigs';
-import contentActions from './actions/contentActions';
 import userActions from './actions/userActions';
-import indexActions from './actions/indexActions';
+import appActions from './actions/appActions';
 
 useProvider('content',GushiProvider);
 injectProvider(contentProviderConfigs);
 injectProvider(userProviderConfigs);
-createActions(contentActions);
 createActions(userActions);
-createActions(indexActions);
+createActions(appActions);
 
 const SHICI_STROAGE_PRE = 'SHICI_STROAGE_PRE_';
 

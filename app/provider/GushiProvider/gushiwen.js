@@ -1,66 +1,78 @@
 
 import fetchData from './fetchData';
-import SQLite  from 'react-native-sqlite-storage';
+import SQLite from 'react-native-sqlite-storage';
 
 const TYPES = {
     INDEX: 'index',
 }
+const db = SQLite.openDatabase({ name: "main", createFromLocation: "~data/data.db" });
 
+function sqliteSuccess(params) {
 
-//解析古籍
-function parseGujiToList(content){
-    if (!content) {
-        return null;
-    } else {
-        var list = content.match(/<div class="cont">[\s\S]*?<div class="tool">/g);
-        if (list) {
-            return list.map(function (item) {
-                var id, brief,title;
-                id = item.match(/guwen\/(.*?)\.aspx/)[1];
-                title =item.match(/<b>(.*?)<\/b>/)[1]
-                brief = item.match(/<p style=" margin:0px;">(.*?)</)[1];
-                return {
-                    id,
-                    title,
-                    brief
-                }
-            });
-        }
-    }
+}
+function sqliteError(err) {
+    console.log(err)
+    /**
+     *抛出异常及时处理
+    */
+    // throw new Error(err)
 }
 
-//首页推荐
-function fetchDefault(state,payload) {
-    state = state || {};
-    var params = state.params || {}
-    params.page = params.page || 0;
-    if(payload.loadMore||params.page==0){
-        params.page++;
-        state.params = params;
-        state.data = shi.slice(0,params.page*10);
-    }
-    return state;
+const EVERY_DAY_MIN = new Date(2018,1,28).getTime();
+const EVERY_DAY_MAX = new Date(2019,1,27).getTime();
+const TODAY = new Date();
+const TODAY_ZERO = new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()).getTime();
+//每日数据
+function getEveryDay(state, payload) {
+    const every_day = payload.every_day;
+    let date = every_day.map(function(offset,i){
+        //数据库存储的时候多了.0
+        //暂时先不修
+        let day = TODAY_ZERO+offset*24*3600000+'.0';
+        return day;
+    });
     
-}
-//首页名句
-function fetchMingju(state={},payload){
-    var params = state.params || {}
-    params.page = params.page || 0;
-    console.log(params,'====')
-    if(payload.loadMore||params.page==0){
-        params.page++;;
-        state.data = mingju.slice(0,params.page*20)
-    }
-    return state;
+    // if(start_date<EVERY_DAY_MIN){
+    //     start_date = EVERY_DAY_MIN;
+    //     //offset = EVERY_DAY_MIN
+    // }
+    return new Promise(function(resolve){
+        db.transaction((tx) => {
+            const sqlString = `select * from every_day where ${date.reduce((pre,item,i)=>{
+                if(pre){
+                    pre = pre +' or ';
+                }else{
+                    pre ='';
+                }
+                pre =pre+' date = '+item;
+                return pre;
+            },'')}`;
+            tx.executeSql(
+                sqlString
+                , [], (tx, results) => {
+                    let rows = results.rows;
+                    let len = rows.length;
+                    resolve(date.map(function(day){
+                        for(let i =0;i<len;i++){
+                            let item = rows.item(i);
+                            if(item['date']===day){
+                                return item;
+                            }
+                        }
+                        return null;
+                    }));
+                }, sqliteError);
+        }, sqliteError,sqliteError);
+    })
 }
 
 //首页获取古籍
-function fetchGuji(state={},payload){
+function fetchGuji(state = {}, payload) {
     var params = state.params || {}
     var page = params.page || 0;
-    if(payload.loadMore||params.page==0){
+    if (payload.loadMore || params.page == 0) {
         params.page++;;
-    }else{
+    } else {
         return state;
     }
     var url = `guwen/Default.aspx?p=${params.page}`;
@@ -78,11 +90,13 @@ function fetchGuji(state={},payload){
 
 
 
-function fetchBySourceType(sourceType, state,payload) {
-    return methods[sourceType](state,payload);
+function fetchBySourceType(sourceType, state, payload) {
+    return methods[sourceType](state, payload);
 }
-function fetchArticle(state,payload){
-}
+
+
+
+
 //
 const methods = {};
 
@@ -91,10 +105,7 @@ function injectMethod(type, method) {
 }
 
 const methodList = [
-    { type: 'tuijie', method: fetchDefault },
-    { type: 'mingju', method: fetchMingju},
-    { type: 'guji', method: fetchGuji},
-    { type: 'article', method: fetchArticle},
+    { type: 'every_day', method: getEveryDay },
 ]
 
 methodList.forEach(item => injectMethod(item.type, item.method));

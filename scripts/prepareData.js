@@ -156,11 +156,12 @@ tables.push({
 * 1 pic
 * 2 mingju
 * 3 shi
+* 4 date
 */
 tables.push({
     name: 'every_day',
     source:every,
-    column: ['pic', 'mingju', 'shi']
+    column: ['pic', 'mingju', 'shi','date']
 });
 
 /*****************表mingju**************
