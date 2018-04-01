@@ -24,6 +24,7 @@
     "react-native-modalui": "^1.0.2",
     "react-native-sqlite-storage": "^3.3.4",
     "react-native-storage-tool": "0.0.1",
+    "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.5.7"
   }
 }
