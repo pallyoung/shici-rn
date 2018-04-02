@@ -29,6 +29,9 @@ function getEveryDay(state, payload) {
         //数据库存储的时候多了.0
         //暂时先不修
         let day = TODAY_ZERO+offset*24*3600000+'.0';
+        if(offset>-0){
+            day='null';
+        }
         return day;
     });
     
@@ -38,7 +41,9 @@ function getEveryDay(state, payload) {
     // }
     return new Promise(function(resolve){
         db.transaction((tx) => {
-            const sqlString = `select * from every_day where ${date.reduce((pre,item,i)=>{
+            const sqlString = `select * from every_day inner join mingju on  every_day.mingju = mingju.pageid 
+            inner join shi on shi.pageid = every_day.shi
+            where ${date.reduce((pre,item,i)=>{
                 if(pre){
                     pre = pre +' or ';
                 }else{
@@ -56,7 +61,19 @@ function getEveryDay(state, payload) {
                         for(let i =0;i<len;i++){
                             let item = rows.item(i);
                             if(item['date']===day){
-                                return item;
+                                let newItem = {
+                                    date:item.date,
+                                    mingju:item.text,
+                                    pic:item.pic,
+                                    shi:{
+                                        title:item.title,
+                                        author:item.author,
+                                        content:item.content,
+                                        pageid:item.pageid,
+                                        age:item.pageid
+                                    }
+                                }
+                                return newItem;
                             }
                         }
                         return null;

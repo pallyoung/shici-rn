@@ -72,7 +72,7 @@ class Main extends ScreenComponent {
         let offset = this.state.offset;
         this.dispatcher.dispatch(ACTIONS.MAIN_PAGE,{
             every_day:[
-                offset-1,offset,offset+1
+                offset+1,offset,offset-1
             ]
         }) 
     }
