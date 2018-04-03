@@ -41,13 +41,34 @@ class Tail extends Component {
         } = this.props;
         return (
             <View
-               >
-                <Text>{title}</Text>
-                <Text>{age} {author}</Text>
-                {content.map((item)=>{
-                    return <Text key={item}>{item}</Text>
-                })}
-                
+                style={styles.wrapper}>
+                <View
+                    style={styles.titleSection}>
+                    <Text
+                        style={styles.title}>
+                        {title}
+                    </Text>
+                </View>
+                <View
+                    style={styles.authorSection}>
+                    <Text
+                        style={styles.author}>
+                        {age} {author}
+                    </Text>
+                </View>
+                <View
+                    style={styles.contentSection}>
+                    {content.map((item) => {
+                        return (
+                            <Text
+                                style={styles.content}
+                                key={item}>
+                                {item}
+                            </Text>
+                        );
+                    })}
+
+                </View>
             </View>
         )
     }
@@ -56,7 +77,32 @@ class Tail extends Component {
 
 const styles = StyleSheet.create({
     wrapper: {
-
+        backgroundColor: '#fff',
+        paddingHorizontal: 12,
+        paddingTop: 30,
+        paddingBottom: 30
+    },
+    titleSection: {
+        paddingVertical: 10
+    },
+    title: {
+        fontSize: 20,
+        color: '#333'
+    },
+    authorSection: {
+        paddingBottom: 10,
+    },
+    author: {
+        fontSize: 12,
+        color: '#333'
+    },
+    contentSection: {
+        paddingBottom: 10,
+    },
+    content: {
+        fontSize: 14,
+        color: '#333',
+        paddingVertical: 5
     },
     text: {
         fontSize: 12,
