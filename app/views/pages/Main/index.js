@@ -105,23 +105,22 @@ class Main extends ScreenComponent {
                 return null;
             }
             return <Page 
-                     date={item.date}
-                     key={item.date}
-                     image={item.pic}
-                     text={item.mingju}
-                     shi={item.shi}
-                     />
-        })
+                    date={item.date}
+                    key={item.date}
+                    image={item.pic}
+                    text={item.mingju}
+                    shi={item.shi}
+                    />
+        });
     }
     render() {
         return (
             <View
                 style={styles.wrapper}>
-                <Swiper
-                    indicator={false}
-                    style={styles.wrapper}>
+                <ViewPager
+                    style={{flex:1}}>
                     {this._renderPage()}
-                </Swiper>
+                </ViewPager>
             </View>
         );
     }
