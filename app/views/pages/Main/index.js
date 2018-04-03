@@ -53,6 +53,8 @@ function getDateString(time){
     return `${d} ${m},${y}`;
 }
 
+const TODAY = new Date();
+
 class Main extends ScreenComponent {
     constructor(...props) {
         super(...props);
@@ -60,10 +62,11 @@ class Main extends ScreenComponent {
             title: '01 Feb,2018',
             titleStyle: styles.titleStyle,
             leftButton: <LeftIcon />,
-            rightButton: <RightIcon />
+            // rightButton: <RightIcon />
         }
         this.state = {
-            offset:0
+            offset:0,
+            index:0
         }
 
         this.dispatcher = ReactFebrest.createDispatcher(this,this._onDispatch);
@@ -80,10 +83,29 @@ class Main extends ScreenComponent {
     componentWillUnmount() {
         this.dispatcher.release();
     }
-    
+    _onPageSelected=(event)=>{
+        let list = this.state.every_day_list;
+        let position = event.nativeEvent.position;
+        if(list[0]===null){
+            position++;
+        }
+        let date = list[position].date,rightButton;
+        if(new Date(date).toDateString()!==TODAY.toDateString()){
+            rightButton = <RightIcon />
+        }
+        this.getScreen().updateHeader({
+            title:getDateString(date),
+            rightButton,
+
+        })
+    }
     _onDispatch(data){
         if(data.key===ACTIONS.MAIN_PAGE){
-            let current = data.state.every_day_list[1];
+            /**
+             * list 包含前一天，当天（当前应该显示的），后一天
+            */
+            let list = data.state.every_day_list;
+            let current = list[1];
             /**
              * 不出bug的情况下应该都会有
             */
@@ -94,6 +116,9 @@ class Main extends ScreenComponent {
             }
             return false;
         }
+    }
+    _gotoToday=()=>{
+
     }
     _renderPage(){
         var list = this.state.every_day_list;
@@ -118,6 +143,8 @@ class Main extends ScreenComponent {
             <View
                 style={styles.wrapper}>
                 <ViewPager
+                    ref='VIEWPAGER_REF'
+                    onPageSelected={this._onPageSelected}
                     style={{flex:1}}>
                     {this._renderPage()}
                 </ViewPager>

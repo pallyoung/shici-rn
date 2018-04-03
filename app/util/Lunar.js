@@ -331,7 +331,6 @@ class Lunar {
     }
     static fromGMT(timestamps) {
         var date = new Date(timestamps);
-        console.log(date,timestamps,'timestampstimestampstimestamps')
 
         let i, temp = 0;
 
