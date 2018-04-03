@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ScreenComponent from './../../components/ScreenComponent';
 
 import Top from './Top';
+import Tail from './Tail';
 var currentTheme = Theme.getTheme();
 
 class Page extends ScreenComponent{
@@ -36,7 +37,8 @@ class Page extends ScreenComponent{
         } = this.state;
         const {
             text,
-            image
+            image,
+            shi
         } = this.props;
         
         return (
@@ -51,6 +53,8 @@ class Page extends ScreenComponent{
                     image={image}
                     text={text}
                     />
+                <Tail 
+                    {...shi}/>
             </ScrollView>
         )
     }

@@ -62,7 +62,7 @@ class Top extends Component {
                     <Text
                         style={styles.date}>
                         18/04/02
-                        {Lunar.fromGMT(Date.now()).toLocalString()}
+                        {Lunar.fromGMT(Date.now()).getGZMonth()}
                     </Text>
                     {this._renderText(text)}
                 </View>

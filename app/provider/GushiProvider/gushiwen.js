@@ -68,9 +68,9 @@ function getEveryDay(state, payload) {
                                     shi:{
                                         title:item.title,
                                         author:item.author,
-                                        content:item.content,
+                                        content:JSON.parse(item.content),
                                         pageid:item.pageid,
-                                        age:item.pageid
+                                        age:item.age
                                     }
                                 }
                                 return newItem;

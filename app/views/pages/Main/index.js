@@ -105,9 +105,12 @@ class Main extends ScreenComponent {
                 return null;
             }
             return <Page 
+                     date={item.date}
                      key={item.date}
                      image={item.pic}
-                     text={item.mingju}/>
+                     text={item.mingju}
+                     shi={item.shi}
+                     />
         })
     }
     render() {
