@@ -2,7 +2,10 @@
   "name": "shici",
   "version": "0.0.1",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
   "devDependencies": {
     "babel-jest": "^23.0.0-alpha.0",
     "babel-preset-react-native": "^4.0.0",
