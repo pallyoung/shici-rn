@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import ScreenComponent from './../../components/ScreenComponent';
-import { TabBar } from 'react-native-awesome-viewpager';
 import { Theme } from 'react-native-improver';
 import LeftIcon from './LeftIcon';
 import RightIcon from './RightIcon';
@@ -23,7 +22,7 @@ import {
 import ReactFebrest from 'react-febrest';
 import ACTIONS from './../../../constants/ACTIONS';
 
-import Page from './Page';
+import Pages from './Pages';
 
 var currentTheme = Theme.getTheme();
 
@@ -42,13 +41,13 @@ const MONTH = [
     'Dec'
 ]
 
-function getDateString(time){
+function getDateString(time) {
     var date = new Date(parseInt(time));
     var y = date.getFullYear();
     var m = MONTH[date.getMonth()];
     var d = date.getDate();
-    if(d<10){
-        d = '0'+d;
+    if (d < 10) {
+        d = '0' + d;
     }
     return `${d} ${m},${y}`;
 }
@@ -65,89 +64,71 @@ class Main extends ScreenComponent {
             // rightButton: <RightIcon />
         }
         this.state = {
-            offset:0,
-            index:0
+            offset: -1,
+            index: 0
         }
 
-        this.dispatcher = ReactFebrest.createDispatcher(this,this._onDispatch);
+        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch);
     }
     componentDidMount() {
-        let offset = this.state.offset;
-        this.dispatcher.dispatch(ACTIONS.MAIN_PAGE,{
-            every_day:[
-                offset+1,offset,offset-1
-            ]
-        }) 
+        this._fetchData();
+        // setInterval(()=>{
+        //     this.state.offset--;
+        //     this._fetchData();
+        // },6000)
     }
-    
+
     componentWillUnmount() {
         this.dispatcher.release();
     }
-    _onPageSelected=(event)=>{
-        let list = this.state.every_day_list;
-        let position = event.nativeEvent.position;
-        if(list[0]===null){
-            position++;
+    _onPageSelected = (position) => {
+        // let date = list[position].date, rightButton;
+        // if (new Date(date).toDateString() !== TODAY.toDateString()) {
+        //     rightButton = <RightIcon />
+        // }
+        // this.getScreen().updateHeader({
+        //     title: getDateString(date),
+        //     rightButton,
+        // });
+        if (position = 1) {
+            this.state.offset--;
+        } else if(position == -1){
+            this.state.offset++
+        }else{
+            return;
         }
-        let date = list[position].date,rightButton;
-        if(new Date(date).toDateString()!==TODAY.toDateString()){
-            rightButton = <RightIcon />
-        }
-        this.getScreen().updateHeader({
-            title:getDateString(date),
-            rightButton,
-
-        })
+        this._fetchData();
     }
-    _onDispatch(data){
-        if(data.key===ACTIONS.MAIN_PAGE){
-            /**
-             * list 包含前一天，当天（当前应该显示的），后一天
-            */
-            let list = data.state.every_day_list;
-            let current = list[1];
-            /**
-             * 不出bug的情况下应该都会有
-            */
-            if(current){
-                this.getScreen().updateHeader({
-                    title:getDateString(current.date)
-                })
-            }
+    _onDispatch(data) {
+        if (data.key === ACTIONS.MAIN_PAGE) {
+            console.log(data.state.every_day_list[1].mingju)
             return false;
         }
     }
-    _gotoToday=()=>{
+    _gotoToday = () => {
 
     }
-    _renderPage(){
-        var list = this.state.every_day_list;
-        if(!list){
-            return null;
-        }
-        return list.map(function(item){
-            if(item===null){
-                return null;
-            }
-            return <Page 
-                    date={item.date}
-                    key={item.date}
-                    image={item.pic}
-                    text={item.mingju}
-                    shi={item.shi}
-                    />
+    _fetchData() {
+        let offset = this.state.offset;
+        this.dispatcher.dispatch(ACTIONS.MAIN_PAGE, {
+            every_day: [
+                offset + 1, offset, offset - 1
+            ]
         });
     }
+
+
     render() {
+        var list = this.state.every_day_list;
         return (
             <View
                 style={styles.wrapper}>
-                <ViewPager
+                <Pages
                     ref='VIEWPAGER_REF'
+                    dataSource={list}
                     onPageSelected={this._onPageSelected}
-                    style={{flex:1}}>
-                    {this._renderPage()}
-                </ViewPager>
+                    style={{ flex: 1 }}
+                    />
             </View>
         );
     }

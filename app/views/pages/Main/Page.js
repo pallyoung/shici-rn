@@ -22,7 +22,9 @@ var currentTheme = Theme.getTheme();
 class Page extends ScreenComponent{
     constructor(...props) {
         super(...props);
-        this.state = {};
+        this.state = {
+            data:{}
+        };
     }
     _onLayout=(e)=>{
         const {layout:{height,width}} = e.nativeEvent;
@@ -30,33 +32,40 @@ class Page extends ScreenComponent{
             this.setState({height,width});
         }
     }
+    update(data){
+        if(data==null){
+            data = {};
+        }
+        this.setState({data});
+    }
     render(){
         const {
             height,
-            width
+            width,
+            data
         } = this.state;
+        
         const {
-            text,
-            image,
+            mingju,
+            pic,
             shi,
             date
-        } = this.props;
-        
+        } = data;
         return (
             <ScrollView
                 onLayout={this._onLayout}
                 bounces={false}
                 showsVerticalScrollIndicator={false}
-                style={[this.props.style]}>
-                <Top 
+                style={[this.props.style||{flex:1}]}>
+                {date&&<Top 
                     height={height}
                     width={width}
-                    image={image}
-                    text={text}
+                    image={pic}
+                    text={mingju}
                     date={date}
-                    />
-                <Tail 
-                    {...shi}/>
+                    />}
+                {shi&&<Tail 
+                    {...shi}/>}
             </ScrollView>
         )
     }

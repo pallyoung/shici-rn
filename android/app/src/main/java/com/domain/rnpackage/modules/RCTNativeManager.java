@@ -5,7 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import com.domain.shici.MainActivity;
-import com.facebook.shici.BuildConfig;
+import com.domain.shici.BuildConfig;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;

@@ -25,7 +25,7 @@ public class RNPackage extends LazyReactPackage {
     @Override
     public List<ModuleSpec> getNativeModules(final ReactApplicationContext reactContext) {
         return Arrays.asList(
-                new ModuleSpec(RCTNativeManager.class, new Provider<NativeModule>() {
+                ModuleSpec.nativeModuleSpec(RCTNativeManager.class, new Provider<NativeModule>() {
                     @Override
                     public NativeModule get() {
                         return new RCTNativeManager(reactContext);

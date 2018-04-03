@@ -11,7 +11,7 @@ function sqliteSuccess(params) {
 
 }
 function sqliteError(err) {
-    console.log(err)
+    console.log(err,'err')
     /**
      *抛出异常及时处理
     */
@@ -79,7 +79,7 @@ function getEveryDay(state, payload) {
                         return null;
                     }));
                 }, sqliteError);
-        }, sqliteError,sqliteError);
+        }, sqliteError,sqliteSuccess);
     })
 }
 

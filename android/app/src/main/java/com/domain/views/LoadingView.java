@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.facebook.shici.R;
+import com.domain.shici.R;
 
 /**
  * Created by Spencer on 2017/12/1.
