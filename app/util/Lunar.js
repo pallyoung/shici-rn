@@ -224,8 +224,9 @@ class Lunar {
     toString() {
         return `${this._year}/${this._month}/${this._date}`;
     }
-    toLocalString() {
-        return `${this.getYearCN()} ${this.getMonthCN()} ${this.getDateCN()}`;
+    toLocalString(code) {
+        code = code||'';
+        return `${this.getYearCN()}${code}${this.getMonthCN()}${code}${this.getDateCN()}`;
     }
     toSolarDate() {
         var offset = 0;
@@ -330,6 +331,7 @@ class Lunar {
     }
     static fromGMT(timestamps) {
         var date = new Date(timestamps);
+        console.log(date,timestamps,'timestampstimestampstimestamps')
 
         let i, temp = 0;
 

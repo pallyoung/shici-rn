@@ -38,20 +38,22 @@ class Page extends ScreenComponent{
         const {
             text,
             image,
-            shi
+            shi,
+            date
         } = this.props;
         
         return (
             <ScrollView
                 onLayout={this._onLayout}
                 bounces={false}
-                showVerticalIndicator={false}
+                showsVerticalScrollIndicator={false}
                 style={[this.props.style]}>
                 <Top 
                     height={height}
                     width={width}
                     image={image}
                     text={text}
+                    date={date}
                     />
                 <Tail 
                     {...shi}/>

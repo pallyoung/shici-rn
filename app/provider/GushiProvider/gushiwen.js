@@ -62,7 +62,7 @@ function getEveryDay(state, payload) {
                             let item = rows.item(i);
                             if(item['date']===day){
                                 let newItem = {
-                                    date:item.date,
+                                    date:parseInt(item.date),
                                     mingju:item.text,
                                     pic:item.pic,
                                     shi:{

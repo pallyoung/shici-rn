@@ -32,12 +32,31 @@ class Top extends Component {
             </Text>
         );
     }
+    _renderDate(date) {
+        var lunar = Lunar.fromGMT(date);
+
+        var term = lunar.getNextTerm();
+        var dateString = lunar.toLocalString();
+        var termString = '';
+        if (term.offset == 0) {
+            termString = term.term;
+        } else if(term.offset == 1) {
+            termString = '明日' + term.term;
+        }
+        return (
+            <Text
+                style={styles.date}>
+                {dateString+'   '+termString}
+            </Text>
+        );
+    }
     render() {
         var {
             height,
             width,
             image,
-            text
+            text,
+            date
         } = this.props;
         return (
             <View
@@ -59,12 +78,8 @@ class Top extends Component {
                     }} />
                 <View
                     style={styles.textWrapper}>
-                    <Text
-                        style={styles.date}>
-                        18/04/02
-                        {Lunar.fromGMT(Date.now()).getGZMonth()}
-                    </Text>
                     {this._renderText(text)}
+                    {this._renderDate(date)}
                 </View>
             </View>
         )
@@ -80,10 +95,15 @@ const styles = StyleSheet.create({
         right: 0,
         paddingVertical: 20,
         // alignItems: 'center',
-        paddingLeft:20,
+        paddingLeft: 20,
         backgroundColor: 'rgba(30,30,30,0.1)'
     },
     text: {
+        fontSize: 12,
+        color: '#fff',
+    },
+    date:{
+        marginTop:10,
         fontSize: 12,
         color: '#fff',
     }
