@@ -19,40 +19,12 @@ import {
     ViewPager
 } from 'react-native-awesome-viewpager';
 
-import ReactFebrest from 'react-febrest';
-import ACTIONS from './../../../constants/ACTIONS';
+
 
 import Pages from './Pages';
 
 var currentTheme = Theme.getTheme();
 
-const MONTH = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-]
-
-function getDateString(time) {
-    var date = new Date(parseInt(time));
-    var y = date.getFullYear();
-    var m = MONTH[date.getMonth()];
-    var d = date.getDate();
-    if (d < 10) {
-        d = '0' + d;
-    }
-    return `${d} ${m},${y}`;
-}
-
-const TODAY = new Date();
 
 class Main extends ScreenComponent {
     constructor(...props) {
@@ -64,19 +36,11 @@ class Main extends ScreenComponent {
             // rightButton: <RightIcon />
         }
         this.state = {
-            offset: -1,
-            index: 0
+       
         }
 
-        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch);
     }
-    componentDidMount() {
-        this._fetchData();
-        // setInterval(()=>{
-        //     this.state.offset--;
-        //     this._fetchData();
-        // },6000)
-    }
+
 
     componentWillUnmount() {
         this.dispatcher.release();
@@ -100,33 +64,19 @@ class Main extends ScreenComponent {
         this._fetchData();
     }
     _onDispatch(data) {
-        if (data.key === ACTIONS.MAIN_PAGE) {
-            console.log(data.state.every_day_list[1].mingju)
-            return false;
-        }
+   
     }
     _gotoToday = () => {
 
     }
-    _fetchData() {
-        let offset = this.state.offset;
-        this.dispatcher.dispatch(ACTIONS.MAIN_PAGE, {
-            every_day: [
-                offset + 1, offset, offset - 1
-            ]
-        });
-    }
 
 
     render() {
-        var list = this.state.every_day_list;
         return (
             <View
                 style={styles.wrapper}>
                 <Pages
                     ref='VIEWPAGER_REF'
-                    dataSource={list}
-                    onPageSelected={this._onPageSelected}
                     style={{ flex: 1 }}
                     />
             </View>

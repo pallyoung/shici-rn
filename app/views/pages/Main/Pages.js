@@ -16,90 +16,175 @@ import {
     ViewPager
 } from 'react-native-awesome-viewpager';
 
+import ReactFebrest from 'react-febrest';
+import ACTIONS from './../../../constants/ACTIONS';
 import Page from './Page';
 
-class Pages extends Component {
+
+const MONTH = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+]
+
+function getDateString(time) {
+    var date = new Date(parseInt(time));
+    var y = date.getFullYear();
+    var m = MONTH[date.getMonth()];
+    var d = date.getDate();
+    if (d < 10) {
+        d = '0' + d;
+    }
+    return `${d} ${m},${y}`;
+}
+
+const TODAY = new Date();
+
+class Pages extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.state = {
-            page: 0,
-            update: true,
+            offset: 0
         }
         this._position = 0;
+        this._dataSource = [];
+
+        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch);
+
     }
-    
-    shouldComponentUpdate(nextProps){
-        var dataSource = nextProps.dataSource||[];
-        for(let i = 1;i<=3;i++){
-            console.log(!!this.refs['PAGE_'+i])
-            this.refs['PAGE_'+i]&&this.refs['PAGE_'+i].update(dataSource[i-1]);
-        }
-        let update = this.state.update;
-        this.state.update = false;
+    componentDidMount() {
+        this._fetchData();
+    }
+    componentWillUnmount() {
+        this.dispatcher.release();
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
-    componentDidUpdate(prevProps, prevState) {
+    _onDispatch=(data)=>{
+        if (data.key === ACTIONS.MAIN_PAGE) {
+            this._dataSource = data.state.every_day_list;
+            this._update();
+            return true;
+        }
     }
-    
-    _setPage(page,o) {
-        var dataSource = this.dataSource||[];
-        this.state.page = page;
-        this.refs['PAGE_1'].update(dataSource[o]);
-        this.refs['VIEWPAGER_REF'].setPageWithoutAnimation(page);
+    _update() {
+        var dataSource = this._dataSource;
+        var [item0, item1, item2] = dataSource;
+        var page;
+        if (item0 == null) {
+            item0 = item1;
+            item1 = item2;
+            item2 = {};
+            page = 0;
+        } else if (item2 == null) {
+            item2 = item1;
+            item1 = item0;
+            item0 = {};
+            page = 2;
+        }else{
+            page = 1;
+        }
+        Promise.all(
+            this.refs['PAGE_1'].update(item0),
+            this.refs['PAGE_2'].update(item1),
+            this.refs['PAGE_3'].update(item2)
+        ).then(() => {
+            this._setPage(page);
+        })
+
     }
-    _renderPage(list) {
-        return list.map(function (item, i) {
-            if (item === null) {
-                return null;
-            }
-            return (
-                <Page
-                    date={item.date}
-                    key={item.date}
-                    image={item.pic}
-                    text={item.mingju}
-                    shi={item.shi}
-                />
-            );
+    _fetchData() {
+        let offset = this.state.offset;
+        this.dispatcher.dispatch(ACTIONS.MAIN_PAGE, {
+            every_day: [
+                offset + 1, offset, offset - 1
+            ]
         });
+    }
+
+
+    _setPage(page) {
+        if (page===undefined) {
+            return;
+        }
+        this._position = page;
+        this.refs['VIEWPAGER_REF'].setPageWithoutAnimation(page);
     }
     _onPageSelected = (event) => {
         let { position } = event.nativeEvent;
-        if(position>1){
+        let dataSource = this._dataSource;
+        let cPosition = this._position;
+        let [item0, item1, item2] = dataSource;
+
+        if (cPosition == position) {
+            return;
+        }
+        if (cPosition == 0 && position == 1 && item0==null ) {
+            /**
+             * 说明只有两条数据，到第二页的时候要去拿数据
+             */
+            this.state.offset--;
+            this._fetchData();
+            return;
+
+        }
+        if(cPosition == 1){
+            if(position==2){
+                this.state.offset--;
+                this._fetchData();
+            }else if(position==1){
+                this.state.offset++;
+                this._fetchData();
+            }
+            return;
+        }
+        if(cPosition == 2 && position == 1 && item2 == null){
+            this.state.offset++;
+            this._fetchData();
+            return;
+        }
+        return;
+        if (dataSource[0] == null && position == 1) {
+            this.state.offset--;
+            this._fetchData();
+        } else if (dataSource[2] == null && position == 1) {
+            this.state.offset++;
+            this._fetchData();
+        }
+        if (position > 1) {
             this._goForward();
-            console.log('_goForward',position,this._position)
-        }else if(position<1){
-            console.log('_goBack',position,this._position)
+        } else if (position < 1) {
             this._goBack();
         }
     }
-    _goForward(){
-        this.props.onPageSelected(1);
-        this._setPage(1,2);
-    }
-    _goBack(){
-        this.props.onPageSelected(-1);
-        this._setPage(1,0);
-    }
     render() {
-        var dataSource = this.props.dataSource;
         return (
             <ViewPager
                 ref='VIEWPAGER_REF'
                 onPageSelected={this._onPageSelected}
-                // initialPage={initialPage}
                 style={this.props.style}>
                 <View>
                     <Page
-                        ref={'PAGE_1'}/>
+                        ref={'PAGE_1'} />
                 </View>
                 <View>
                     <Page
-                        ref={'PAGE_2'}/>
+                        ref={'PAGE_2'} />
                 </View>
                 <View>
-                    <Page
-                        ref={'PAGE_3'}/>
+                    <Page                    
+                        ref={'PAGE_3'} />
                 </View>
             </ViewPager>
         );
