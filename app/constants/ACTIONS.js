@@ -13,6 +13,8 @@ export default{
 
     'APP_SETTING':'APP_SETTING',
 
+    'APP_GOTO_DATE':'APP_GOTO_DATE',
+
     'CHECK_LOGIN':'CHECK_LOGIN',
     'ADD_FAV':'ADD_FAV',
     'REMOVE_FAV':'REMOVE_FAV',

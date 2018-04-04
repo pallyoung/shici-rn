@@ -28,13 +28,13 @@ function getDateString(times) {
 function getDateString2(times) {
     var date = new Date(times);
     let month = date.getMonth() + 1;
-    if(month<10){
-        month = '0'+month;
+    if (month < 10) {
+        month = '0' + month;
     }
     let day = date.getDate();
 
-    if(day<10){
-        day = '0'+day;
+    if (day < 10) {
+        day = '0' + day;
     }
     return `${date.getFullYear()}/${month}/${day}`;
 }
@@ -65,6 +65,7 @@ function Item(props) {
                     return (
                         <TouchableOpacity
                             activeOpacity={1}
+                            onPress={() => props.dispatcher.dispatch(ACTIONS.APP_GOTO_DATE, { offset: item.offset })}
                             style={[styles.itemSingle]}
                             key={item.date}>
                             <Image
@@ -117,7 +118,7 @@ class History extends ScreenComponent {
     componentDidMount() {
         this._fetchData();
     }
-    _fetchData=()=> {
+    _fetchData = () => {
         if (!this._deadline) {
             this._deadline = new Date(TOADY.getFullYear(), TOADY.getMonth(), 1).getTime();
         } else {
@@ -131,7 +132,13 @@ class History extends ScreenComponent {
         this.dispatcher.dispatch(ACTIONS.GET_HISTORY, { every_day: offset });
     }
     _onDispatch = (data) => {
-
+        if(data.key === ACTIONS.APP_GOTO_DATE){
+            this.getScreen().getNavigation().goBack();
+            return true;
+        }
+        if (data.key !== ACTIONS.GET_HISTORY) {
+            return true;
+        }
     }
     _renderSectionHeader = ({ section }) => {
         return (
@@ -143,6 +150,7 @@ class History extends ScreenComponent {
     _renderItem = ({ item }) => {
         return (
             <Item
+                dispatcher={this.dispatcher}
                 dataSource={item}
             />
         );
@@ -175,7 +183,7 @@ const styles = StyleSheet.create({
     },
     listView: {
         flex: 1,
-        paddingBottom:60
+        paddingBottom: 60
     },
     sectionHeader: {
         // borderTopWidth: currentTheme.px,

@@ -80,6 +80,11 @@ class Pages extends ScreenComponent {
             this._update();
             return true;
         }
+        if(data.key === ACTIONS.APP_GOTO_DATE){
+            this.state.offset = data.state.offset;
+            this._fetchData();
+            return true;
+        }
     }
     _update() {
         var dataSource = this._dataSource;

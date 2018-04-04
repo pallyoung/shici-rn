@@ -60,9 +60,14 @@ function getHistory(every_day_list,payload) {
         history
     }
 }
+
+function gotoDate(payload) {
+    return payload;
+}
 export default {
     appInit,
     getMenu,
     empty,
-    getHistory
+    getHistory,
+    gotoDate
 }

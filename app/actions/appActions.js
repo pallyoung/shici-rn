@@ -38,5 +38,9 @@ export default [
     {
         key:ACTIONS.GET_HISTORY,
         controller:app.getHistory
+    },
+    {
+        key:ACTIONS.APP_GOTO_DATE,
+        controller:app.gotoDate
     }
 ]
