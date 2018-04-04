@@ -45,9 +45,12 @@ class Main extends ScreenComponent {
         this.dispatcher.release();
     }
     _showMenu = () => {
-        this.getScreen().showPopup({
-            content:<Menu />,
-            animationType:'slideLeft'
+        let id = this.getScreen().showPopup({
+            content:<Menu 
+                        onClose={()=>this.getScreen().hidePopup(id)}/>,
+            duration:1,
+            animationType:'none',
+            onBackdropPress:()=>false
         })
     }
 

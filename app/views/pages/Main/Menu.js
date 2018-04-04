@@ -8,7 +8,8 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
-    UIManager
+    Animated,
+    Easing
 } from 'react-native';
 
 import ScreenComponent from './../../components/ScreenComponent';
@@ -17,6 +18,8 @@ import ReactFebrest from 'react-febrest';
 import ACTIONS from '../../../constants/ACTIONS';
 
 const currentTheme = Theme.getTheme();
+
+const ATouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
 function Row(props){
     return (
@@ -36,20 +39,37 @@ class Menu extends ScreenComponent{
     constructor(...props){
         super(...props);
         this.state = {
-            appMenu:null,
-            translateX:-currentTheme.screenWidth
+            appMenu:null
         }
         this.dispatcher = ReactFebrest.createDispatcher(this,this._onDispatch);
+
+        this._translateXValue = new Animated.Value(-275);
     }
     componentDidMount() {
         this.dispatcher.dispatch(ACTIONS.APP_MENU);
+        Animated.timing(this._translateXValue,{
+            toValue:0,
+            duration:200,
+            easing:Easing.linear
+        }).start();
+
     }
     componentWillUnmount(){
         this.dispatcher.release();
     }
+    _close=()=>{
+        Animated.timing(this._translateXValue,{
+            toValue:-275,
+            duration:200,
+            easing:Easing.linear
+        }).start(()=>{
+            this.props.onClose();
+        });
+    }
     _onDispatch(data){
 
     }
+    
     _renderMenu(menu){
         if(!menu){
             return null;
@@ -79,9 +99,13 @@ class Menu extends ScreenComponent{
     render(){
         let {appMenu} = this.state;
         return (
-            <View style={[styles.wrapper]}>
-                <View
-                    style={styles.container}>
+            <TouchableOpacity 
+                onPress={this._close}
+                activeOpacity={1}
+                style={[styles.wrapper]}>
+                <ATouchableOpacity
+                    onPress={()=>false}
+                    style={[styles.container,{transform:[{translateX:this._translateXValue}]}]}>
                     <View
                         style={styles.main}>
                         {this._renderMenu(appMenu)}
@@ -89,9 +113,8 @@ class Menu extends ScreenComponent{
                     <View
                         style={styles.footer}>
                     </View>
-                </View>
-                
-            </View>
+                </ATouchableOpacity>
+            </TouchableOpacity>
         );
     }
 }
