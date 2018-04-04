@@ -37,6 +37,16 @@ export default [
                     title: '我的诗集',
                     action:  ACTIONS.APP_MENU_COLLECTION
                 }
+            ],
+            [
+                {
+                    title: '诗文集',
+                    action: ACTIONS.APP_MENU_FAV
+                },
+                {
+                    title: '名句录',
+                    action:  ACTIONS.APP_MENU_COLLECTION
+                }
             ]
         ]
 
