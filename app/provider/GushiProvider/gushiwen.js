@@ -64,26 +64,30 @@ function getEveryDay(state, payload) {
                 , [], (tx, results) => {
                     let rows = results.rows;
                     let len = rows.length;
-                    resolve(date.map(function(day){
-                        for(let i =0;i<len;i++){
-                            let item = rows.item(i);
-                            if(item['date']===day){
-                                let newItem = {
-                                    date:parseInt(item.date),
-                                    mingju:item.text,
-                                    pic:item.pic,
-                                    shi:{
-                                        title:item.title,
-                                        author:item.author,
-                                        content:JSON.parse(item.content),
-                                        pageid:item.pageid,
-                                        age:item.age
-                                    }
-                                }
-                                return newItem;
+                    let itemMap = {
+
+                    }
+                    for(let i =0;i<len;i++){
+                        let item = rows.item(i);
+                        itemMap[item['date']] = {
+                            date:parseInt(item.date),
+                            mingju:item.text,
+                            pic:item.pic,
+                            shi:{
+                                title:item.title,
+                                author:item.author,
+                                content:JSON.parse(item.content),
+                                pageid:item.pageid,
+                                age:item.age
                             }
-                        }
-                        return null;
+                        };
+                    }
+                    resolve(date.map(function(day,i){
+                        let item = itemMap[day]||null;
+                        if(item){
+                            item.offset = every_day[i]
+                        };
+                        return item;
                     }));
                 }, sqliteError);
         }, sqliteError,sqliteSuccess);

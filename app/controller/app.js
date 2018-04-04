@@ -20,7 +20,7 @@ function empty() {
 function isSameMonth(time1, time2) {
     return new Date(time1).getMonth() === new Date(time2).getMonth();
 }
-function getHistory(every_day_list) {
+function getHistory(every_day_list,payload) {
 
     var history = [];
     var preItem = every_day_list.shift();

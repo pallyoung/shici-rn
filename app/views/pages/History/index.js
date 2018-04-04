@@ -63,7 +63,8 @@ function Item(props) {
             {
                 props.dataSource.map(function (item, i) {
                     return (
-                        <View
+                        <TouchableOpacity
+                            activeOpacity={1}
                             style={[styles.itemSingle]}
                             key={item.date}>
                             <Image
@@ -84,7 +85,7 @@ function Item(props) {
                                 </Text>
                             </View>
 
-                        </View>
+                        </TouchableOpacity>
                     );
                 })
             }
