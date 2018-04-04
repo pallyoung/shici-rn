@@ -9,5 +9,9 @@ export default [
     {
         key:ACTIONS.MAIN_PAGE,
         controller:content.getEvery,
+    },
+    {
+        key:ACTIONS.APP_MENU,
+        controller:app.getMenu
     }
 ]

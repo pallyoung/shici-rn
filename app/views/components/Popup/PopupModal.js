@@ -6,7 +6,7 @@ class PopupModal extends Component {
     constructor(...props) {
         super(...props);
         this.state = {
-            show: ture
+            show: true
         }
     }
     _onBackPress = () => {
@@ -33,7 +33,7 @@ class PopupModal extends Component {
             easing={this.props.easing}
             animationType={this.props.animationType}
             onModalShow = { this._onModalShow }
-            onModalClose={this._onModalClose}
+            onModalHide={this._onModalClose}
             onBackPress={this._onBackPress}
             onBackdropPress={this._onBackdropPress}
             isVisible={this.state.show}

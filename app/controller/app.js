@@ -5,7 +5,14 @@ function appInit(){
     }
 }
 
+function getMenu(appMenu){
+    return {
+        appMenu
+    }
+}
+
 
 export default {
-    appInit
+    appInit,
+    getMenu
 }

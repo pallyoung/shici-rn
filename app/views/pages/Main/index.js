@@ -22,6 +22,7 @@ import {
 
 
 import Pages from './Pages';
+import Menu from './Menu';
 
 var currentTheme = Theme.getTheme();
 
@@ -32,7 +33,7 @@ class Main extends ScreenComponent {
         this.navigationOptions = {
             title: '',
             titleStyle: styles.titleStyle,
-            leftButton: <LeftIcon />,
+            leftButton: <LeftIcon onMenuPress={this._showMenu}/>,
             // rightButton: <RightIcon />
         }
         this.state = {
@@ -40,36 +41,15 @@ class Main extends ScreenComponent {
         }
 
     }
-
-
     componentWillUnmount() {
         this.dispatcher.release();
     }
-    _onPageSelected = (position) => {
-        // let date = list[position].date, rightButton;
-        // if (new Date(date).toDateString() !== TODAY.toDateString()) {
-        //     rightButton = <RightIcon />
-        // }
-        // this.getScreen().updateHeader({
-        //     title: getDateString(date),
-        //     rightButton,
-        // });
-        if (position = 1) {
-            this.state.offset--;
-        } else if(position == -1){
-            this.state.offset++
-        }else{
-            return;
-        }
-        this._fetchData();
+    _showMenu = () => {
+        this.getScreen().showPopup({
+            content:<Menu />,
+            animationType:'slideLeft'
+        })
     }
-    _onDispatch(data) {
-   
-    }
-    _gotoToday = () => {
-
-    }
-
 
     render() {
         return (

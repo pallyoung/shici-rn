@@ -1,6 +1,7 @@
 'use strict'
 import React, { Component } from 'react';
-import Modal from 'react-native-modalui';
+import {View} from 'react-native';
+import PopupModal from './PopupModal';
 class Popup extends Component {
     constructor(...props) {
         super(...props);
@@ -10,7 +11,7 @@ class Popup extends Component {
     }
     _createContent(config) {
         var id = config.id;
-        var element = <Modal
+        var element = <PopupModal
             key={config.id}
             id={config.id}
             children={config.content}
@@ -18,12 +19,13 @@ class Popup extends Component {
             easing={config.easing}
             style={config.style || { backgroundColor: 'rgba(120,120,120,0.5)' }}
             onModalShow={this._onModalShow}
-            onModalColse={this._onModalClose}
+            onModalClose={this._onModalClose}
             onBackPress={this._onBackPress}
             onBackdropPress={this._onBackdropPress}
             animationType={config.animationType} />
-        this._elements.put(id, element);
-        this._configs.put(id,config);
+
+        this._elements.set(id, element);
+        this._configs.set(id,config);
     }
     _onBackPress = (id) => {
         var config = this._configs.get(id);
@@ -52,7 +54,7 @@ class Popup extends Component {
         if(!element){
             modal.hide()
         }else{
-            this._modals.put(id,modal);
+            this._modals.set(id,modal);
         }
     }
     _onModalClose = (id, modal)=> {
@@ -84,6 +86,18 @@ class Popup extends Component {
             this._elements.delete(id);
         }
     }
+    _renderModal(){
+        var elements = [];
+        var values = this._elements.values();
+        let v;
+        do{
+           v = values.next();
+           if(v.value){
+               elements.push(v.value);
+           }
+        }while(!v.done);
+        return elements;
+    }
     render() {
         if (this._elements.size == 0) {
             return null;
@@ -97,7 +111,7 @@ class Popup extends Component {
                 right: 0,
                 bottom: 0
             }}>
-                {this._elements.values()}
+                {this._renderModal()}
             </View>
         );
     }
