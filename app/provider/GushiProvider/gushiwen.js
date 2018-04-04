@@ -26,11 +26,16 @@ const TODAY_ZERO = new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()
 function getEveryDay(state, payload) {
     const every_day = payload.every_day;
     let date = every_day.map(function(offset,i){
-        //数据库存储的时候多了.0
-        //暂时先不修
-        let day = TODAY_ZERO+offset*24*3600000+'.0';
-        if(offset>0){
+        
+        let day = TODAY_ZERO+offset*24*3600000;
+        if(day<EVERY_DAY_MIN){
+            day='null'; 
+        }else if(offset>0){
             day='null';
+        }else{
+            //数据库存储的时候多了.0
+            //暂时先不修
+            day = day+'.0';
         }
         return day;
     });
@@ -45,14 +50,15 @@ function getEveryDay(state, payload) {
             inner join shi on shi.pageid = every_day.shi
             where ${date.reduce((pre,item,i)=>{
                 if(pre){
-                    pre = pre +' or ';
+                    if(item!='null'){
+                        pre = pre +' or ';
+                        pre = pre+' date = '+item;
+                    }
                 }else{
-                    pre ='';
+                    pre = ' date = '+item;
                 }
-                pre =pre+' date = '+item;
                 return pre;
             },'')}`;
-            console.log(sqlString)
             tx.executeSql(
                 sqlString
                 , [], (tx, results) => {

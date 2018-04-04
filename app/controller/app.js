@@ -25,24 +25,37 @@ function getHistory(every_day_list) {
     var history = [];
     var preItem = every_day_list.shift();
     var temp = {
-        data:[preItem],
-        title:preItem.date
+        data: [],
+        title: preItem.date
     }
+    var tempArray = [preItem];
 
-    every_day_list.forEach(function(item){
-        if(!isSameMonth(preItem.date,item.date)){
+    every_day_list.forEach(function (item, index) {
+        if(item===null){
+            return;
+        }
+        if (!isSameMonth(preItem.date, item.date)) {
+            temp.data.push(tempArray);
             history.push(temp);
             temp = {
-                data:[item],
-                title:item.date
+                data: [],
+                title: item.date
             };
-        }else{
-            temp.data.push(item);
+            tempArray = [];
+        } else {
+            if (tempArray.length < 2) {
+                tempArray.push(item);
+            } else {
+                temp.data.push(tempArray);
+                tempArray = [item];
+            }
         }
         preItem = item;
     });
-    history.push(temp);
-    console.log(history)
+    if(tempArray.length!==0){
+        temp.data.push(tempArray);
+        history.push(temp);
+    }   
     return {
         history
     }
