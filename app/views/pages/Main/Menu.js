@@ -104,12 +104,13 @@ const styles = StyleSheet.create({
     },
     container:{
         flex:1,
-        width:300,
+        width:275,
         backgroundColor:'#fefefe',
     },
     main:{
         flex:1,  
-        paddingHorizontal:12
+        paddingHorizontal:20,
+        paddingTop:64
     },
     row:{
         paddingVertical:12,
