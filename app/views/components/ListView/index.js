@@ -1,7 +1,8 @@
 'use strict'
 import React,{Component} from 'react';
 import {
-    FlatList
+    FlatList,
+    SectionList
 }from 'react-native'
 
 class ListView extends Component{
@@ -9,6 +10,9 @@ class ListView extends Component{
         super(...props)
     }
     render(){
+        if(this.props.type==='section'){
+            return <SectionList {...this.props}/>
+        }
         return <FlatList {...this.props}/>
     }
 }

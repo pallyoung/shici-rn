@@ -34,5 +34,9 @@ export default [
     {
         key:ACTIONS.APP_SETTING,
         controller:app.empty
+    },
+    {
+        key:ACTIONS.GET_HISTORY,
+        controller:app.getHistory
     }
 ]

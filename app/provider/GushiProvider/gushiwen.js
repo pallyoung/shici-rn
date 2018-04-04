@@ -29,7 +29,7 @@ function getEveryDay(state, payload) {
         //数据库存储的时候多了.0
         //暂时先不修
         let day = TODAY_ZERO+offset*24*3600000+'.0';
-        if(offset>-0){
+        if(offset>0){
             day='null';
         }
         return day;
@@ -52,6 +52,7 @@ function getEveryDay(state, payload) {
                 pre =pre+' date = '+item;
                 return pre;
             },'')}`;
+            console.log(sqlString)
             tx.executeSql(
                 sqlString
                 , [], (tx, results) => {
@@ -83,29 +84,6 @@ function getEveryDay(state, payload) {
     })
 }
 
-//首页获取古籍
-function fetchGuji(state = {}, payload) {
-    var params = state.params || {}
-    var page = params.page || 0;
-    if (payload.loadMore || params.page == 0) {
-        params.page++;;
-    } else {
-        return state;
-    }
-    var url = `guwen/Default.aspx?p=${params.page}`;
-    var data = state.data || [];
-    return fetchData(url).then(function (content) {
-        return parseGujiToList(content);
-    }).then(function (newData) {
-        data = data.concat(newData);
-        return {
-            params,
-            data
-        }
-    });
-}
-
-
 
 function fetchBySourceType(sourceType, state, payload) {
     return methods[sourceType](state, payload);
@@ -122,7 +100,7 @@ function injectMethod(type, method) {
 }
 
 const methodList = [
-    { type: 'every_day', method: getEveryDay },
+    { type: 'every_day', method: getEveryDay }
 ]
 
 methodList.forEach(item => injectMethod(item.type, item.method));

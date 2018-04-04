@@ -12,8 +12,10 @@ export default{
     'APP_EXIT':'APP_EXIT',
 
     'APP_SETTING':'APP_SETTING',
-    
+
     'CHECK_LOGIN':'CHECK_LOGIN',
     'ADD_FAV':'ADD_FAV',
-    'REMOVE_FAV':'REMOVE_FAV'
+    'REMOVE_FAV':'REMOVE_FAV',
+
+    'GET_HISTORY':'GET_HISTORY'
 }

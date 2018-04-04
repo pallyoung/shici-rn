@@ -80,6 +80,7 @@ class Menu extends ScreenComponent {
             case ACTIONS.APP_MENU_FAV:
                 return true;
             case ACTIONS.APP_MENU_HISTROY:
+                this._close();
                 navigation.navigate('History');
                 return true;
         }
