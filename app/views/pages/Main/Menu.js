@@ -104,33 +104,37 @@ class Menu extends ScreenComponent{
                 onPress={this._close}
                 activeOpacity={1}
                 style={[styles.wrapper]}>
-                <ATouchableOpacity
-                    onPress={()=>false}
+                <Animated.View
+                    activeOpacity={1}
                     style={[styles.container,{transform:[{translateX:this._translateXValue}]}]}>
-                    <View
-                        style={styles.main}>
-                        {this._renderMenu(appMenu)}
-                    </View>
-                    <View
-                        style={styles.footer}>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={styles.footerButton}>
-                            <Icon 
-                                size={20}
-                                name='ios-settings'/>
-                            <Text style={[styles.text,{marginLeft:8}]}>设置</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                            style={styles.footerButton}>
-                            <Icon 
-                                size={20}
-                                name='md-exit'/>
-                            <Text style={[styles.text,{marginLeft:8}]}>退出</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ATouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={styles.container}>
+                        <View
+                            style={styles.main}>
+                            {this._renderMenu(appMenu)}
+                        </View>
+                        <View
+                            style={styles.footer}>
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={styles.footerButton}>
+                                <Icon 
+                                    size={20}
+                                    name='ios-settings'/>
+                                <Text style={[styles.text,{marginLeft:8}]}>设置</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={styles.footerButton}>
+                                <Icon 
+                                    size={20}
+                                    name='md-exit'/>
+                                <Text style={[styles.text,{marginLeft:8}]}>退出</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </TouchableOpacity>
+                </Animated.View>
             </TouchableOpacity>
         );
     }

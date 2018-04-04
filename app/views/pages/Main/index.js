@@ -41,9 +41,6 @@ class Main extends ScreenComponent {
         }
 
     }
-    componentWillUnmount() {
-        this.dispatcher.release();
-    }
     _showMenu = () => {
         let id = this.getScreen().showPopup({
             content:<Menu 
@@ -53,7 +50,6 @@ class Main extends ScreenComponent {
             onBackdropPress:()=>false
         })
     }
-
     render() {
         return (
             <View

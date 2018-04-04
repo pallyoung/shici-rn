@@ -69,7 +69,7 @@ class Pages extends ScreenComponent {
         setInterval(()=>this.forceUpdate(),4000)
     }
     componentWillUnmount() {
-        this.dispatcher.release();s
+        this.dispatcher.release();
     }
 
     shouldComponentUpdate() {
