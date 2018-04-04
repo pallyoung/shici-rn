@@ -8,7 +8,9 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    LayoutAnimation,
+    UIManager
 } from 'react-native';
 
 import { Theme } from 'react-native-improver';
@@ -22,13 +24,33 @@ var currentTheme = Theme.getTheme();
 class Page extends ScreenComponent {
     constructor(...props) {
         super(...props);
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
         this.state = {
-            data: null
+            data: null,
+            opacity:0
         };
     }
+    componentDidMount() {
+        LayoutAnimation.configureNext({
+            duration: 500,
+            create: {
+                type: LayoutAnimation.Types.linear,
+                property: LayoutAnimation.Properties.opacity,
+            },
+            update: {
+                type: LayoutAnimation.Types.easeInEaseOut
+            }
+        });
+        this.setState({opacity:1})
+    }
+    
+    componentWillUpdate(nextProps, nextState) {
+        
+    }
+
     componentDidUpdate() {
         this._resolve && this._resolve();
-        this.props.name&&this.getScreen().toast('update'+this.props.name,2000)
+        this.props.name && this.getScreen().toast('update' + this.props.name, 2000)
         this._resolve = null;
     }
     _onLayout = (e) => {
@@ -49,14 +71,14 @@ class Page extends ScreenComponent {
             height,
             width,
         } = this.state;
-    
+
         const {
             mingju,
             pic,
             shi,
             date
         } = this.props;
-        if(!mingju){
+        if (!mingju) {
             return null;
         }
         return (
@@ -64,7 +86,7 @@ class Page extends ScreenComponent {
                 onLayout={this._onLayout}
                 bounces={false}
                 showsVerticalScrollIndicator={false}
-                style={[this.props.style || { flex: 1 }]}>
+                style={[this.props.style || { flex: 1,opacity:this.state.opacity }]}>
                 {date && <Top
                     height={height}
                     width={width}
