@@ -7,19 +7,21 @@ import {
     FlatList,
     TouchableOpacity,
     Text,
-    StyleSheet
+    StyleSheet,
+    Animated
 } from 'react-native';
 
 import ScreenComponent from './../../components/ScreenComponent';
 import { Theme } from 'react-native-improver';
 import {
-    ViewPager
+    ViewPager,
 } from 'react-native-awesome-viewpager';
 
 import ReactFebrest from 'react-febrest';
 import ACTIONS from './../../../constants/ACTIONS';
 import Page from './Page';
 
+import C from './C';
 
 const MONTH = [
     'Jan',
@@ -53,7 +55,7 @@ class Pages extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.state = {
-            offset: 0
+            offset: -1
         }
         this._position = 0;
         this._dataSource = [];
@@ -63,13 +65,14 @@ class Pages extends ScreenComponent {
     }
     componentDidMount() {
         this._fetchData();
+        setInterval(()=>this.forceUpdate(),4000)
     }
     componentWillUnmount() {
-        this.dispatcher.release();
+        this.dispatcher.release();s
     }
 
     shouldComponentUpdate() {
-        return false;
+        return true;
     }
     _onDispatch=(data)=>{
         if (data.key === ACTIONS.MAIN_PAGE) {
@@ -81,24 +84,27 @@ class Pages extends ScreenComponent {
     _update() {
         var dataSource = this._dataSource;
         var [item0, item1, item2] = dataSource;
-        var page;
+        var page,page0,page1,page2;
         if (item0 == null) {
             item0 = item1;
             item1 = item2;
             item2 = {};
+            page0 = <Page key={item0.date} {...item0}/>
             page = 0;
         } else if (item2 == null) {
             item2 = item1;
             item1 = item0;
+            page2 = <Page key={item2.date} {...item2}/>
             item0 = {};
             page = 2;
         }else{
+            page1 = <Page key={item1.date} {...item1}/>
             page = 1;
         }
         Promise.all(
-            this.refs['PAGE_1'].update(item0),
-            this.refs['PAGE_2'].update(item1),
-            this.refs['PAGE_3'].update(item2)
+            this.refs['C_0'].setChild(page0),
+            this.refs['C_1'].setChild(page1),
+            this.refs['C_2'].setChild(page2)
         ).then(() => {
             this._setPage(page);
         })
@@ -112,7 +118,9 @@ class Pages extends ScreenComponent {
             ]
         });
     }
+    _renderPage(){
 
+    }
 
     _setPage(page) {
         if (page===undefined) {
@@ -126,7 +134,6 @@ class Pages extends ScreenComponent {
         let dataSource = this._dataSource;
         let cPosition = this._position;
         let [item0, item1, item2] = dataSource;
-
         if (cPosition == position) {
             return;
         }
@@ -143,7 +150,7 @@ class Pages extends ScreenComponent {
             if(position==2){
                 this.state.offset--;
                 this._fetchData();
-            }else if(position==1){
+            }else if(position==0){
                 this.state.offset++;
                 this._fetchData();
             }
@@ -155,36 +162,26 @@ class Pages extends ScreenComponent {
             return;
         }
         return;
-        if (dataSource[0] == null && position == 1) {
-            this.state.offset--;
-            this._fetchData();
-        } else if (dataSource[2] == null && position == 1) {
-            this.state.offset++;
-            this._fetchData();
-        }
-        if (position > 1) {
-            this._goForward();
-        } else if (position < 1) {
-            this._goBack();
-        }
     }
     render() {
         return (
             <ViewPager
                 ref='VIEWPAGER_REF'
+                initialPage={1}
                 onPageSelected={this._onPageSelected}
                 style={this.props.style}>
+                {this._renderPage()}
                 <View>
-                    <Page
-                        ref={'PAGE_1'} />
+                    <C 
+                        ref='C_0'/>
                 </View>
                 <View>
-                    <Page
-                        ref={'PAGE_2'} />
+                    <C 
+                        ref='C_1'/>
                 </View>
                 <View>
-                    <Page                    
-                        ref={'PAGE_3'} />
+                    <C 
+                        ref='C_2'/>
                 </View>
             </ViewPager>
         );

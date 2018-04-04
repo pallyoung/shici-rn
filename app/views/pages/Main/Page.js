@@ -23,7 +23,7 @@ class Page extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.state = {
-            data: {}
+            data: null
         };
     }
     componentDidUpdate() {
@@ -38,9 +38,6 @@ class Page extends ScreenComponent {
         }
     }
     update(data) {
-        if (data == null) {
-            data = {};
-        }
         return new Promise((resolve) => {
             this._resolve = resolve;
             this.setState({ data });
@@ -51,15 +48,17 @@ class Page extends ScreenComponent {
         const {
             height,
             width,
-            data
         } = this.state;
-
+    
         const {
             mingju,
             pic,
             shi,
             date
-        } = data;
+        } = this.props;
+        if(!mingju){
+            return null;
+        }
         return (
             <ScrollView
                 onLayout={this._onLayout}
