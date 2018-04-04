@@ -16,6 +16,7 @@ import ScreenComponent from './../../components/ScreenComponent';
 import { Theme } from 'react-native-improver';
 import ReactFebrest from 'react-febrest';
 import ACTIONS from '../../../constants/ACTIONS';
+import Icon from './../../components/Icon';
 
 const currentTheme = Theme.getTheme();
 
@@ -112,6 +113,22 @@ class Menu extends ScreenComponent{
                     </View>
                     <View
                         style={styles.footer}>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={styles.footerButton}>
+                            <Icon 
+                                size={20}
+                                name='ios-settings'/>
+                            <Text style={[styles.text,{marginLeft:8}]}>设置</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            style={styles.footerButton}>
+                            <Icon 
+                                size={20}
+                                name='md-exit'/>
+                            <Text style={[styles.text,{marginLeft:8}]}>退出</Text>
+                        </TouchableOpacity>
                     </View>
                 </ATouchableOpacity>
             </TouchableOpacity>
@@ -144,13 +161,20 @@ const styles = StyleSheet.create({
     },
     text:{
         color:'#333',
-        fontSize:currentTheme.f3
+        fontSize:currentTheme.f2
     },
     footer:{
         height:44,
+        paddingHorizontal:20,
         borderTopWidth:currentTheme.px,
-        borderTopColor:currentTheme.borderColor
-
+        borderTopColor:currentTheme.borderColor,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
+    },
+    footerButton:{
+        flexDirection:'row',
+        alignItems:'center',
     }
 });
 export default Menu;
