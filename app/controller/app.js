@@ -11,8 +11,14 @@ function getMenu(appMenu){
     }
 }
 
+function empty(){
+    return {
+        message:'ok'
+    }
+}
 
 export default {
     appInit,
-    getMenu
+    getMenu,
+    empty
 }

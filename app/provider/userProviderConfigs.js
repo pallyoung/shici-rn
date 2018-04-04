@@ -1,3 +1,5 @@
+import ACTIONS from './../constants/ACTIONS';
+
 export default [
     {
         name: 'userList',
@@ -23,17 +25,17 @@ export default [
             [
                 {
                     title: '往日旧诗',
-                    action: ''
+                    action: ACTIONS.APP_MENU_HISTROY
                 }
             ],
             [
                 {
                     title: '我的收藏',
-                    action: ''
+                    action: ACTIONS.APP_MENU_FAV
                 },
                 {
                     title: '我的诗集',
-                    action: ''
+                    action:  ACTIONS.APP_MENU_COLLECTION
                 }
             ]
         ]

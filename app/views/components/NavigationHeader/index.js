@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { autoSize,Theme } from 'react-native-improver';
 
+import Icon from './../Icon';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 const IOS = Platform.OS === 'ios';
 const currentTheme = Theme.getTheme();
@@ -107,16 +108,14 @@ export default class Header extends Component {
     _backButton(headerProps, navigation) {
         return (
             <TouchableOpacity
-                style={{ justifyContent: 'center',flexDirection:'row', paddingLeft:12 }}
+                style={{ justifyContent: 'center',flexDirection:'row', paddingLeft:20 }}
                 onPress={headerProps.scene.index !== 0 ? () => navigation.goBack() : () => APPContext.hideLoginPopup()}>
-                <Text
+                <Icon
+                    name='ios-arrow-round-back-outline'
                     style={{
-                        color: '#fff',
-                        fontSize: 20,
-                        marginRight:12,
-                    }}>
-                    ←
-                </Text>
+                        color: '#333',
+                        fontSize: 28,
+                    }} />
             </TouchableOpacity >
         );
     }
@@ -134,7 +133,7 @@ export default class Header extends Component {
         if (typeof this.state.title === 'function') {
             child = this.state.title;
         } else {
-            child = <Text style={[{ fontSize: 16, color: '#222',fontWeight:'200' }, this.props.titleStyle]}>{this.state.title}</Text>
+            child = <Text style={[{ fontSize: 14, color: '#333',fontWeight:'200' }, this.props.titleStyle]}>{this.state.title}</Text>
         }
         return <Title>{child}</Title>
     }

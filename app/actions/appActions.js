@@ -13,5 +13,26 @@ export default [
     {
         key:ACTIONS.APP_MENU,
         controller:app.getMenu
+    },
+
+    {
+        key:ACTIONS.APP_EXIT,
+        controller:app.empty
+    },
+    {
+        key:ACTIONS.APP_MENU_COLLECTION,
+        controller:app.empty
+    },
+    {
+        key:ACTIONS.APP_MENU_HISTROY,
+        controller:app.empty
+    },
+    {
+        key:ACTIONS.APP_MENU_FAV,
+        controller:app.empty
+    },
+    {
+        key:ACTIONS.APP_SETTING,
+        controller:app.empty
     }
 ]

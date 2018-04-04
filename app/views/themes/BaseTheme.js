@@ -29,6 +29,9 @@ var BaseTheme = {
         borderBottomWidth:px2dp(1),
         borderColor:'rgba(120,120,120,0.5)',
         flexDirection:'row'
+    },
+    headerTitle:{
+        
     }
 }
 
