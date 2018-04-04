@@ -25,7 +25,7 @@ class RightIcon extends ScreenComponent {
         return (
             <TouchableOpacity
                 activeOpacity={1}
-                onPress={this.props.onMenuPress}
+                onPress={this.props.onPress}
                 style={styles.wrapper}>
                 <Text
                     style={styles.text}>

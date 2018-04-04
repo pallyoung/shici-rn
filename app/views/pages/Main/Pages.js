@@ -19,6 +19,7 @@ import {
 
 import ReactFebrest from 'react-febrest';
 import ACTIONS from './../../../constants/ACTIONS';
+import RightIcon from './RightIcon';
 import Page from './Page';
 
 import C from './C';
@@ -55,7 +56,7 @@ class Pages extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.state = {
-            offset: -1
+            offset: 0
         }
         this._position = 0;
         this._dataSource = [];
@@ -84,20 +85,23 @@ class Pages extends ScreenComponent {
     _update() {
         var dataSource = this._dataSource;
         var [item0, item1, item2] = dataSource;
-        var page,page0,page1,page2;
+        var page,page0,page1,page2,date;
         if (item0 == null) {
             item0 = item1;
             item1 = item2;
             item2 = {};
+            date = item0.date;
             page0 = <Page key={item0.date} {...item0}/>
             page = 0;
         } else if (item2 == null) {
             item2 = item1;
             item1 = item0;
+            date = item2.date;
             page2 = <Page key={item2.date} {...item2}/>
             item0 = {};
             page = 2;
         }else{
+            date = item1.date;
             page1 = <Page key={item1.date} {...item1}/>
             page = 1;
         }
@@ -107,6 +111,7 @@ class Pages extends ScreenComponent {
             this.refs['C_2'].setChild(page2)
         ).then(() => {
             this._setPage(page);
+            this._updateHeader(date)
         })
 
     }
@@ -118,10 +123,23 @@ class Pages extends ScreenComponent {
             ]
         });
     }
-    _renderPage(){
-
+    _updateHeader(date){
+        var rightButton;
+        if(new Date(date).toDateString()!==TODAY.toDateString()){
+            rightButton = <RightIcon onPress={this._gotoToday}/>
+        }
+        this.getScreen().updateHeader({
+            title:getDateString(date),
+            rightButton
+        })
     }
-
+    _gotoToday=()=>{
+        if(this.state.offset==0){
+            return;
+        }
+        this.state.offset = 0;
+        this._fetchData();
+    }
     _setPage(page) {
         if (page===undefined) {
             return;
@@ -170,7 +188,6 @@ class Pages extends ScreenComponent {
                 initialPage={1}
                 onPageSelected={this._onPageSelected}
                 style={this.props.style}>
-                {this._renderPage()}
                 <View>
                     <C 
                         ref='C_0'/>

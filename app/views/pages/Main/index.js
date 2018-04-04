@@ -30,7 +30,7 @@ class Main extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.navigationOptions = {
-            title: '01 Feb,2018',
+            title: '',
             titleStyle: styles.titleStyle,
             leftButton: <LeftIcon />,
             // rightButton: <RightIcon />
