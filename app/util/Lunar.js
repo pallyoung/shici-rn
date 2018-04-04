@@ -142,11 +142,11 @@ class Lunar {
     }
     getDateCN() {
         if (this._date <= 10) {
-            return '初' + NUMBER_CN[this._date];
+            return '初' + NUMBER_CN[this._date-1];
         } else if (this._date < 20) {
-            return '十' + NUMBER_CN[this._date.toString()[1]];
+            return '十' + NUMBER_CN[this._date.toString()[1]-1];
         } else if (this._deta < 30) {
-            return '廿' + NUMBER_CN[this._date.toString()[1]];
+            return '廿' + NUMBER_CN[this._date.toString()[1]-1];
         } else {
             return '卅十';
         }
