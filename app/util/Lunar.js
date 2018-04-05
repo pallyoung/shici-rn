@@ -145,8 +145,10 @@ class Lunar {
             return '初' + NUMBER_CN[this._date-1];
         } else if (this._date < 20) {
             return '十' + NUMBER_CN[this._date.toString()[1]-1];
-        } else if (this._deta < 30) {
-            return '廿' + NUMBER_CN[this._date.toString()[1]-1];
+        } else if(this._date == 20){
+            return '二十';
+        }else if (this._date < 30) {
+            return '廿' + (NUMBER_CN[this._date.toString()[1]-1]||'');
         } else {
             return '卅十';
         }
@@ -337,7 +339,7 @@ class Lunar {
         /**
          * 1900年1月31日正好是正月初一
         */
-        var offset = Math.floor((date.getTime() - new Date(1900, 0, 31).getTime()) / 86400000);
+        var offset = Math.floor((date.getTime() - new Date(1900, 0, 30).getTime()) / 86400000);
         for (i = 1900; i < 2101 && offset > 0; i++) {
             temp = Lunar.getDayOfYear(i);
             offset -= temp;
@@ -362,11 +364,11 @@ class Lunar {
                 isLeap = offset <= 0 ? true : false;
             }
         }
-        if (offset < 0) {
-            m = mi - 1;
-            offset += temp;
-        }
-        d = offset + 1;
+
+        m = mi - 1;
+        offset += temp;
+
+        d = offset;
 
         return new Lunar(y, m, d, isLeap);
     }
