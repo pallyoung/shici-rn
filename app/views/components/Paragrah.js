@@ -30,13 +30,12 @@ const styles = StyleSheet.create({
         paddingRight:currentTheme.paddingHorizontal,
         paddingTop:10,
         paddingBottom:10,
-        marginBottom:10,
         borderBottomWidth:currentTheme.px,
         borderColor:'rgba(120,120,120,0.5)'
     },
     text:{
-        fontSize:currentTheme.f3,
-        lineHeight:2*currentTheme.f3
+        fontSize:currentTheme.f2,
+        lineHeight:1.5*currentTheme.f2
     }
 });
 export default Paragrah;

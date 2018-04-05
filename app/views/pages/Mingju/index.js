@@ -61,7 +61,7 @@ class Mingju extends ScreenComponent {
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
                     onEndReached={this._fetchData}
-                    showVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     data={mingjuList.items} />
             </View>
         );
@@ -70,7 +70,8 @@ class Mingju extends ScreenComponent {
 
 const styles = StyleSheet.create({
     wrapper: {
-        flex: 1
+        flex: 1,
+        backgroundColor:'#fff'
     }
 });
 

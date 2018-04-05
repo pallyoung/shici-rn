@@ -78,26 +78,31 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         marginBottom:10,
         borderBottomWidth:currentTheme.px,
+        backgroundColor:'#fff',
         borderColor:'rgba(120,120,120,0.5)'
     },
     titleWrapper:{
         justifyContent:'center'
     },
     title:{
-        fontSize:currentTheme.f5,
+        fontSize:currentTheme.f4,
+        color:'#333'
     },
     infoWrapper:{
         paddingVertical:8
     },
     info:{
-        textAlign:'left'
+        textAlign:'left',
+        fontSize:currentTheme.f2,
+        color:'#333'
     },
     contentWrapper:{
 
     },
     content:{
         marginBottom:8,
-        lineHeight:2*currentTheme.f3
+        fontSize:currentTheme.f2,
+        lineHeight:1.5*currentTheme.f2
         
     },
     favWrapper:{

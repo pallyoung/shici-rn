@@ -57,7 +57,7 @@ class Shi extends ScreenComponent {
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
                     onEndReached={this._fetchData}
-                    showVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     data={shiList.items} />
             </View>
         );
@@ -65,7 +65,10 @@ class Shi extends ScreenComponent {
 }
 
 const styles = StyleSheet.create({
-
+    wrapper:{
+        flex:1,
+        backgroundColor:'#fff'
+    }
 });
 
 export default Shi;
