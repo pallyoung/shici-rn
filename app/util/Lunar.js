@@ -210,14 +210,16 @@ class Lunar {
         } else if (term2 >= d) {
             offset = term2 - d;
             term = term2;
+            termIndex = termIndex+1;
             month = m;
         } else {
             offset = term3 - d + monthDay;
             term = term3
+            termIndex = termIndex+2;
             month = m+1;
         }
         return {
-            term: TERM[term],
+            term: TERM[termIndex],
             offset,
             day: term,
             month,
