@@ -76,7 +76,7 @@ function Item(props) {
                                     }
                                 }}
                                 style={styles.itemImage}
-                                resizeMode='center'
+                                resizeMode='cover'
                             />
                             <View
                                 style={styles.itemDateWrapper}>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         // borderBottomWidth: currentTheme.px,
         // borderColor: currentTheme.borderColor,
         height: 44,
-        backgroundColor: '#f3f3f3',
+        backgroundColor: '#f4f4f4',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'

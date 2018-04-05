@@ -19,5 +19,7 @@ export default{
     'ADD_FAV':'ADD_FAV',
     'REMOVE_FAV':'REMOVE_FAV',
 
-    'GET_HISTORY':'GET_HISTORY'
+    'GET_HISTORY':'GET_HISTORY',
+    'APP_MINGJU':'APP_MINGJU',
+    'APP_SHI':'APP_SHI'
 }

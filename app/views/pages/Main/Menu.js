@@ -83,6 +83,14 @@ class Menu extends ScreenComponent {
                 this._close();
                 navigation.navigate('History');
                 return true;
+            case ACTIONS.APP_MINGJU:
+                this._close();
+                navigation.navigate('Mingju');
+                return true;
+            case ACTIONS.APP_SHI:
+                this._close();
+                navigation.navigate('Shi');
+                return true;
         }
     }
 

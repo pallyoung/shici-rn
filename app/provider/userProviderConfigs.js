@@ -41,11 +41,11 @@ export default [
             [
                 {
                     title: '诗文集',
-                    action: ACTIONS.APP_MENU_FAV
+                    action: ACTIONS.APP_SHI
                 },
                 {
                     title: '名句录',
-                    action:  ACTIONS.APP_MENU_COLLECTION
+                    action:  ACTIONS.APP_MINGJU
                 }
             ]
         ]

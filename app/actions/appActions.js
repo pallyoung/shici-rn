@@ -42,5 +42,13 @@ export default [
     {
         key:ACTIONS.APP_GOTO_DATE,
         controller:app.gotoDate
+    },
+    {
+        key:ACTIONS.APP_MINGJU,
+        controller:app.empty
+    },
+    {
+        key:ACTIONS.APP_SHI,
+        controller:app.empty
     }
 ]
