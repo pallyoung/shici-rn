@@ -6,6 +6,8 @@ var sqlite = require('sqlite3').verbose();
 
 var fs = require('fs');
 var path = require('path');
+
+
 const assetPath = path.relative('./','asset');
 const everyFile = assetPath+'/every.json';
 
@@ -23,6 +25,7 @@ const START_INDEX = 95;
 
 var authors = new Map()
 var ages = new Map();
+
 
 var shis = [];
 
@@ -76,7 +79,6 @@ if(TOTAL>every.length){
     let mingjuLength = mingju.length++;
     let shiLength = shi.length++;
     for(let i = 0,left = TOTAL-now;i<left;i++){
-        console.log(i,left)
         let p,m,s,date;
         date = (now+i)*24*3600000+START_DATE;
         do{
@@ -204,6 +206,12 @@ function randomInt(upper) {
 
 db.close(()=>{
     var readStream = fs.createReadStream(sqlitePath);
+    if(fs.existsSync('android/app/src/main/assets/data/data.db')){
+        fs.unlinkSync('android/app/src/main/assets/data/data.db')
+    }
+    if(fs.existsSync('ios/shici/data/data.db')){
+        fs.unlinkSync('ios/shici/data/data.db')
+    }
     var writeSteam1 = fs.createWriteStream('android/app/src/main/assets/data/data.db');
     var writeSteam2 = fs.createWriteStream('ios/shici/data/data.db');
     readStream.pipe(writeSteam1);

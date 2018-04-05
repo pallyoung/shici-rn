@@ -32,10 +32,6 @@ function getEveryDay(state, payload) {
             day = 'null';
         } else if (offset > 0) {
             day = 'null';
-        } else {
-            //数据库存储的时候多了.0
-            //暂时先不修
-            day = day + '.0';
         }
         return day;
     });
@@ -52,10 +48,10 @@ function getEveryDay(state, payload) {
                     if (pre) {
                         if (item != 'null') {
                             pre = pre + ' or ';
-                            pre = pre + ' date = ' + item;
+                            pre = pre + ' date = ' + '"'+item+'"';
                         }
                     } else {
-                        pre = ' date = ' + item;
+                        pre = ' date = ' + '"'+item+'"';
                     }
                     return pre;
                 }, '')}`;
