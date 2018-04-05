@@ -14,7 +14,9 @@ function getMingjuList(mingjuList) {
 }
 
 function getShiList(shiList) {
-
+    return {
+        shiList
+    }
 }
 export default {
     getEvery,

@@ -126,7 +126,32 @@ function getMingjuList(state = {}, payload) {
 /*诗文列表*/
 
 function getShiList(state = {}, payload) {
-
+    var lastid = state.lastid || 0;
+    const count = 50;//一次拿50条
+    const start = lastid;
+    const end = lastid+50;
+    return new Promise(function (resolve) {
+        db.transaction((tx) => {
+            const sqlString = `select * from shi limit ${start},${end}`;
+            tx.executeSql(
+                sqlString
+                , [], (tx, results) => {
+                    let rows = results.rows;
+                    let len = rows.length;
+                    let items = [];
+                    for (let i = 0; i < len; i++) {
+                        let item = rows.item(i);
+                        item.content = JSON.parse(item.content);
+                        items.push(item);
+                        lastid++;
+                    }
+                    resolve({
+                        lastid,
+                        items
+                    });
+                }, sqliteError);
+        }, sqliteError, sqliteSuccess);
+    })
 }
 function fetchBySourceType(sourceType, state, payload) {
     return methods[sourceType](state, payload);

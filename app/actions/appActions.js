@@ -63,6 +63,9 @@ export default [
 
     {
         key:ACTIONS.GET_SHI_LIST,
-        controller:content.getMingjuList
+        controller:content.getShiList,
+        persist:{
+            shiList:'shiList'
+        }
     }
 ]

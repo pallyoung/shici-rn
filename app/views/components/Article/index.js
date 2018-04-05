@@ -56,7 +56,7 @@ function Article(props) {
                 age={props.age}
                 author={props.author} />
             <Content 
-                article={props.article}/>
+                article={props.content}/>
             <TouchableOpacity
                 activeOpacity={1}
                 onPress={props.onFav}
