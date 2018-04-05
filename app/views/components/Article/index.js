@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     content:{
         marginBottom:8,
         fontSize:currentTheme.f2,
-        lineHeight:1.5*currentTheme.f2
+        lineHeight:1.5*currentTheme.f2,
+        color:'#333'
         
     },
     favWrapper:{

@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:currentTheme.f2,
-        lineHeight:1.5*currentTheme.f2
+        lineHeight:1.5*currentTheme.f2,
+        color:'#333'
     }
 });
 export default Paragrah;
