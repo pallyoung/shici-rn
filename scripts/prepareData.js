@@ -192,7 +192,7 @@ db.serialize(function () {
             ")"); //
         table.source.forEach(function (item,k) {
             update.run.apply(update,table.column.map(function(c){
-                return item[c];
+                return String(item[c]);
             }));
         });
         update.finalize();
@@ -202,4 +202,10 @@ function randomInt(upper) {
     return Math.floor(Math.random(Date.now()) * upper);
 }
 
-db.close();
+db.close(()=>{
+    var readStream = fs.createReadStream(sqlitePath);
+    var writeSteam1 = fs.createWriteStream('android/app/src/main/assets/data/data.db');
+    var writeSteam2 = fs.createWriteStream('ios/shici/data/data.db');
+    readStream.pipe(writeSteam1);
+    readStream.pipe(writeSteam2);
+});
