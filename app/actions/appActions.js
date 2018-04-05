@@ -50,5 +50,19 @@ export default [
     {
         key:ACTIONS.APP_SHI,
         controller:app.empty
+    },
+
+
+    {
+        key:ACTIONS.GET_MINGJU_LIST,
+        controller:content.getMingjuList,
+        persist:{
+            mingjuList:'mingjuList'
+        }
+    },
+
+    {
+        key:ACTIONS.GET_SHI_LIST,
+        controller:content.getMingjuList
     }
 ]

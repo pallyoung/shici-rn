@@ -21,5 +21,7 @@ export default{
 
     'GET_HISTORY':'GET_HISTORY',
     'APP_MINGJU':'APP_MINGJU',
-    'APP_SHI':'APP_SHI'
+    'APP_SHI':'APP_SHI',
+    
+    'GET_MINGJU_LIST':'GET_MINGJU_LIST'
 }

@@ -7,6 +7,17 @@ function getEvery(every_day_list) {
 }
 
 
+function getMingjuList(mingjuList) {
+    return {
+        mingjuList
+    }
+}
+
+function getShiList(shiList) {
+
+}
 export default {
-    getEvery
+    getEvery,
+    getMingjuList,
+    getShiList
 }
