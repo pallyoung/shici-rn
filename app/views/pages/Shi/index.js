@@ -32,18 +32,25 @@ class Shi extends ScreenComponent {
     componentWillUnmount() {
         this.dispatcher.release();
     }
-    _fetchData = (isTop) => {
+    _fetchData = () => {
         if(this._onFetching){
             return;
         }
         this._onFetching = true;
-        this.dispatcher.dispatch(ACTIONS.GET_SHI_LIST,{isTop});
+        this.dispatcher.dispatch(ACTIONS.GET_SHI_LIST);
     }
     _onDispatch = (data) => {
-        if(data.key===ACTIONS.GET_SHI_LIST){
-            this._onFetching = false;
-            return false;
-        }
+        switch(data.key){
+            case ACTIONS.REMOVE_FAV:
+                this._fetchData();
+                return true;
+            case ACTIONS.ADD_FAV:
+                this._fetchData();
+                return true;
+            case ACTIONS.GET_SHI_LIST:
+                this._onFetching = false;
+                return false;
+        }  
     }
     _renderItem = ({ item }) => {
         return (

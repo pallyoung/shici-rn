@@ -75,15 +75,20 @@ const handlers = {
             }
             let { remove, update } = classify(state.data, commonCondition, FAV_COLUMN_MAP);
             let sqlString = updateSql(table_name, update, FAV_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
+
             executeSql(sqlString)
         },
         getState: function (state, payload) {
-            const sqlString = `select * from fav
+            const sqlString = `select fav.id as id,fav.content_id as content_id,fav.content_type as content_type,
+                                shi.id as c_id, shi.author as author,shi.content as content,
+                                shi.pageid as pageid,shi.age as age from fav as fav
                                 inner join content.shi as shi on fav.content_id = shi.pageid 
                                 where user_id = ${payload.user_id || 1}`;
-            const sqlString2 = `select * from fav
+            const sqlString2 = `select fav.id as id,fav.content_id as content_id,fav.content_type as content_type,
+                                mingju.id as c_id, mingju.pageid as pageid,mingju.text as text from fav
                                 inner join content.mingju as mingju on fav.content_id = mingju.pageid 
                                 where user_id = ${payload.user_id || 1}`;
+            console.log(sqlString,'sqlString')
             var result = {
                 
             }
@@ -96,6 +101,7 @@ const handlers = {
                     let newItem = {
                         id:item.id,
                         content_id:item.pageid,
+                        content_type:item.content_type,
                         content:{
                             title: item.title,
                             author: item.author,
@@ -119,6 +125,7 @@ const handlers = {
                     let newItem = {
                         id:item.id,
                         content_id:item.pageid,
+                        content_type:item.content_type,
                         content:{
                             text: item.text,
                             pageid:item.pageid,
@@ -126,9 +133,19 @@ const handlers = {
                             fav_id:item.id
                         }
                     }
-                    items.push(item);
+                    items.push(newItem);
                 }
                 result.mingju = items;
+                executeSql('select * from fav').then((results)=>{
+                    let rows = results.rows;
+                    let len = rows.length;
+                    let items = [];
+                    for (let i = 0; i < len; i++) {
+                        let item = rows.item(i);
+                        items.push(item);
+                    }
+                })
+                console.log(result,'resultssss')
                 return result;
             });
         }
@@ -176,3 +193,4 @@ class UserProvider extends Provider {
 
 
 export default UserProvider;
+

@@ -44,10 +44,17 @@ class Mingju extends ScreenComponent {
         this.dispatcher.dispatch(ACTIONS.GET_MINGJU_LIST,{isTop})
     }
     _onDispatch = (data) => {
-        if(data.key===ACTIONS.GET_MINGJU_LIST){
-            this._onFetching = false;
-            return false;
-        }
+        switch(data.key){
+            case ACTIONS.REMOVE_FAV:
+                this._fetchData();
+                return true;
+            case ACTIONS.ADD_FAV:
+                this._fetchData();
+                return true;
+            case ACTIONS.GET_MINGJU_LIST:
+                this._onFetching = false;
+                return false;
+        } 
     }
     _renderItem = ({ item }) => {
         return (

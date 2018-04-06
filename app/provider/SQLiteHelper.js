@@ -31,6 +31,9 @@ function ready() {
 
 
 }
+function error(err){
+    console.log('execute sql err:',err);
+}
 
 function executeSql(type, sql, data = []) {
     return ready().then(() => new Promise((resolve, reject) => {
@@ -44,9 +47,10 @@ function executeSql(type, sql, data = []) {
                 data,
                 (tx, results) => {
                     resolve(results)
-                }
+                },
+                error
             )
-        });
+        },error);
     }))
 }
 
