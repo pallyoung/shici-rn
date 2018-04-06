@@ -49,10 +49,35 @@ tables.push({
         'id integer primary key autoincrement not null',
         'user_id integer not null',
         'content_id text not null',
-        'content_type text'
+        'content_type text',
+        'created_time integer'
     ]
 });
 
+tables.push({
+    name: 'collection',
+    column: [
+        'id integer primary key autoincrement not null',
+        'collection_name text not null',
+        'cover text',
+        'bookmark integer',
+        'last_read_time integer',
+        'read_times integer',
+        'updated_time integer',
+        'created_time integer'
+    ]
+});
+
+tables.push({
+    name: 'collection_list',
+    column: [
+        'id integer primary key autoincrement not null',
+        'collection_id integer not null',
+        'content_id text not null',
+        'content_type text',
+        'created_time integer'
+    ]
+});
 function getColumn(item) {
     return item.match(/^[\S]*?(?=\s)/)[0];
 }

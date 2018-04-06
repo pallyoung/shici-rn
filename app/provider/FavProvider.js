@@ -1,11 +1,15 @@
 'use strict'
 import {Provider} from 'febrest';
-import SQLite from 'react-native-sqlite-storage';
+import SQLiteHelper from './SQLiteHelper';
 
-const db = SQLite.openDatabase({ name: "main", createFromLocation: "~data/user.db" });
+function setState(type,state){
+    var tablename = state.type;
 
-class UserProvider extends Provider{
-    params:any;
+}
+function getState(state){
+    
+}
+class FavProvider extends Provider{
     sourceType:string;
     constructor(config){
         super(config);
@@ -13,7 +17,8 @@ class UserProvider extends Provider{
         this.sourceType = config.sourceType;
     }
     set(state){
-        
+        this.state = state;
+        return setState(this.sourceType,state);
     }
     get(payload={}){
         return [];
