@@ -18,5 +18,9 @@ export default [
         persist:{
             fav:'fav'
         }
+    },
+    {
+        key:ACTIONS.GET_FAV,
+        controller:user.getFav
     }
 ]

@@ -24,5 +24,6 @@ export default{
     'APP_SHI':'APP_SHI',
     
     'GET_MINGJU_LIST':'GET_MINGJU_LIST',
-    'GET_SHI_LIST':'GET_SHI_LIST'
+    'GET_SHI_LIST':'GET_SHI_LIST',
+    'GET_FAV':'GET_FAV'
 }

@@ -50,11 +50,33 @@ function removeFav(payload){
         }
     }
 }
+
+function getFav(fav){
+    return {
+        fav
+    }
+}
+function getCollection(){
+
+}
+function addCollection(){
+
+}
+function removeCollection(){
+
+}
+function updateCollection(){
+
+}
 export default {
     login,
     unlogin,
     register,
     isLogin,
     addFav,
-    removeFav
+    removeFav,
+    getFav,
+    getCollection,
+    removeCollection,
+    updateCollection
 }
