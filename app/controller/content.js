@@ -17,7 +17,7 @@ function getShiList(shiList,fav) {
     var favMap = {};
     fav.forEach((item)=>{
         favMap[item.content_id] = item;
-    })
+    });
     shiList.items = shiList.items.map(function(item){
         if(!item){
             return null;

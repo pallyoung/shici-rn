@@ -14,7 +14,7 @@ function updateSql(table_name, data, keys) {
 
 function removeSql(table_name, data, condition) {
     return data.map(function (item) {
-        return `DELETE from  ${table_name} where ${condition(item)}`;
+        return `DELETE from ${table_name} where ${condition(item)}`;
     })
 }
 function classify(data, condition, map) {
@@ -64,7 +64,7 @@ function commonCondition(item) {
 }
 
 function removeCondition(item) {
-    return 'where id = ' + item.id;
+    return 'id = ' + item[0];
 }
 const handlers = {
     fav: {

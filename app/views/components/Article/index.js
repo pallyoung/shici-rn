@@ -15,6 +15,7 @@ var currentTheme = Theme.getTheme();
 
 
 function favIt(item) {
+    console.log(item)
     if (item.isFav) {
         Febrest.dispatch(ACTIONS.REMOVE_FAV, {
             fav_id: item.fav_id

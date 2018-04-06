@@ -41,7 +41,6 @@ function addFav(payload){
 }
 function removeFav(payload){
     var fav = [{
-        user_id:payload.user_id,
         id:payload.fav_id,
         itemRemove:true
     }];
