@@ -48,10 +48,10 @@ function getEveryDay(state, payload) {
                     if (pre) {
                         if (item != 'null') {
                             pre = pre + ' or ';
-                            pre = pre + ' date = ' + '"'+item+'"';
+                            pre = pre + ' date = ' + '"' + item + '"';
                         }
                     } else {
-                        pre = ' date = ' + '"'+item+'"';
+                        pre = ' date = ' + '"' + item + '"';
                     }
                     return pre;
                 }, '')}`;
@@ -94,9 +94,18 @@ function getEveryDay(state, payload) {
 /*mingju列表*/
 function getMingjuList(state = {}, payload) {
     var lastid = state.lastid || 0;
-    const count = 50;//一次拿50条
-    const start = lastid;
-    const end = lastid+50;
+    var start = lastid-25;
+    var end = lastid + 25;
+    if (payload.isTop) {
+        start = lastid - 25;
+        end = lastid+25;
+    }
+    if(start<0){
+        start = 0;
+    }
+    if(end<0){
+        end=0;
+    }
     return new Promise(function (resolve) {
         db.transaction((tx) => {
             const sqlString = `select * from mingju limit ${start},${end}`;
@@ -109,7 +118,7 @@ function getMingjuList(state = {}, payload) {
                     for (let i = 0; i < len; i++) {
                         let item = rows.item(i);
                         items.push(item);
-                        lastid++;
+                        lastid = item.id-1;
                     }
                     resolve({
                         lastid,
@@ -123,9 +132,18 @@ function getMingjuList(state = {}, payload) {
 
 function getShiList(state = {}, payload) {
     var lastid = state.lastid || 0;
-    const count = 50;//一次拿50条
-    const start = lastid;
-    const end = lastid+50;
+    var start = lastid-25;
+    var end = lastid + 25;
+    if (payload.isTop) {
+        start = lastid - 25;
+        end = lastid+25;
+    }
+    if(start<0){
+        start = 0;
+    }
+    if(end<0){
+        end=0;
+    }
     return new Promise(function (resolve) {
         db.transaction((tx) => {
             const sqlString = `select * from shi limit ${start},${end}`;
@@ -139,7 +157,7 @@ function getShiList(state = {}, payload) {
                         let item = rows.item(i);
                         item.content = JSON.parse(item.content);
                         items.push(item);
-                        lastid++;
+                        lastid = item.id-1;
                     }
                     resolve({
                         lastid,

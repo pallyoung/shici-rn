@@ -36,11 +36,18 @@ class Mingju extends ScreenComponent {
         this.dispatcher.release();
     }
     
-    _fetchData=()=>{
-        this.dispatcher.dispatch(ACTIONS.GET_MINGJU_LIST)
+    _fetchData=(isTop)=>{
+        if(this._onFetching){
+            return;
+        }
+        this._onFetching = true;
+        this.dispatcher.dispatch(ACTIONS.GET_MINGJU_LIST,{isTop})
     }
     _onDispatch = (data) => {
-
+        if(data.key===ACTIONS.GET_MINGJU_LIST){
+            this._onFetching = false;
+            return false;
+        }
     }
     _renderItem = ({ item }) => {
         return (
@@ -60,7 +67,8 @@ class Mingju extends ScreenComponent {
                 <ListView
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
-                    onEndReached={this._fetchData}
+                    onTopReached={()=>this._fetchData(true)}
+                    onBottomReached={this._fetchData}
                     showsVerticalScrollIndicator={false}
                     data={mingjuList.items} />
             </View>

@@ -32,11 +32,18 @@ class Shi extends ScreenComponent {
     componentWillUnmount() {
         this.dispatcher.release();
     }
-    _fetchData = () => {
-        this.dispatcher.dispatch(ACTIONS.GET_SHI_LIST);
+    _fetchData = (isTop) => {
+        if(this._onFetching){
+            return;
+        }
+        this._onFetching = true;
+        this.dispatcher.dispatch(ACTIONS.GET_SHI_LIST,{isTop});
     }
     _onDispatch = (data) => {
-
+        if(data.key===ACTIONS.GET_SHI_LIST){
+            this._onFetching = false;
+            return false;
+        }
     }
     _renderItem = ({ item }) => {
         return (
@@ -56,7 +63,8 @@ class Shi extends ScreenComponent {
                 <ListView
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
-                    onEndReached={this._fetchData}
+                    onTopReached={()=>this._fetchData(true)}
+                    onBottomReached={this._fetchData}
                     showsVerticalScrollIndicator={false}
                     data={shiList.items} />
             </View>
