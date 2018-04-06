@@ -11,6 +11,7 @@ import ScreenComponent from './../../components/ScreenComponent';
 
 import { Theme } from 'react-native-improver';
 import ReactFebrest from 'react-febrest';
+import Febrest from 'febrest';
 import {ViewPager} from 'react-native-awesome-viewpager';
 
 import ListView from './../../components/ListView';
@@ -27,7 +28,8 @@ class Fav extends ScreenComponent {
             title: '我的收藏'
         }
         this.state = {};
-        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
+        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch);
+
     }
     componentDidMount() {
         this._fetchData();
@@ -39,7 +41,14 @@ class Fav extends ScreenComponent {
         this.dispatcher.dispatch(ACTIONS.GET_FAV);
     }
     _onDispatch = (data) => {
-    
+        switch (data.key){
+            case ACTIONS.REMOVE_FAV:
+                this._fetchData();
+                return true;
+            case ACTIONS.ADD_FAV:
+                this._fetchData();
+                return true;
+        }
     }
     render() {
         let { fav = {} } = this.state;

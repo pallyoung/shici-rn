@@ -95,6 +95,7 @@ const handlers = {
                     let item = rows.item(i);
                     let newItem = {
                         id:item.id,
+                        content_id:item.pageid,
                         content:{
                             title: item.title,
                             author: item.author,
@@ -117,6 +118,7 @@ const handlers = {
                     let item = rows.item(i);
                     let newItem = {
                         id:item.id,
+                        content_id:item.pageid,
                         content:{
                             text: item.text,
                             pageid:item.pageid,
@@ -126,7 +128,6 @@ const handlers = {
                     }
                     items.push(item);
                 }
-                
                 result.mingju = items;
                 return result;
             });

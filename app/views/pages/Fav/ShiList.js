@@ -33,7 +33,7 @@ class ShiList extends Component{
         );
     }
     _keyExtractor = (item) => {
-        return item.id;
+        return item.id+'';
     }
     render(){
         let {
