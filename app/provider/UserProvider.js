@@ -23,10 +23,10 @@ function classify(data, condition, map) {
     data.forEach(function (item) {
         if (condition(item)) {
             update.push(map.map((key) => {
-                if(!item[key]){
+                if (!item[key]) {
                     return 'null';
-                }else{
-                    if(/[\w]/.test(item[key])){
+                } else {
+                    if (/[\w]/.test(item[key])) {
                         return `"${item[key]}"`;
                     }
                     return item[key];
@@ -76,10 +76,17 @@ const handlers = {
             let { remove, update } = classify(state.data, commonCondition, FAV_COLUMN_MAP);
             let sqlString = updateSql(table_name, update, FAV_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
             executeSql(sqlString)
-
         },
         getState: function (state, payload) {
-            const sqlString = `select * from fav where user_id = ${payload.user_id||1}`;
+            const sqlString = `select * from fav
+                                inner join content.shi as shi on fav.content_id = shi.pageid 
+                                where user_id = ${payload.user_id || 1}`;
+            const sqlString2 = `select * from fav
+                                inner join content.mingju as mingju on fav.content_id = mingju.pageid 
+                                where user_id = ${payload.user_id || 1}`;
+            var result = {
+                
+            }
             return executeSql(sqlString).then(results => {
                 let rows = results.rows;
                 let len = rows.length;
@@ -88,7 +95,18 @@ const handlers = {
                     let item = rows.item(i);
                     items.push(item);
                 }
-                return items;
+                result.shi = items;
+                return executeSql(sqlString2);
+            }).then(results => {
+                let rows = results.rows;
+                let len = rows.length;
+                let items = [];
+                for (let i = 0; i < len; i++) {
+                    let item = rows.item(i);
+                    items.push(item);
+                }
+                result.mingju = items;
+                return result;
             });
         }
     },

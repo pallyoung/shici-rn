@@ -11,11 +11,13 @@ import ScreenComponent from './../../components/ScreenComponent';
 
 import { Theme } from 'react-native-improver';
 import ReactFebrest from 'react-febrest';
+import {ViewPager} from 'react-native-awesome-viewpager';
 
 import ListView from './../../components/ListView';
 import ACTIONS from '../../../constants/ACTIONS';
-import Article from './../../components/Article';
-import Paragrah from './../../components/Paragrah';
+import MingjuList from './MingjuList';
+import ShiList from './ShiList';
+import Mingju from '../Mingju';
 
 const currentTheme = Theme.getTheme();
 class Fav extends ScreenComponent {
@@ -37,25 +39,28 @@ class Fav extends ScreenComponent {
         this.dispatcher.dispatch(ACTIONS.GET_FAV);
     }
     _onDispatch = (data) => {
-        if(data.key===ACTIONS.GET_FAV){
-            return false;
-        }
-    }
-    _renderItem = ({ item }) => {
-        return (
-            <Article
-                {...item} />
-        );
-    }
-    _keyExtractor = (item) => {
-        return item.pageid;
+    
     }
     render() {
-        let { shiList = {} } = this.state;
-
+        let { fav = {} } = this.state;
+        let {
+            shi,
+            mingju 
+        } = fav;
         return (
             <View
                 style={styles.wrapper}>
+                <ViewPager
+                    style={styles.wrapper}>
+                    <View>
+                        <ShiList 
+                            data={shi}/>
+                    </View>
+                    <View>
+                        <MingjuList
+                            data={mingju}/>
+                    </View>
+                </ViewPager>
             </View>
         );
     }
