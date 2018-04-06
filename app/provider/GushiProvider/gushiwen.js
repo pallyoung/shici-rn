@@ -67,19 +67,9 @@ function getEveryDay(state, payload) {
 /*mingju列表*/
 function getMingjuList(state = {}, payload) {
     var lastid = state.lastid || 0;
-    var start = lastid - 25;
-    var end = lastid + 25;
-    if (payload.isTop) {
-        start = lastid - 25;
-        end = lastid + 25;
-    }
-    if (start < 0) {
-        start = 0;
-    }
-    if (end < 0) {
-        end = 0;
-    }
-    const sqlString = `select * from mingju limit ${start},${end}`;
+    var start = lastid;
+    var end = lastid + 50;
+    const sqlString = `select * from mingju limit ${end}`;
 
     return SQLiteHelper.executeSql(
         'content',
@@ -103,19 +93,9 @@ function getMingjuList(state = {}, payload) {
 
 function getShiList(state = {}, payload) {
     var lastid = state.lastid || 0;
-    var start = lastid - 25;
-    var end = lastid + 25;
-    if (payload.isTop) {
-        start = lastid - 25;
-        end = lastid + 25;
-    }
-    if (start < 0) {
-        start = 0;
-    }
-    if (end < 0) {
-        end = 0;
-    }
-    const sqlString = `select * from shi limit ${start},${end}`;
+    var start = lastid;
+    var end = lastid + 50;
+    const sqlString = `select * from shi limit ${end}`;
     return SQLiteHelper.executeSql(
         'content',
         sqlString,
