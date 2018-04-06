@@ -29,11 +29,11 @@ class ShiList extends Component{
     _renderItem = ({ item }) => {
         return (
             <Article
-                {...item} />
+                {...item.content} />
         );
     }
     _keyExtractor = (item) => {
-        return item.pageid;
+        return item.id;
     }
     render(){
         let {

@@ -93,7 +93,19 @@ const handlers = {
                 let items = [];
                 for (let i = 0; i < len; i++) {
                     let item = rows.item(i);
-                    items.push(item);
+                    let newItem = {
+                        id:item.id,
+                        content:{
+                            title: item.title,
+                            author: item.author,
+                            content: JSON.parse(item.content),
+                            pageid: item.pageid,
+                            age: item.age,
+                            isFav:true,
+                            fav_id:item.id
+                        }
+                    }
+                    items.push(newItem);
                 }
                 result.shi = items;
                 return executeSql(sqlString2);
@@ -103,8 +115,18 @@ const handlers = {
                 let items = [];
                 for (let i = 0; i < len; i++) {
                     let item = rows.item(i);
+                    let newItem = {
+                        id:item.id,
+                        content:{
+                            text: item.text,
+                            pageid:item.pageid,
+                            isFav:true,
+                            fav_id:item.id
+                        }
+                    }
                     items.push(item);
                 }
+                
                 result.mingju = items;
                 return result;
             });

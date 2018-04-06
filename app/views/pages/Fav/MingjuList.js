@@ -29,11 +29,11 @@ class MingjuList extends Component{
     _renderItem = ({ item }) => {
         return (
             <Paragrah
-                {...item} />
+                {...item.content} />
         );
     }
     _keyExtractor = (item) => {
-        return item.pageid;
+        return item.id;
     }
     render(){
         let {
