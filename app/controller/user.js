@@ -27,19 +27,28 @@ function isLogin(currentUser){
         }
     }
 }
-function addFav(fav,payload){
-    fav=fav||{};
-    fav[payload.id] = {
-        timestamp:Date.now()
-    };
+function addFav(payload){
+    var fav = [{
+        user_id:payload.user_id,
+        content_id:payload.content_id,
+        content_type:payload.content_type,
+    }];
     return {
-        fav
+        fav:{
+            data:fav
+        }
     }
 }
-function removeFav(fav,payload){
-    delete fav[payload.id];
+function removeFav(payload){
+    var fav = [{
+        user_id:payload.user_id,
+        id:payload.fav_id,
+        itemRemove:true
+    }];
     return {
-        fav
+        fav:{
+            data:fav
+        }
     }
 }
 export default {

@@ -17,7 +17,8 @@ export default [
     },
     {
         name: 'fav',
-        type: 'user'
+        type: 'user',
+        sourceType:'fav'
     },
     {
         name: 'appMenu',

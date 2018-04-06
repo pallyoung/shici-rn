@@ -7,10 +7,27 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import {Theme} from 'react-native-improver';
+import { Theme } from 'react-native-improver';
+import Febrest from 'febrest';
+import ACTIONS from '../../../constants/ACTIONS';
 
 var currentTheme = Theme.getTheme();
 
+
+function favIt(item) {
+    if (item.isFav) {
+        Febrest.dispatch(ACTIONS.REMOVE_FAV, {
+            fav_id: item.fav_id
+        });
+    } else {
+        Febrest.dispatch(ACTIONS.ADD_FAV, {
+            user_id: 1,
+            content_id: item.pageid,
+            content_type: item.content ? 'shi' : 'mingju'
+        });
+    }
+
+}
 function Title(props) {
     return (
         <View
@@ -45,6 +62,7 @@ function Content(props) {
         </View>
     );
 }
+
 function Article(props) {
     return (
         <TouchableOpacity
@@ -55,15 +73,15 @@ function Article(props) {
             <Info
                 age={props.age}
                 author={props.author} />
-            <Content 
-                article={props.content}/>
+            <Content
+                article={props.content} />
             <TouchableOpacity
                 activeOpacity={1}
-                onPress={props.onFav}
+                onPress={() => favIt(props)}
                 style={styles.favWrapper}>
                 <Text
                     style={styles.fav}>
-                    {props.isFav?'取消收藏':'点我收藏'}
+                    {props.isFav ? '取消收藏' : '点我收藏'}
                 </Text>
             </TouchableOpacity>
         </TouchableOpacity>
@@ -71,48 +89,48 @@ function Article(props) {
 }
 
 const styles = StyleSheet.create({
-    wrapper:{
-        marginLeft:currentTheme.paddingHorizontal,
-        paddingRight:currentTheme.paddingHorizontal,
-        paddingTop:10,
-        paddingBottom:10,
-        marginBottom:10,
-        borderBottomWidth:currentTheme.px,
-        backgroundColor:'#fff',
-        borderColor:'rgba(120,120,120,0.5)'
+    wrapper: {
+        marginLeft: currentTheme.paddingHorizontal,
+        paddingRight: currentTheme.paddingHorizontal,
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginBottom: 10,
+        borderBottomWidth: currentTheme.px,
+        backgroundColor: '#fff',
+        borderColor: 'rgba(120,120,120,0.5)'
     },
-    titleWrapper:{
-        justifyContent:'center'
+    titleWrapper: {
+        justifyContent: 'center'
     },
-    title:{
-        fontSize:currentTheme.f4,
-        color:'#333'
+    title: {
+        fontSize: currentTheme.f4,
+        color: '#333'
     },
-    infoWrapper:{
-        paddingVertical:8
+    infoWrapper: {
+        paddingVertical: 8
     },
-    info:{
-        textAlign:'left',
-        fontSize:currentTheme.f2,
-        color:'#333'
+    info: {
+        textAlign: 'left',
+        fontSize: currentTheme.f2,
+        color: '#333'
     },
-    contentWrapper:{
+    contentWrapper: {
 
     },
-    content:{
-        marginBottom:8,
-        fontSize:currentTheme.f2,
-        lineHeight:1.5*currentTheme.f2,
-        color:'#333'
-        
+    content: {
+        marginBottom: 8,
+        fontSize: currentTheme.f2,
+        lineHeight: 1.5 * currentTheme.f2,
+        color: '#333'
+
     },
-    favWrapper:{
-        marginBottom:8,
-        alignItems:'flex-end'
+    favWrapper: {
+        marginBottom: 8,
+        alignItems: 'flex-end'
     },
-    fav:{
-        fontSize:currentTheme.f2,
-        color:'#795548'
+    fav: {
+        fontSize: currentTheme.f2,
+        color: '#795548'
     }
 })
 export default Article;
