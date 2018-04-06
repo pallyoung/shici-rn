@@ -3,21 +3,21 @@ import ACTIONS from './../constants/ACTIONS';
 export default [
     {
         name: 'userList',
-        type: 'storage',
+        type: 'user',
         defaultState: [
             { name: 'default' }
         ]
     },
     {
         name: 'currentUser',
-        type: 'storage',
+        type: 'user',
         defaultState: {
             name: 'default'
         }
     },
     {
         name: 'fav',
-        type: 'storage'
+        type: 'user'
     },
     {
         name: 'appMenu',

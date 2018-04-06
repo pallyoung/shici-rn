@@ -10,6 +10,7 @@ import {
         StorageProvider,
     } from 'febrest';
 import GushiProvider from './provider/GushiProvider';
+import UserProvider from './provider/UserProvider';
 import {
     AsyncStorage
 } from 'react-native';
@@ -20,6 +21,7 @@ import userActions from './actions/userActions';
 import appActions from './actions/appActions';
 
 useProvider('content',GushiProvider);
+useProvider('user',UserProvider);
 injectProvider(contentProviderConfigs);
 injectProvider(userProviderConfigs);
 createActions(userActions);
