@@ -48,9 +48,15 @@ class Collection extends ScreenComponent {
     _onDispatch = (data) => {
         let navigation = this.getScreen().getNavigation();
     }
+    _onCollectionPress=()=>{
+        let navigation = this.getScreen().getNavigation();
+        navigation.navigate('COLLECTION',{id:item.id});
+    }
     _renderItem = ({ item }) => {
         return (
-            <View
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={()=>this._onCollectionPress(item)}
                 style={styles.item}>
                 <View
                     style={styles.nameWrapper}>
@@ -69,7 +75,7 @@ class Collection extends ScreenComponent {
                             style={styles.tips}>上次读到</Text>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     _keyExtractor = (item) => {

@@ -36,7 +36,12 @@ class CreateCollection extends ScreenComponent {
         this.dispatcher.release();
     }
     _onDispatch = (data) => {
-     
+        let navigation = this.getScreen().getNavigation();
+        switch (data.key){
+            case ACTIONS.CREATE_COLLECTION:
+                navigation.goBack();
+                return true;
+        }
     }
     _save=()=>{
         let {
