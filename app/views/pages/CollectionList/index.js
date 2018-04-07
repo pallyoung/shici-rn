@@ -22,9 +22,9 @@ class Collection extends ScreenComponent {
         super(...props);
         this.navigationOptions = {
             title: '我的诗集',
-            rightButton:<RightButton 
-                            text='新建'
-                            onPress={this._add}/>
+            rightButton: <RightButton
+                text='新建'
+                onPress={this._add} />
         }
         this.state = {};
         this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
@@ -36,7 +36,7 @@ class Collection extends ScreenComponent {
         this.dispatcher.release();
     }
 
-    _add=()=>{
+    _add = () => {
         let navigation = this.getScreen().getNavigation();
         navigation.navigate('CreateCollection')
     }
@@ -49,37 +49,79 @@ class Collection extends ScreenComponent {
         let navigation = this.getScreen().getNavigation();
     }
     _renderItem = ({ item }) => {
-       return (
-           <View>
-               <View>
-                   <Text>{item.name}</Text>
+        return (
+            <View
+                style={styles.item}>
+                <View
+                    style={styles.nameWrapper}>
+                    <Text
+                        style={styles.name}>{item.name}</Text>
+                </View>
+                <View
+                    style={styles.row}>
+                    <View>
+                        <Text
+                            style={styles.tips}>共{item.count}篇</Text>
+                    </View>
+                    <View
+                        style={styles.left}>
+                        <Text
+                            style={styles.tips}>上次读到</Text>
+                    </View>
                 </View>
             </View>
-       )
+        )
     }
     _keyExtractor = (item) => {
-        return item.id+'';
+        return item.id + '';
     }
     render() {
-        let { collectionList} = this.state;
+        let { collectionList } = this.state;
 
         return (
             <View
                 style={styles.wrapper}>
-                <ListView 
+                <ListView
                     keyExtractor={this._keyExtractor}
                     renderItem={this._renderItem}
-                    data={collectionList}/>
+                    data={collectionList} />
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    wrapper:{
+    wrapper: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    item:{
+        paddingLeft:currentTheme.paddingHorizontal,
+        marginRight:currentTheme.paddingHorizontal,
+        borderBottomWidth:currentTheme.px,
+        borderBottomColor:currentTheme.borderColor,
+        paddingVertical:5
+    },
+    name:{
+        color:'#333',
+        fontSize:currentTheme.f3
+    },
+    nameWrapper:{
+        marginBottom:8
+    },
+    row:{
+        flexDirection:'row'
+    },
+    left:{
         flex:1,
-        backgroundColor:'#fff'
+        alignItems:'flex-end'
+    },
+    tips:{
+        color:'#333',
+        fontSize:currentTheme.f2,
+        fontWeight:'200'
     }
+
 });
 
 export default Collection;

@@ -169,17 +169,27 @@ const handlers = {
         },
         getState: function (state, payload) {
             const sqlString = `select * from collection_list as clist  where user_id = ${payload.id || 1}`;
-            const sqlString2 = `select count(collection_id),collection_id from collection  where user_id = ${payload.id || 1}`
-            return executeSql(sqlString).then(function (results) {
+            const sqlString2 = `select count(collection_id),collection_id from collection  where user_id = ${payload.id || 1}`;
+            let list,countList;
+            return executeSql(sqlString2).then(function (results) {
                 let rows = results.rows;
                 let len = rows.length;
-                let items = [];
+                countList = {};
                 for (let i = 0; i < len; i++) {
                     let item = rows.item(i);
-                    items.push(item);
+                    countList[item.collection_id] = item.count;
                 }
-                console.log(items,'itemsitemsitemsitemsitems')
-                return items;
+                return executeSql(sqlString);
+            }).then(function(results){
+                let rows = results.rows;
+                let len = rows.length;
+                list = [];
+                for (let i = 0; i < len; i++) {
+                    let item = rows.item(i);
+                    item.count = countList[item.id]||0;
+                    list.push(item);
+                }
+                return list;
             })
         }
     }
