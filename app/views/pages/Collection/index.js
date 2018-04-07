@@ -22,7 +22,7 @@ class Collection extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.navigationOptions = {
-            title: '我的收藏'
+            title: '我的诗集'
         }
         this.state = {};
         this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
@@ -33,7 +33,7 @@ class Collection extends ScreenComponent {
         this.dispatcher.release();
     }
     _fetchData = () => {
-        this.dispatcher.dispatch(ACTIONS.GET_FAV);
+        this.dispatcher.dispatch(ACTIONS.GET_COLLECTION);
     }
     _onDispatch = (data) => {
         if(data.key===ACTIONS.GET_FAV){
