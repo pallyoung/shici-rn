@@ -8,4 +8,5 @@ module.exports = {
     Fav:require('./Fav').default,
     Collection:require('./Collection').default,
     CollectionUpdate:require('./CollectionUpdate').default,
+    CollectionList:require('./CollectionList').default,
 }

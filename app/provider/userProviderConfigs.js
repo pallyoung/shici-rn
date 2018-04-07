@@ -21,6 +21,11 @@ export default [
         sourceType:'fav'
     },
     {
+        name: 'collection',
+        type: 'user',
+        sourceType:'collection'
+    },
+    {
         name: 'appMenu',
         defaultState: [
             [

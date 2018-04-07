@@ -22,5 +22,17 @@ export default [
     {
         key:ACTIONS.GET_FAV,
         controller:user.getFav
+    },
+    {
+        key:ACTIONS.GET_COLLECTION,
+        controller:user.getCollection
+    },
+    {
+        key:ACTIONS.UPDATE_COLLECTION,
+        controller:user.updateCollection
+    },
+    {
+        key:ACTIONS.REMOVE_COLLECTION,
+        controller:user.removeCollection
     }
 ]
