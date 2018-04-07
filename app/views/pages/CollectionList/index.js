@@ -27,7 +27,8 @@ class Collection extends ScreenComponent {
                 onPress={this._add} />
         }
         this.state = {};
-        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
+        this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch);
+        this.dispatcher.watch(['collectionList'],this._onProviderChange);
     }
     componentDidMount() {
         this._fetchData();
@@ -47,6 +48,11 @@ class Collection extends ScreenComponent {
 
     _onDispatch = (data) => {
         let navigation = this.getScreen().getNavigation();
+    }
+    _onProviderChange=(change)=>{
+        if(change.collectionList){
+            this._fetchData();
+        }
     }
     _onCollectionPress=()=>{
         let navigation = this.getScreen().getNavigation();
