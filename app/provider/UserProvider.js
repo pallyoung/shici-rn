@@ -88,9 +88,8 @@ const handlers = {
                                 mingju.id as c_id, mingju.pageid as pageid,mingju.text as text from fav
                                 inner join content.mingju as mingju on fav.content_id = mingju.pageid 
                                 where user_id = ${payload.user_id || 1}`;
-            console.log(sqlString,'sqlString')
             var result = {
-                
+
             }
             return executeSql(sqlString).then(results => {
                 let rows = results.rows;
@@ -99,17 +98,17 @@ const handlers = {
                 for (let i = 0; i < len; i++) {
                     let item = rows.item(i);
                     let newItem = {
-                        id:item.id,
-                        content_id:item.pageid,
-                        content_type:item.content_type,
-                        content:{
+                        id: item.id,
+                        content_id: item.pageid,
+                        content_type: item.content_type,
+                        content: {
                             title: item.title,
                             author: item.author,
                             content: JSON.parse(item.content),
                             pageid: item.pageid,
                             age: item.age,
-                            isFav:true,
-                            fav_id:item.id
+                            isFav: true,
+                            fav_id: item.id
                         }
                     }
                     items.push(newItem);
@@ -123,29 +122,19 @@ const handlers = {
                 for (let i = 0; i < len; i++) {
                     let item = rows.item(i);
                     let newItem = {
-                        id:item.id,
-                        content_id:item.pageid,
-                        content_type:item.content_type,
-                        content:{
+                        id: item.id,
+                        content_id: item.pageid,
+                        content_type: item.content_type,
+                        content: {
                             text: item.text,
-                            pageid:item.pageid,
-                            isFav:true,
-                            fav_id:item.id
+                            pageid: item.pageid,
+                            isFav: true,
+                            fav_id: item.id
                         }
                     }
                     items.push(newItem);
                 }
                 result.mingju = items;
-                executeSql('select * from fav').then((results)=>{
-                    let rows = results.rows;
-                    let len = rows.length;
-                    let items = [];
-                    for (let i = 0; i < len; i++) {
-                        let item = rows.item(i);
-                        items.push(item);
-                    }
-                })
-                console.log(result,'resultssss')
                 return result;
             });
         }
@@ -164,6 +153,32 @@ const handlers = {
         },
         getState: function () {
 
+        }
+    },
+    collectionList: {
+        setState: function (state) {
+            const table_name = 'collection';
+            if (!state) {
+                return;
+            }
+            let { remove, update } = classify(state, commonCondition, COLLECTION_COLUMN_MAP);
+            let sqlString = updateSql(table_name, update, COLLECTION_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
+
+            executeSql(sqlString)
+
+        },
+        getState: function (state, payload) {
+            const sqlString = `select * from collection where user_id = ${payload.id || 1}`;
+            return executeSql(sqlString).then(function (results) {
+                let rows = results.rows;
+                let len = rows.length;
+                let items = [];
+                for (let i = 0; i < len; i++) {
+                    let item = rows.item(i);
+                    items.push(item);
+                }
+                return items;
+            })
         }
     }
 }

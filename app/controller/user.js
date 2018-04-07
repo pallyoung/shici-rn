@@ -59,6 +59,11 @@ function getFav(fav){
 function getCollection(){
 
 }
+function getCollectionList(collectionList){
+    return {
+        collectionList
+    }
+}
 function addCollection(){
 
 }
@@ -78,5 +83,6 @@ export default {
     getFav,
     getCollection,
     removeCollection,
-    updateCollection
+    updateCollection,
+    getCollectionList
 }
