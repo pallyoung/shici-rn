@@ -54,9 +54,9 @@ class Collection extends ScreenComponent {
             this._fetchData();
         }
     }
-    _onCollectionPress=()=>{
+    _onCollectionPress=(item)=>{
         let navigation = this.getScreen().getNavigation();
-        navigation.navigate('COLLECTION',{id:item.id});
+        navigation.navigate('Collection',{id:item.id,title:item.name});
     }
     _renderItem = ({ item }) => {
         return (
