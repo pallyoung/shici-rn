@@ -76,8 +76,10 @@ class Menu extends ScreenComponent {
             case ACTIONS.APP_SETTING:
                 return true;
             case ACTIONS.APP_MENU_COLLECTION:
+                navigation.navigate('Collection');
                 return true;
             case ACTIONS.APP_MENU_FAV:
+                navigation.navigate('Fav');
                 return true;
             case ACTIONS.APP_MENU_HISTROY:
                 this._close();
