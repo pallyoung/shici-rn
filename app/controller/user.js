@@ -64,8 +64,18 @@ function getCollectionList(collectionList){
         collectionList
     }
 }
-function addCollection(){
-
+function createCollection(payload){
+    let collection = {
+        collection_name:payload.name,
+        user_id:payload.user_id||1,
+        cover:'',
+        bookmark:''
+    }
+    return {
+        collectionList:[
+            collection 
+        ]
+    }
 }
 function removeCollection(){
 
@@ -84,5 +94,6 @@ export default {
     getCollection,
     removeCollection,
     updateCollection,
-    getCollectionList
+    getCollectionList,
+    createCollection
 }

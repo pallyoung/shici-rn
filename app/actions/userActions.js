@@ -28,6 +28,10 @@ export default [
         controller:user.getCollection
     },
     {
+        key:ACTIONS.CREATE_COLLECTION,
+        controller:user.createCollection
+    },
+    {
         key:ACTIONS.GET_COLLECTION_LIST,
         controller:user.getCollectionList
     },

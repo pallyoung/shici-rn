@@ -13,16 +13,18 @@ import { Theme } from 'react-native-improver';
 import ReactFebrest from 'react-febrest';
 
 import ListView from './../../components/ListView';
-import ACTIONS from '../../../constants/ACTIONS';
-import Article from './../../components/Article';
-import Paragrah from './../../components/Paragrah';
+import ACTIONS from '../../../constants/ACTIONS';;
+import RightButton from './../../components/RightButton';
 
 const currentTheme = Theme.getTheme();
 class Collection extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.navigationOptions = {
-            title: '我的诗集'
+            title: '我的诗集',
+            rightButton:<RightButton 
+                            text='新建'
+                            onPress={this._add}/>
         }
         this.state = {};
         this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
@@ -32,13 +34,21 @@ class Collection extends ScreenComponent {
     componentWillUnmount() {
         this.dispatcher.release();
     }
+    _add=()=>{
+        let navigation = this.getScreen().getNavigation();
+        navigation.navigate('CreateCollection')
+    }
     _fetchData = () => {
         this.dispatcher.dispatch(ACTIONS.GET_COLLECTION);
     }
     _onDispatch = (data) => {
-        if(data.key===ACTIONS.GET_FAV){
-            return false;
-        }
+
+        let navigation = this.getScreen().getNavigation();
+        // switch (data.key){
+        //     case ACTIONS.UPDATE_COLLECTION:
+        //         navigation.navigate('CollectionUpdate')
+        //         return true;
+        // }
     }
     _renderItem = ({ item }) => {
         return (
