@@ -30,41 +30,46 @@ class Collection extends ScreenComponent {
         this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
     }
     componentDidMount() {
+        this._fetchData();
     }
     componentWillUnmount() {
         this.dispatcher.release();
     }
+
     _add=()=>{
         let navigation = this.getScreen().getNavigation();
         navigation.navigate('CreateCollection')
     }
-    _fetchData = () => {
-        this.dispatcher.dispatch(ACTIONS.GET_COLLECTION);
-    }
-    _onDispatch = (data) => {
 
+    _fetchData = () => {
+        this.dispatcher.dispatch(ACTIONS.GET_COLLECTION_LIST);
+    }
+
+    _onDispatch = (data) => {
         let navigation = this.getScreen().getNavigation();
-        // switch (data.key){
-        //     case ACTIONS.UPDATE_COLLECTION:
-        //         navigation.navigate('CollectionUpdate')
-        //         return true;
-        // }
     }
     _renderItem = ({ item }) => {
-        return (
-            <Article
-                {...item} />
-        );
+       return (
+           <View>
+               <View>
+                   <Text>{item.name}</Text>
+                </View>
+            </View>
+       )
     }
     _keyExtractor = (item) => {
-        return item.pageid;
+        return item.id+'';
     }
     render() {
-        let { shiList = {} } = this.state;
+        let { collectionList} = this.state;
 
         return (
             <View
                 style={styles.wrapper}>
+                <ListView 
+                    keyExtractor={this._keyExtractor}
+                    renderItem={this._renderItem}
+                    data={collectionList}/>
             </View>
         );
     }

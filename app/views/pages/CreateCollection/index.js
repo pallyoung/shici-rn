@@ -26,7 +26,7 @@ class CreateCollection extends ScreenComponent {
                             onPress={this._save}/>
         }
         this.state = {
-            value:'我的歌单'
+            value:'我的诗集'
         };
         this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch)
     }
@@ -48,6 +48,9 @@ class CreateCollection extends ScreenComponent {
         }
         this.dispatcher.dispatch(ACTIONS.CREATE_COLLECTION,{collectionName:this.state.value})
     }
+    _onTextChange=(value)=>{
+        this.setState({value});
+    }
     render() {
         return (
             <View
@@ -56,6 +59,7 @@ class CreateCollection extends ScreenComponent {
                     style={styles.row}>
                     <TextInput 
                         value={this.state.value}
+                        onChangeText={this._onTextChange}
                         placeholder='请输入内容'
                         style={styles.input}/>
                 </View>

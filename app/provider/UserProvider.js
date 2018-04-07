@@ -164,12 +164,12 @@ const handlers = {
             }
             let { remove, update } = classify(state, commonCondition, COLLECTION_LIST_COLUMN_MAP);
             let sqlString = updateSql(table_name, update, COLLECTION_LIST_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
-            console.log(sqlString,'collection_listcollection_list')
             executeSql(sqlString);
 
         },
         getState: function (state, payload) {
-            const sqlString = `select * from collection where user_id = ${payload.id || 1}`;
+            const sqlString = `select * from collection_list as clist  where user_id = ${payload.id || 1}`;
+            const sqlString2 = `select count(collection_id),collection_id from collection  where user_id = ${payload.id || 1}`
             return executeSql(sqlString).then(function (results) {
                 let rows = results.rows;
                 let len = rows.length;
@@ -178,6 +178,7 @@ const handlers = {
                     let item = rows.item(i);
                     items.push(item);
                 }
+                console.log(items,'itemsitemsitemsitemsitems')
                 return items;
             })
         }

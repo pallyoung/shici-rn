@@ -74,6 +74,7 @@ tables.push({
     column: [
         'id integer primary key autoincrement not null',
         'collection_id integer not null',
+        'user_id integer not null',
         'content_id text not null',
         'content_type text',
         'created_time integer'
