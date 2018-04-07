@@ -29,7 +29,10 @@ export default [
     },
     {
         key:ACTIONS.CREATE_COLLECTION,
-        controller:user.createCollection
+        controller:user.createCollection,
+        persist:{
+            collectionList:'collectionList'
+        }
     },
     {
         key:ACTIONS.GET_COLLECTION_LIST,

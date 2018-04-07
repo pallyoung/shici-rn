@@ -26,7 +26,7 @@ function classify(data, condition, map) {
                 if (!item[key]) {
                     return 'null';
                 } else {
-                    if (/[\w]/.test(item[key])) {
+                    if (!/^[\d]+$/.test(item[key])) {
                         return `"${item[key]}"`;
                     }
                     return item[key];
@@ -46,9 +46,9 @@ function classify(data, condition, map) {
 
 const FAV_COLUMN_MAP = ['id', 'user_id', 'content_id', 'content_type', 'created_time'];
 
-const COLLECTION_COLUMN_MAP = ['id', 'collection_name', 'cover', 'bookmark', 'last_read_time', 'read_times', 'updated_time', 'created_time'];
+const COLLECTION_LIST_COLUMN_MAP = ['id', 'name', 'user_id', 'cover', 'bookmark', 'last_read_time', 'read_times', 'updated_time', 'created_time'];
 
-const COLLECTION_LIST_COLUMN_MAP = ['id', 'collection_id', 'content_id', 'content_type', 'created_time'];
+const COLLECTION_COLUMN_MAP = ['id', 'collection_id', 'content_id', 'content_type', 'created_time'];
 
 
 function commonCondition(item) {
@@ -157,14 +157,15 @@ const handlers = {
     },
     collectionList: {
         setState: function (state) {
-            const table_name = 'collection';
+            const table_name = 'collection_list';
+            
             if (!state) {
                 return;
             }
-            let { remove, update } = classify(state, commonCondition, COLLECTION_COLUMN_MAP);
-            let sqlString = updateSql(table_name, update, COLLECTION_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
-
-            executeSql(sqlString)
+            let { remove, update } = classify(state, commonCondition, COLLECTION_LIST_COLUMN_MAP);
+            let sqlString = updateSql(table_name, update, COLLECTION_LIST_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
+            console.log(sqlString,'collection_listcollection_list')
+            executeSql(sqlString);
 
         },
         getState: function (state, payload) {

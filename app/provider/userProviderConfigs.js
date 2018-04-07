@@ -26,6 +26,11 @@ export default [
         sourceType:'collection'
     },
     {
+        name: 'collectionList',
+        type: 'user',
+        sourceType:'collectionList'
+    },
+    {
         name: 'appMenu',
         defaultState: [
             [

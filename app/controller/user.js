@@ -66,7 +66,7 @@ function getCollectionList(collectionList){
 }
 function createCollection(payload){
     let collection = {
-        collection_name:payload.name,
+        name:payload.collectionName,
         user_id:payload.user_id||1,
         cover:'',
         bookmark:''
