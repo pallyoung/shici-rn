@@ -55,10 +55,11 @@ tables.push({
 });
 
 tables.push({
-    name: 'collection',
+    name: 'collection_list',
     column: [
         'id integer primary key autoincrement not null',
-        'collection_name text not null',
+        'name text not null',
+        'user_id integer not null',
         'cover text',
         'bookmark integer',
         'last_read_time integer',
@@ -69,7 +70,7 @@ tables.push({
 });
 
 tables.push({
-    name: 'collection_list',
+    name: 'collection',
     column: [
         'id integer primary key autoincrement not null',
         'collection_id integer not null',
