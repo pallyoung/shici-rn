@@ -10,15 +10,21 @@ import {
 import { Theme } from 'react-native-improver';
 import Febrest from 'febrest';
 import ACTIONS from '../../../constants/ACTIONS';
+import Icon from './../Icon';
 var currentTheme = Theme.getTheme();
 
 function Title(props){
     return (
-        <View>
+        <View style={styles.titleWrapper}>
             <Text
                 style={styles.title}>
                 {props.title}   ({props.author}/{props.age})
             </Text>
+            <TouchableOpacity
+                activeOpacity={1}>
+                <Icon 
+                    name='ios-more'/>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -72,7 +78,8 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(120,120,120,0.5)'
     },
     titleWrapper: {
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        flexDirection:'row'
     },
     title: {
         fontSize: currentTheme.f3,
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
         fontWeight:'200'
     },
     contentWrapper: {
-        marginTop:20
+        marginTop:12
     },
     content: {
         fontSize: currentTheme.f2,
