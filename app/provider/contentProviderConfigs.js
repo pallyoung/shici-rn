@@ -14,4 +14,32 @@ export default [
         type:'content',
         sourceType:'shi_list'
     },
+    {
+        name:'ages',
+        defaultState:[
+            '唐代',
+            '宋代',
+            '元代',
+            '明代',
+            '清代',
+            '先秦',
+            '魏晋',
+            '南北朝',
+            '两汉'
+        ],
+    },
+    {
+        name:'authors',
+        defaultState:[
+            '唐代',
+            '宋代',
+            '元代',
+            '明代',
+            '清代',
+            '先秦',
+            '魏晋',
+            '南北朝',
+            '两汉'
+        ],
+    },
 ]
