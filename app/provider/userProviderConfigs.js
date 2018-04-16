@@ -44,7 +44,7 @@ export default [
                 {
                     title: '我的收藏',
                     action: ACTIONS.APP_MENU_FAV,
-                    icon:'ios-archive-outline'
+                    icon:'ios-cube-outline'
                 },
                 {
                     title: '我的诗集',
