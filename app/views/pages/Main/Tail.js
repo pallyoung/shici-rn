@@ -81,14 +81,15 @@ const styles = StyleSheet.create({
         borderTopWidth:currentTheme.px,
         borderTopColor:currentTheme.borderColor,
         marginHorizontal: 12,
-        paddingTop: 30,
+        paddingTop: 20,
         paddingBottom: 30
     },
     titleSection: {
-        paddingVertical: 10
+        paddingBottom: 10
     },
     title: {
         fontSize: 20,
+        fontWeight:'200',
         color: '#333'
     },
     authorSection: {
@@ -96,7 +97,8 @@ const styles = StyleSheet.create({
     },
     author: {
         fontSize: 12,
-        color: '#333'
+        color: '#333',
+        fontWeight:'200',
     },
     contentSection: {
         paddingBottom: 10,
@@ -104,11 +106,13 @@ const styles = StyleSheet.create({
     content: {
         fontSize: 14,
         color: '#333',
-        paddingVertical: 5
+        paddingVertical: 5,
+        fontWeight:'200',
     },
     text: {
         fontSize: 12,
         color: '#fff',
+        fontWeight:'200',
     }
 });
 

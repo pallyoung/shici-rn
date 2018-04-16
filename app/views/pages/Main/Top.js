@@ -103,12 +103,14 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 12,
-        color:'#333'
+        color:'#333',
+        fontWeight:'200',
     },
     date:{
         marginTop:10,
         fontSize: 12,
         color:'#333',
+        fontWeight:'200',
     }
 });
 
