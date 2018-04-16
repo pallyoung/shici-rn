@@ -46,7 +46,7 @@ class Top extends Component {
         return (
             <Text
                 style={styles.date}>
-                {dateString+'   '+termString}
+                ——{dateString+'   '+termString}
             </Text>
         );
     }
@@ -60,10 +60,10 @@ class Top extends Component {
         } = this.props;
         return (
             <View
-                style={{
+                style={[{
                     height,
-                    width
-                }}>
+                    width,
+                },styles.wrapper]}>
                 <Image
                     source={{
                         uri: image,
@@ -73,8 +73,8 @@ class Top extends Component {
                     }}
                     resizeMode='stretch'
                     style={{
-                        height,
-                        width
+                        height:height-100,
+                        width:width-2*padding
                     }} />
                 <View
                     style={styles.textWrapper}>
@@ -87,25 +87,28 @@ class Top extends Component {
 
 }
 
+const padding = 10;
 const styles = StyleSheet.create({
+    wrapper:{
+        paddingHorizontal: padding,
+        paddingTop:padding,
+        backgroundColor:'#fff',
+    },
     textWrapper: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        paddingVertical: 20,
+        flex:1,
+        paddingVertical: padding,
         // alignItems: 'center',
-        paddingLeft: 20,
-        backgroundColor: 'rgba(30,30,30,0.1)'
+        paddingLeft: padding,
+        justifyContent:'space-around'
     },
     text: {
         fontSize: 12,
-        color: '#fff',
+        color:'#333'
     },
     date:{
         marginTop:10,
         fontSize: 12,
-        color: '#fff',
+        color:'#333',
     }
 });
 

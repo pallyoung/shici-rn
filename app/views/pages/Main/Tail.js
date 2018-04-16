@@ -78,7 +78,9 @@ class Tail extends Component {
 const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: '#fff',
-        paddingHorizontal: 12,
+        borderTopWidth:currentTheme.px,
+        borderTopColor:currentTheme.borderColor,
+        marginHorizontal: 12,
         paddingTop: 30,
         paddingBottom: 30
     },

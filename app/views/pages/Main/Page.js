@@ -86,7 +86,7 @@ class Page extends ScreenComponent {
                 onLayout={this._onLayout}
                 bounces={false}
                 showsVerticalScrollIndicator={false}
-                style={[this.props.style || { flex: 1,opacity:this.state.opacity }]}>
+                style={[this.props.style || { flex: 1,opacity:this.state.opacity,backgroundColor:'#fff' }]}>
                 {date && <Top
                     height={height}
                     width={width}
@@ -103,7 +103,7 @@ class Page extends ScreenComponent {
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: '#eeddff'
+        backgroundColor: '#fff'
     }
 });
 export default Page;
