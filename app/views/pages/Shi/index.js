@@ -15,6 +15,7 @@ import ReactFebrest from 'react-febrest';
 import ListView from './../../components/ListView';
 import ACTIONS from '../../../constants/ACTIONS';
 import ArticleItem from './../../components/ArticleItem';
+import Search from './../../components/Search';
 
 const currentTheme = Theme.getTheme();
 class Shi extends ScreenComponent {
@@ -67,6 +68,7 @@ class Shi extends ScreenComponent {
         return (
             <View
                 style={styles.wrapper}>
+                <Search />
                 <ListView
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
