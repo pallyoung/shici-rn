@@ -14,7 +14,7 @@ import ReactFebrest from 'react-febrest';
 
 import ListView from './../../components/ListView';
 import ACTIONS from '../../../constants/ACTIONS';
-import Article from './../../components/Article';
+import ArticleItem from './../../components/ArticleItem';
 
 const currentTheme = Theme.getTheme();
 class Shi extends ScreenComponent {
@@ -54,7 +54,7 @@ class Shi extends ScreenComponent {
     }
     _renderItem = ({ item }) => {
         return (
-            <Article
+            <ArticleItem
                 {...item} />
         );
     }
