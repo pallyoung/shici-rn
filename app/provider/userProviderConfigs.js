@@ -36,27 +36,32 @@ export default [
             [
                 {
                     title: '往日旧诗',
-                    action: ACTIONS.APP_MENU_HISTROY
+                    action: ACTIONS.APP_MENU_HISTROY,
+                    icon:'ios-film-outline'
                 }
             ],
             [
                 {
                     title: '我的收藏',
-                    action: ACTIONS.APP_MENU_FAV
+                    action: ACTIONS.APP_MENU_FAV,
+                    icon:'ios-archive-outline'
                 },
                 {
                     title: '我的诗集',
-                    action:  ACTIONS.APP_MENU_COLLECTION
+                    action:  ACTIONS.APP_MENU_COLLECTION,
+                    icon:'ios-albums-outline'
                 }
             ],
             [
                 {
                     title: '诗文集',
-                    action: ACTIONS.APP_SHI
+                    action: ACTIONS.APP_SHI,
+                    icon:'ios-book-outline'
                 },
                 {
                     title: '名句录',
-                    action:  ACTIONS.APP_MINGJU
+                    action:  ACTIONS.APP_MINGJU,
+                    icon:'ios-bookmarks-outline'
                 }
             ]
         ]

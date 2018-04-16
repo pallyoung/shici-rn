@@ -22,12 +22,31 @@ const currentTheme = Theme.getTheme();
 
 const ATouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
+
+function I(props){
+    let icon = props.icon;
+    if(!icon){
+        return null;
+    }
+    return (
+        <View
+            style={{width:25}}>
+            <Icon 
+                size={18}
+                name={icon}/>
+        </View>
+        
+    )
+}
+
 function Row(props) {
     return (
         <TouchableOpacity
             onPress={() => props.action && props.dispatcher.dispatch(props.action)}
             activeOpacity={1}
             style={[styles.row, props.isLast && styles.divide]}>
+            <I 
+                icon={props.icon}/>
             <Text
                 style={styles.text}>
                 {props.text}
@@ -121,6 +140,7 @@ class Menu extends ScreenComponent {
                 key={item.title}
                 action={item.action}
                 text={item.title}
+                icon={item.icon}
                 isLast={isLast} />
         );
     }
@@ -186,7 +206,8 @@ const styles = StyleSheet.create({
     },
     row: {
         paddingVertical: 12,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems:'center'
     },
     divide: {
         marginBottom: 20
