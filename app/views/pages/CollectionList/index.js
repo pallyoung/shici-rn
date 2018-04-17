@@ -48,6 +48,7 @@ class Collection extends ScreenComponent {
 
     _onDispatch = (data) => {
         let navigation = this.getScreen().getNavigation();
+        
     }
     _onProviderChange=(change)=>{
         if(change.collectionList){

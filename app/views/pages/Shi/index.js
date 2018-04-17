@@ -41,6 +41,8 @@ class Shi extends ScreenComponent {
         this.dispatcher.dispatch(ACTIONS.GET_SHI_LIST);
     }
     _onDispatch = (data) => {
+        let navigation = this.getScreen().getNavigation();
+        let {key,state} = data;
         switch(data.key){
             case ACTIONS.REMOVE_FAV:
                 this._fetchData();
@@ -51,6 +53,9 @@ class Shi extends ScreenComponent {
             case ACTIONS.GET_SHI_LIST:
                 this._onFetching = false;
                 return false;
+            case ACTIONS.NAVIGATE_TO_SHI:
+                navigation.navigate('Article',data.state);
+                return;
         }  
     }
     _renderItem = ({ item }) => {

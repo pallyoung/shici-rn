@@ -14,8 +14,6 @@ import ReactFebrest from 'react-febrest';
 
 import ListView from './../../components/ListView';
 import ACTIONS from '../../../constants/ACTIONS';
-import Article from './../../components/Article';
-import Paragrah from './../../components/Paragrah';
 
 const currentTheme = Theme.getTheme();
 class CollectionUpdate extends ScreenComponent {

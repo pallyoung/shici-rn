@@ -51,10 +51,14 @@ function Main(props){
     );
 }
 
+function dispatch(payload){
+    Febrest.dispatch(ACTIONS.NAVIGATE_TO_SHI,payload);
+}
 function ArticleItem(props){
     return (
         <TouchableOpacity
             activeOpacity={1}
+            onPress={()=>dispatch(props)}
             style={styles.wrapper}>
             <Title 
                 age={props.age}

@@ -51,6 +51,10 @@ export default [
         key:ACTIONS.APP_SHI,
         controller:app.empty
     },
+    {
+        key:ACTIONS.NAVIGATE_TO_SHI,
+        controller:app.transmit
+    },
 
 
     {

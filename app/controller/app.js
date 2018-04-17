@@ -16,6 +16,9 @@ function empty() {
         message: 'ok'
     }
 }
+function transmit(payload){
+    return payload;
+}
 
 function isSameMonth(time1, time2) {
     return new Date(time1).getMonth() === new Date(time2).getMonth();
@@ -69,5 +72,6 @@ export default {
     getMenu,
     empty,
     getHistory,
-    gotoDate
+    gotoDate,
+    transmit
 }

@@ -7,6 +7,7 @@ import NavigationHeader from './../NavigationHeader';
 import Toast from './../Toast';
 import Alert from './../Alert';
 import Popup from './../Popup';
+import NavigationManager from './../../../util/NavigationManager';
 
 
 const MODAL_PREFIX = 'MODAL_PREFIX_';
@@ -16,6 +17,18 @@ const ALERT_REF = 'ALERT_REF';
 const TOAST_REF = 'TOAST_REF';
 
 var ID = 1;
+
+NavigationManager.create({
+    navigate:function(name,params){
+
+    },
+    back:function(){
+
+    },
+    backTo:function(){
+
+    }
+});
 function Screen(component) {
     class $Screen extends component {
         static childContextTypes = {
