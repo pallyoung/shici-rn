@@ -1,5 +1,23 @@
 'use strict'
-function appInit() {
+function appInit($connect) {
+
+    let i = 0;
+    function progress(){
+        i++;
+        if(i===100){
+            $connect({
+                inited:true,
+                progress:100
+            })
+        }else{
+            $connect({
+                inited:false,
+                progress:i
+            });
+
+            setTimeout(progress,50)
+        }
+    }
     return {
         inited: true
     }

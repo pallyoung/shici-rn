@@ -55,7 +55,11 @@ class Entry extends Component {
 
     }
     _onDispatch(data){
-        
+        switch(data.key){
+            case Actions.INIT:
+                this.setState(data.state);
+                return true;
+        }
     }
     resetNavigator(initialRouteName, initialRouteParams) {
         initialRouteName = initialRouteName || BuildConfig.ENV === 'DEBUG' ? 'PageList' : 'Main';

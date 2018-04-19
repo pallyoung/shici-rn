@@ -16,7 +16,7 @@
     "sqlite3": "^4.0.0"
   },
   "dependencies": {
-    "febrest": "^0.3.2-beta",
+    "febrest": "^0.3.3-beta",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-febrest": "^0.1.1",
