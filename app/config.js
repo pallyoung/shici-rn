@@ -7,7 +7,7 @@ import {
         useProvider,
         injectProvider,
         createActions,
-        StorageProvider,
+        setStorageProviderTool        
     } from 'febrest';
 import GushiProvider from './provider/GushiProvider';
 import UserProvider from './provider/UserProvider';
@@ -29,7 +29,7 @@ createActions(appActions);
 
 const SHICI_STROAGE_PRE = 'SHICI_STROAGE_PRE_';
 
-StorageProvider.setStorageTool({
+setStorageProviderTool({
     setter:function(key,value){
         key = SHICI_STROAGE_PRE+key;
         try{

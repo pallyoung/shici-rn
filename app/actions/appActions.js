@@ -59,17 +59,11 @@ export default [
 
     {
         key:ACTIONS.GET_MINGJU_LIST,
-        controller:content.getMingjuList,
-        persist:{
-            mingjuList:'mingjuList'
-        }
+        controller:content.getMingjuList
     },
 
     {
         key:ACTIONS.GET_SHI_LIST,
-        controller:content.getShiList,
-        persist:{
-            shiList:'shiList'
-        }
+        controller:content.getShiList
     }
 ]

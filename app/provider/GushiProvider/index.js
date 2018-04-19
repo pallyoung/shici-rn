@@ -11,10 +11,12 @@ class GushiProvider extends Provider{
         this.state = config.state||{};
         this.sourceType = config.sourceType;
     }
-    set(state){
+    setState(state){
         this.state=state;
     }
-    get(payload={}){
+    getState($payload){
+        let payload = $payload();
+        
         return fetchBySourceType(this.sourceType,this.state,payload);
     }
 }

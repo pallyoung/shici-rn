@@ -16,14 +16,16 @@ function empty() {
         message: 'ok'
     }
 }
-function transmit(payload){
+function transmit($payload){
+    let payload = $payload();
+
     return payload;
 }
 
 function isSameMonth(time1, time2) {
     return new Date(time1).getMonth() === new Date(time2).getMonth();
 }
-function getHistory(every_day_list,payload) {
+function getHistory(every_day_list,$payload) {
 
     var history = [];
     var preItem = every_day_list.shift();
@@ -32,6 +34,7 @@ function getHistory(every_day_list,payload) {
         title: preItem.date
     }
     var tempArray = [preItem];
+    let payload = $payload();
 
     every_day_list.forEach(function (item, index) {
         if(item===null){
@@ -64,7 +67,9 @@ function getHistory(every_day_list,payload) {
     }
 }
 
-function gotoDate(payload) {
+function gotoDate($payload) {
+    let payload = $payload();
+
     return payload;
 }
 export default {

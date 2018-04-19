@@ -7,17 +7,11 @@ export default [
     },
     {
         key:ACTIONS.ADD_FAV,
-        controller:user.addFav,
-        persist:{
-            fav:'fav'
-        }
+        controller:user.addFav
     },
     {
         key:ACTIONS.REMOVE_FAV,
-        controller:user.removeFav,
-        persist:{
-            fav:'fav'
-        }
+        controller:user.removeFav
     },
     {
         key:ACTIONS.GET_FAV,
@@ -29,10 +23,7 @@ export default [
     },
     {
         key:ACTIONS.CREATE_COLLECTION,
-        controller:user.createCollection,
-        persist:{
-            collectionList:'collectionList'
-        }
+        controller:user.createCollection
     },
     {
         key:ACTIONS.GET_COLLECTION_LIST,

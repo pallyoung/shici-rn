@@ -7,13 +7,14 @@ function getEvery(every_day_list) {
 }
 
 
-function getMingjuList(mingjuList) {
+function getMingjuList(mingjuList,$persist) {
+    $persist('mingjuList',mingjuList);
     return {
         mingjuList
     }
 }
 
-function getShiList(shiList,fav) {
+function getShiList(shiList,fav, $persist) {
     var favMap = {};
     fav.shi.forEach((item)=>{
         favMap[item.content_id] = item;
@@ -29,6 +30,7 @@ function getShiList(shiList,fav) {
         }
         return item;
     })
+    $persist('shiList',shiList);
     return {
         shiList
     }

@@ -209,11 +209,12 @@ class UserProvider extends Provider {
         this.state = config.state || {};
         this.sourceType = config.sourceType;
     }
-    set(state) {
+    setState(state) {
         this.state = state;
         return handlers[this.sourceType].setState(state);
     }
-    get(payload = {}) {
+    getState($payload) {
+        let payload = $payload()||{};
         return handlers[this.sourceType].getState(this.state, payload);
     }
 }

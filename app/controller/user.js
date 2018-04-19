@@ -1,86 +1,98 @@
 'use strict'
-function login(userList,payload){
+function login(userList, $payload) {
 
 }
 
-function unlogin(currentUser,payload){
+function unlogin(currentUser, $payload) {
     currentUser = undefined;
     return {
         currentUser
     }
 }
 
-function register(userList,payload){
+function register(userList, $payload) {
 
 }
-function isLogin(currentUser){
-    if(currentUser&&currentUser.name){
+function isLogin(currentUser) {
+    if (currentUser && currentUser.name) {
         return {
-            loginState:{
-                isLogined:true
+            loginState: {
+                isLogined: true
             }
         }
     }
     return {
-        loginState:{
-            isLogined:false
+        loginState: {
+            isLogined: false
         }
     }
 }
-function addFav(payload){
-    var fav = [{
-        user_id:payload.user_id,
-        content_id:payload.content_id,
-        content_type:payload.content_type,
+function addFav($payload, $persist) {
+    let payload = $payload();
+    let fav = [{
+        user_id: payload.user_id,
+        content_id: payload.content_id,
+        content_type: payload.content_type,
     }];
+    $persist('fav', {
+        data: fav
+    });
     return {
-        fav:{
-            data:fav
+        fav: {
+            data: fav
         }
     }
 }
-function removeFav(payload){
-    var fav = [{
-        id:payload.fav_id,
-        itemRemove:true
+function removeFav($payload, $persist) {
+    let payload = $payload();
+    let fav = [{
+        id: payload.fav_id,
+        itemRemove: true
     }];
+    $persist('fav', {
+        data: fav
+    });
     return {
-        fav:{
-            data:fav
+        fav: {
+            data: fav
         }
     }
 }
 
-function getFav(fav){
+function getFav(fav) {
     return {
         fav
     }
 }
-function getCollection(){
+function getCollection() {
 
 }
-function getCollectionList(collectionList){
+function getCollectionList(collectionList) {
     return {
         collectionList
     }
 }
-function createCollection(payload){
+function createCollection($payload, $persist) {
+    let payload = $payload();
     let collection = {
-        name:payload.collectionName,
-        user_id:payload.user_id||1,
-        cover:'',
-        bookmark:''
+        name: payload.collectionName,
+        user_id: payload.user_id || 1,
+        cover: '',
+        bookmark: ''
     }
+    $persist('collectionList', [
+        collection
+    ]);
     return {
-        collectionList:[
-            collection 
+        collectionList: [
+            collection
         ]
     }
 }
-function removeCollection(){
+function removeCollection() {
 
 }
-function updateCollection(){
+function updateCollection() {
 
 }
 export default {
