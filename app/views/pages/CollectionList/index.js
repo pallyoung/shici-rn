@@ -28,7 +28,7 @@ class Collection extends ScreenComponent {
         }
         this.state = {};
         this.dispatcher = ReactFebrest.createDispatcher(this, this._onDispatch);
-        this.dispatcher.watch(['collectionList'],this._onProviderChange);
+        this.dispatcher.watch(this._onProviderChange);
     }
     componentDidMount() {
         this._fetchData();
