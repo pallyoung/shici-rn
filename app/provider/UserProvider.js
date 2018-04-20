@@ -13,9 +13,14 @@ function updateSql(table_name, data, keys) {
 }
 
 function removeSql(table_name, data, condition) {
-    return data.map(function (item) {
-        return `DELETE from ${table_name} where ${condition(item)}`;
-    })
+    if(data&&data.length>0){
+        return [
+            `DELETE from ${table_name} where ${data.map(item=>condition(item)).join(' or ')}`
+        ]
+    }else{
+        return [];
+    }
+    
 }
 function classify(data, condition, map) {
     var update = [];
@@ -75,7 +80,6 @@ const handlers = {
             }
             let { remove, update } = classify(state.data, commonCondition, FAV_COLUMN_MAP);
             let sqlString = updateSql(table_name, update, FAV_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
-
             executeSql(sqlString)
         },
         getState: function (state, payload) {
@@ -163,7 +167,7 @@ const handlers = {
                 return;
             }
             let { remove, update } = classify(state, commonCondition, COLLECTION_LIST_COLUMN_MAP);
-            let sqlString = updateSql(table_name, update, COLLECTION_LIST_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join('union');
+            let sqlString = updateSql(table_name, update, COLLECTION_LIST_COLUMN_MAP).concat(removeSql(table_name, remove, removeCondition)).join(' union ');
             executeSql(sqlString);
 
         },

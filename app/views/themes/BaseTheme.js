@@ -1,8 +1,10 @@
 
 import { autoSize, px2dp } from 'react-native-improver';
-import { Dimensions,Platform } from 'react-native';
+import { Dimensions,Platform,PixelRatio } from 'react-native';
 
 const windows = Dimensions.get('window');
+
+let px = 1/PixelRatio.get();
 var BaseTheme = {
     f1: autoSize(10),
     f2: autoSize(12),
@@ -16,7 +18,7 @@ var BaseTheme = {
     
     paddingHorizontal:autoSize(14),
     mainColor:'#fff',
-    px:px2dp(1),
+    px:px,
     
     color:'#333',
     

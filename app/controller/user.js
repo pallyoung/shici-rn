@@ -89,7 +89,18 @@ function createCollection($payload, $persist) {
         ]
     }
 }
-function removeCollection() {
+function removeCollection($persist, $payload) {
+    let payload = $payload();
+    let list = payload.map(id => {
+        return {
+            id: id,
+            itemRemove: true
+        }
+    });
+    $persist('collectionList', list);
+    return {
+
+    }
 
 }
 function updateCollection() {

@@ -17,7 +17,7 @@ import ACTIONS from '../../../constants/ACTIONS';;
 import RightButton from './../../components/RightButton';
 
 const currentTheme = Theme.getTheme();
-class Collection extends ScreenComponent {
+class CollectionList extends ScreenComponent {
     constructor(...props) {
         super(...props);
         this.navigationOptions = {
@@ -59,11 +59,16 @@ class Collection extends ScreenComponent {
         let navigation = this.getScreen().getNavigation();
         navigation.navigate('Collection',{id:item.id,title:item.name});
     }
+    _gotoManage=()=>{
+        let navigation = this.getScreen().getNavigation();
+        navigation.navigate('CollectionManager');
+    }
     _renderItem = ({ item }) => {
         return (
             <TouchableOpacity
                 activeOpacity={1}
                 onPress={()=>this._onCollectionPress(item)}
+                onLongPress={this._gotoManage}
                 style={styles.item}>
                 <View
                     style={styles.nameWrapper}>
@@ -137,4 +142,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Collection;
+export default CollectionList;

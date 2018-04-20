@@ -9,6 +9,7 @@ module.exports = {
     Collection:require('./Collection').default,
     CollectionUpdate:require('./CollectionUpdate').default,
     CollectionList:require('./CollectionList').default,
+    CollectionManager:require('./CollectionManager').default,
     CreateCollection:require('./CreateCollection').default,
     Article:require('./Article').default
 }
