@@ -15,6 +15,8 @@ export default{
 
     'APP_GOTO_DATE':'APP_GOTO_DATE',
 
+    'APP_SEARCH':'APP_SEARCH',
+
     'CHECK_LOGIN':'CHECK_LOGIN',
     'ADD_FAV':'ADD_FAV',
     'REMOVE_FAV':'REMOVE_FAV',

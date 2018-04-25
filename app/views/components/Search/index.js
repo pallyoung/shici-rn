@@ -17,6 +17,7 @@ function Search(props){
     return (
         <TouchableOpacity
             activeOpacity={1}
+            onPress={()=>Febrest.dispatch(ACTIONS.APP_SEARCH)}
             style={styles.wrapper}>
             <Icon 
                 size={13}

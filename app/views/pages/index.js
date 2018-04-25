@@ -11,5 +11,6 @@ module.exports = {
     CollectionList:require('./CollectionList').default,
     CollectionManager:require('./CollectionManager').default,
     CreateCollection:require('./CreateCollection').default,
-    Article:require('./Article').default
+    Article:require('./Article').default,
+    Search:require('./Search').default
 }

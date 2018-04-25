@@ -36,6 +36,10 @@ export default [
         controller:app.empty
     },
     {
+        key:ACTIONS.APP_SEARCH,
+        controller:app.empty
+    },
+    {
         key:ACTIONS.GET_HISTORY,
         controller:app.getHistory
     },

@@ -56,6 +56,10 @@ class Shi extends ScreenComponent {
             case ACTIONS.NAVIGATE_TO_SHI:
                 navigation.navigate('Article',data.state);
                 return;
+            case ACTIONS.APP_SEARCH:
+                navigation.navigate('Search',data.state);
+                return;
+
         }  
     }
     _renderItem = ({ item }) => {
