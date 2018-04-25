@@ -64,7 +64,10 @@ function getFav(fav) {
         fav
     }
 }
-function getCollection() {
+function getCollection(collection) {
+    return {
+        collection
+    }
 
 }
 function getCollectionList(collectionList) {

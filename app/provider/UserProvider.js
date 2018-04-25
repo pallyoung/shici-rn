@@ -155,8 +155,22 @@ const handlers = {
         setState: function () {
 
         },
-        getState: function () {
-
+        getState: function (state,payload) {
+            const sqlString = `select c.id as cid,shi.id as sid,shi.content as content,c.title as title,c.age as age,c.authot as author from collection as c
+                                inner join content.shi as shi on shi.id = c.content_id
+                                 where user_id = ${payload.user_id || 1} and collection_id = ${payload.id}
+                                `;
+            return executeSql(sqlString).then((results)=>{
+                let rows = results.rows;
+                let len = rows.length;
+                let collection = [];
+                for (let i = 0; i < len; i++) {
+                    let item = rows.item(i);
+                    item.content = JSON.parse(item.contnet)
+                    collection.push(item);
+                }
+                return collection;
+            });
         }
     },
     collectionList: {

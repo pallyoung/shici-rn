@@ -31,10 +31,11 @@ class Collection extends ScreenComponent {
         this.dispatcher.release();
     }
     _fetchData = () => {
-        this.dispatcher.dispatch(ACTIONS.GET_COLLECTION);
+        let {params} = this.getScreen().getNavigation().state;
+        this.dispatcher.dispatch(ACTIONS.GET_COLLECTION,{id:params.id});
     }
     _onDispatch = (data) => {
-        if(data.key===ACTIONS.GET_FAV){
+        if(data.key===ACTIONS.GET_COLLECTION){
             return false;
         }
     }
@@ -53,6 +54,7 @@ class Collection extends ScreenComponent {
         return (
             <View
                 style={styles.wrapper}>
+                
             </View>
         );
     }
