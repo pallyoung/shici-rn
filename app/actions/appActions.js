@@ -56,6 +56,10 @@ export default [
         controller:app.empty
     },
     {
+        key:ACTIONS.SHI_ITEM_MENU,
+        controller:app.transmit
+    },
+    {
         key:ACTIONS.NAVIGATE_TO_SHI,
         controller:app.transmit
     },

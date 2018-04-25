@@ -26,6 +26,7 @@ export default{
     'APP_SHI':'APP_SHI',
 
     'NAVIGATE_TO_SHI':'NAVIGATE_TO_SHI',
+    'SHI_ITEM_MENU':'SHI_ITEM_MENU',
 
     
     'GET_MINGJU_LIST':'GET_MINGJU_LIST',

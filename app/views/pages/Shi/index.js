@@ -16,6 +16,7 @@ import ListView from './../../components/ListView';
 import ACTIONS from '../../../constants/ACTIONS';
 import ArticleItem from './../../components/ArticleItem';
 import Search from './../../components/Search';
+import Menu from './Menu';
 
 const currentTheme = Theme.getTheme();
 class Shi extends ScreenComponent {
@@ -41,7 +42,8 @@ class Shi extends ScreenComponent {
         this.dispatcher.dispatch(ACTIONS.GET_SHI_LIST);
     }
     _onDispatch = (data) => {
-        let navigation = this.getScreen().getNavigation();
+        let screen = this.getScreen();
+        let navigation = screen.getNavigation();
         let {key,state} = data;
         switch(data.key){
             case ACTIONS.REMOVE_FAV:
@@ -58,6 +60,14 @@ class Shi extends ScreenComponent {
                 return;
             case ACTIONS.APP_SEARCH:
                 navigation.navigate('Search',data.state);
+                return;
+            case ACTIONS.SHI_ITEM_MENU:
+                let popid = screen.showPopup({
+                    animationType:'fade',
+                    content:<Menu 
+                                {...data.state}
+                                onClose={()=>screen.hidePopup(popid)}/> 
+                })
                 return;
 
         }  

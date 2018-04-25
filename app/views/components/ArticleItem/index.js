@@ -21,6 +21,7 @@ function Title(props){
                 {props.title}   ({props.author}/{props.age})
             </Text>
             <TouchableOpacity
+                onPress={props.onMenuPress}
                 activeOpacity={1}>
                 <Icon 
                     name='ios-more'/>
@@ -54,6 +55,9 @@ function Main(props){
 function dispatch(payload){
     Febrest.dispatch(ACTIONS.NAVIGATE_TO_SHI,payload);
 }
+function dispatchMenu(payload){
+    Febrest.dispatch(ACTIONS.SHI_ITEM_MENU,payload);
+}
 function ArticleItem(props){
     return (
         <TouchableOpacity
@@ -62,6 +66,7 @@ function ArticleItem(props){
             style={styles.wrapper}>
             <Title 
                 age={props.age}
+                onMenuPress={()=>dispatchMenu(props)}
                 author={props.author}
                 title={props.title}/>
             <Main 
