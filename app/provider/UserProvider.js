@@ -86,12 +86,12 @@ const handlers = {
             const sqlString = `select fav.id as id,fav.content_id as content_id,fav.content_type as content_type,
                                 shi.id as c_id, shi.author as author,shi.content as content,
                                 shi.pageid as pageid,shi.age as age from fav as fav
-                                inner join content.shi as shi on fav.content_id = shi.pageid 
-                                where user_id = ${payload.user_id || 1}`;
+                                inner join content.shi as shi on fav.content_id = shi.id 
+                                where user_id = ${payload.user_id || 1}  and content_type='shi'`;
             const sqlString2 = `select fav.id as id,fav.content_id as content_id,fav.content_type as content_type,
                                 mingju.id as c_id, mingju.pageid as pageid,mingju.text as text from fav
-                                inner join content.mingju as mingju on fav.content_id = mingju.pageid 
-                                where user_id = ${payload.user_id || 1}`;
+                                inner join content.mingju as mingju on fav.content_id = mingju.id 
+                                where user_id = ${payload.user_id || 1} and content_type='mingju'`;
             var result = {
 
             }
@@ -139,6 +139,7 @@ const handlers = {
                     items.push(newItem);
                 }
                 result.mingju = items;
+                console.log(result,'=====');
                 return result;
             });
         }

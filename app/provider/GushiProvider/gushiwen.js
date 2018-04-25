@@ -47,6 +47,7 @@ function getEveryDay(state, payload) {
                 shi: {
                     title: item.title,
                     author: item.author,
+                    type: 'shi',
                     content: JSON.parse(item.content),
                     pageid: item.pageid,
                     age: item.age
@@ -81,6 +82,7 @@ function getMingjuList(state = {}, payload) {
         for (let i = 0; i < len; i++) {
             let item = rows.item(i);
             items.push(item);
+            item.type = 'mingju';
             lastid = item.id - 1;
         }
         return {
@@ -106,6 +108,7 @@ function getShiList(state = {}, payload) {
         for (let i = 0; i < len; i++) {
             let item = rows.item(i);
             item.content = JSON.parse(item.content);
+            item.type = 'shi';
             items.push(item);
             lastid = item.id - 1;
         }
